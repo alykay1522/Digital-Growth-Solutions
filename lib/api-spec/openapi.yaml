@@ -30,6 +30,31 @@ paths:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
 
+  /analyze:
+    post:
+      operationId: analyzeSite
+      tags: [analyze]
+      summary: Analyze a website URL for issues
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AnalyzeSiteInput"
+      responses:
+        "200":
+          description: Site analysis results
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnalyzeSiteResult"
+        "400":
+          description: Invalid URL or fetch failed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
   /contact:
     post:
       operationId: submitContact
@@ -94,6 +119,90 @@ components:
           type: string
       required:
         - status
+
+    AnalyzeSiteInput:
+      type: object
+      properties:
+        url:
+          type: string
+          description: The URL of the website to analyze
+      required:
+        - url
+
+    SiteIssue:
+      type: object
+      properties:
+        id:
+          type: string
+        category:
+          type: string
+          enum: [seo, performance, security, accessibility, mobile, content]
+        severity:
+          type: string
+          enum: [critical, warning, info, pass]
+        title:
+          type: string
+        description:
+          type: string
+        fix:
+          type: string
+        value:
+          type: string
+      required:
+        - id
+        - category
+        - severity
+        - title
+        - description
+        - fix
+
+    AnalyzeSiteResult:
+      type: object
+      properties:
+        url:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        favicon:
+          type: string
+        fetchedAt:
+          type: string
+        scores:
+          type: object
+          properties:
+            seo:
+              type: number
+            performance:
+              type: number
+            security:
+              type: number
+            accessibility:
+              type: number
+          required: [seo, performance, security, accessibility]
+        issues:
+          type: array
+          items:
+            $ref: "#/components/schemas/SiteIssue"
+        summary:
+          type: object
+          properties:
+            critical:
+              type: number
+            warnings:
+              type: number
+            passes:
+              type: number
+          required: [critical, warnings, passes]
+      required:
+        - url
+        - title
+        - description
+        - fetchedAt
+        - scores
+        - issues
+        - summary
 
     ContactFormInput:
       type: object

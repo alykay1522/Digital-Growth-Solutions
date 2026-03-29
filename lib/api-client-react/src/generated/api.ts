@@ -17,6 +17,8 @@ import type {
 } from "@tanstack/react-query";
 
 import type {
+  AnalyzeSiteInput,
+  AnalyzeSiteResult,
   ContactFormInput,
   ContactFormResponse,
   ErrorResponse,
@@ -109,6 +111,92 @@ export function useHealthCheck<
 
   return { ...query, queryKey: queryOptions.queryKey };
 }
+
+/**
+ * @summary Analyze a website URL for issues
+ */
+export const getAnalyzeSiteUrl = () => {
+  return `/api/analyze`;
+};
+
+export const analyzeSite = async (
+  analyzeSiteInput: AnalyzeSiteInput,
+  options?: RequestInit,
+): Promise<AnalyzeSiteResult> => {
+  return customFetch<AnalyzeSiteResult>(getAnalyzeSiteUrl(), {
+    ...options,
+    method: "POST",
+    headers: { "Content-Type": "application/json", ...options?.headers },
+    body: JSON.stringify(analyzeSiteInput),
+  });
+};
+
+export const getAnalyzeSiteMutationOptions = <
+  TError = ErrorType<ErrorResponse>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof analyzeSite>>,
+    TError,
+    { data: BodyType<AnalyzeSiteInput> },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof analyzeSite>>,
+  TError,
+  { data: BodyType<AnalyzeSiteInput> },
+  TContext
+> => {
+  const mutationKey = ["analyzeSite"];
+  const { mutation: mutationOptions, request: requestOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey }, request: undefined };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof analyzeSite>>,
+    { data: BodyType<AnalyzeSiteInput> }
+  > = (props) => {
+    const { data } = props ?? {};
+
+    return analyzeSite(data, requestOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type AnalyzeSiteMutationResult = NonNullable<
+  Awaited<ReturnType<typeof analyzeSite>>
+>;
+export type AnalyzeSiteMutationBody = BodyType<AnalyzeSiteInput>;
+export type AnalyzeSiteMutationError = ErrorType<ErrorResponse>;
+
+/**
+ * @summary Analyze a website URL for issues
+ */
+export const useAnalyzeSite = <
+  TError = ErrorType<ErrorResponse>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof analyzeSite>>,
+    TError,
+    { data: BodyType<AnalyzeSiteInput> },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationResult<
+  Awaited<ReturnType<typeof analyzeSite>>,
+  TError,
+  { data: BodyType<AnalyzeSiteInput> },
+  TContext
+> => {
+  return useMutation(getAnalyzeSiteMutationOptions(options));
+};
 
 /**
  * @summary Submit contact form

@@ -11,6 +11,7 @@ import Services from "./pages/Services";
 import Portfolio from "./pages/Portfolio";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
+import SiteAudit from "./pages/SiteAudit";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -30,6 +31,7 @@ function Router() {
         <Route path="/portfolio" component={Portfolio} />
         <Route path="/about" component={About} />
         <Route path="/contact" component={Contact} />
+        <Route path="/audit" component={SiteAudit} />
         <Route component={NotFound} />
       </Switch>
     </Layout>

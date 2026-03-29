@@ -22,6 +22,7 @@ export function Navbar() {
     { label: "Services", href: "/services" },
     { label: "Portfolio", href: "/portfolio" },
     { label: "About", href: "/about" },
+    { label: "Site Audit", href: "/audit", highlight: true },
   ];
 
   return (
@@ -50,19 +51,35 @@ export function Navbar() {
             {/* Desktop Nav */}
             <nav className="hidden md:flex items-center gap-8">
               {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className={`text-sm font-medium transition-colors hover:text-primary ${
-                    location === link.href 
-                      ? "text-primary" 
-                      : !isScrolled && location === '/' 
-                        ? "text-white/90 hover:text-white" 
-                        : "text-muted-foreground"
-                  }`}
-                >
-                  {link.label}
-                </Link>
+                link.highlight ? (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className={`text-sm font-semibold px-3 py-1 rounded-full border transition-all ${
+                      location === link.href
+                        ? "bg-primary text-white border-primary"
+                        : !isScrolled && location === '/'
+                          ? "text-white border-white/40 hover:bg-white/10 hover:border-white/70"
+                          : "text-primary border-primary/40 hover:bg-primary/10 hover:border-primary"
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                ) : (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className={`text-sm font-medium transition-colors hover:text-primary ${
+                      location === link.href 
+                        ? "text-primary" 
+                        : !isScrolled && location === '/' 
+                          ? "text-white/90 hover:text-white" 
+                          : "text-muted-foreground"
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                )
               ))}
               <Link href="/contact" className="ml-4">
                 <Button 
@@ -120,10 +137,11 @@ export function Navbar() {
                   href={link.href}
                   onClick={() => setIsMobileMenuOpen(false)}
                   className={`text-2xl font-display font-semibold transition-colors ${
-                    location === link.href ? "text-primary" : "text-secondary"
+                    location === link.href ? "text-primary" : link.highlight ? "text-primary" : "text-secondary"
                   }`}
                 >
                   {link.label}
+                  {link.highlight && <span className="ml-2 text-sm font-medium bg-primary/10 text-primary px-2 py-0.5 rounded-full align-middle">Free Tool</span>}
                 </Link>
               ))}
               <div className="mt-auto pb-8">

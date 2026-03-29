@@ -16,6 +16,50 @@ export const HealthCheckResponse = zod.object({
 });
 
 /**
+ * @summary Analyze a website URL for issues
+ */
+export const AnalyzeSiteBody = zod.object({
+  url: zod.string().describe("The URL of the website to analyze"),
+});
+
+export const AnalyzeSiteResponse = zod.object({
+  url: zod.string(),
+  title: zod.string(),
+  description: zod.string(),
+  favicon: zod.string().optional(),
+  fetchedAt: zod.string(),
+  scores: zod.object({
+    seo: zod.number(),
+    performance: zod.number(),
+    security: zod.number(),
+    accessibility: zod.number(),
+  }),
+  issues: zod.array(
+    zod.object({
+      id: zod.string(),
+      category: zod.enum([
+        "seo",
+        "performance",
+        "security",
+        "accessibility",
+        "mobile",
+        "content",
+      ]),
+      severity: zod.enum(["critical", "warning", "info", "pass"]),
+      title: zod.string(),
+      description: zod.string(),
+      fix: zod.string(),
+      value: zod.string().optional(),
+    }),
+  ),
+  summary: zod.object({
+    critical: zod.number(),
+    warnings: zod.number(),
+    passes: zod.number(),
+  }),
+});
+
+/**
  * @summary Submit contact form
  */
 export const submitContactBodyNameMin = 2;

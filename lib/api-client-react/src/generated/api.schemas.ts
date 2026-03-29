@@ -9,6 +9,67 @@ export interface HealthStatus {
   status: string;
 }
 
+export interface AnalyzeSiteInput {
+  /** The URL of the website to analyze */
+  url: string;
+}
+
+export type SiteIssueCategory =
+  (typeof SiteIssueCategory)[keyof typeof SiteIssueCategory];
+
+export const SiteIssueCategory = {
+  seo: "seo",
+  performance: "performance",
+  security: "security",
+  accessibility: "accessibility",
+  mobile: "mobile",
+  content: "content",
+} as const;
+
+export type SiteIssueSeverity =
+  (typeof SiteIssueSeverity)[keyof typeof SiteIssueSeverity];
+
+export const SiteIssueSeverity = {
+  critical: "critical",
+  warning: "warning",
+  info: "info",
+  pass: "pass",
+} as const;
+
+export interface SiteIssue {
+  id: string;
+  category: SiteIssueCategory;
+  severity: SiteIssueSeverity;
+  title: string;
+  description: string;
+  fix: string;
+  value?: string;
+}
+
+export type AnalyzeSiteResultScores = {
+  seo: number;
+  performance: number;
+  security: number;
+  accessibility: number;
+};
+
+export type AnalyzeSiteResultSummary = {
+  critical: number;
+  warnings: number;
+  passes: number;
+};
+
+export interface AnalyzeSiteResult {
+  url: string;
+  title: string;
+  description: string;
+  favicon?: string;
+  fetchedAt: string;
+  scores: AnalyzeSiteResultScores;
+  issues: SiteIssue[];
+  summary: AnalyzeSiteResultSummary;
+}
+
 export interface ContactFormInput {
   /** @minLength 2 */
   name: string;

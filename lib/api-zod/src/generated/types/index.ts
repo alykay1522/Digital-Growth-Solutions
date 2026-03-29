@@ -6,9 +6,16 @@
  * OpenAPI spec version: 0.1.0
  */
 
+export * from "./analyzeSiteInput";
+export * from "./analyzeSiteResult";
+export * from "./analyzeSiteResultScores";
+export * from "./analyzeSiteResultSummary";
 export * from "./contactFormInput";
 export * from "./contactFormResponse";
 export * from "./errorResponse";
 export * from "./healthStatus";
 export * from "./portfolioProject";
 export * from "./service";
+export * from "./siteIssue";
+export * from "./siteIssueCategory";
+export * from "./siteIssueSeverity";
