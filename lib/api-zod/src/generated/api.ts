@@ -60,6 +60,37 @@ export const AnalyzeSiteResponse = zod.object({
 });
 
 /**
+ * @summary Generate AI-powered fixes for selected site issues
+ */
+export const GenerateAiFixBody = zod.object({
+  url: zod.string().describe("The URL of the analyzed site"),
+  issues: zod
+    .array(
+      zod.object({
+        id: zod.string(),
+        category: zod.enum([
+          "seo",
+          "performance",
+          "security",
+          "accessibility",
+          "mobile",
+          "content",
+        ]),
+        severity: zod.enum(["critical", "warning", "info", "pass"]),
+        title: zod.string(),
+        description: zod.string(),
+        fix: zod.string(),
+        value: zod.string().optional(),
+      }),
+    )
+    .describe("The issues to generate fixes for"),
+  priority: zod
+    .enum(["critical_first", "user_selected"])
+    .optional()
+    .describe("Fix ordering preference"),
+});
+
+/**
  * @summary Submit contact form
  */
 export const submitContactBodyNameMin = 2;

@@ -15,6 +15,8 @@ tags:
     description: Agency services
   - name: portfolio
     description: Portfolio projects
+  - name: ai
+    description: AI-powered fix generation
 paths:
   /healthz:
     get:
@@ -50,6 +52,31 @@ paths:
                 $ref: "#/components/schemas/AnalyzeSiteResult"
         "400":
           description: Invalid URL or fetch failed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /ai-fix:
+    post:
+      operationId: generateAiFix
+      tags: [ai]
+      summary: Generate AI-powered fixes for selected site issues
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AiFixInput"
+      responses:
+        "200":
+          description: Streamed markdown fix instructions (text/event-stream)
+          content:
+            text/event-stream:
+              schema:
+                type: string
+        "400":
+          description: Invalid input
           content:
             application/json:
               schema:
@@ -119,6 +146,25 @@ components:
           type: string
       required:
         - status
+
+    AiFixInput:
+      type: object
+      properties:
+        url:
+          type: string
+          description: The URL of the analyzed site
+        issues:
+          type: array
+          items:
+            $ref: "#/components/schemas/SiteIssue"
+          description: The issues to generate fixes for
+        priority:
+          type: string
+          enum: [critical_first, user_selected]
+          description: Fix ordering preference
+      required:
+        - url
+        - issues
 
     AnalyzeSiteInput:
       type: object

@@ -6,6 +6,8 @@
  * OpenAPI spec version: 0.1.0
  */
 
+export * from "./aiFixInput";
+export * from "./aiFixInputPriority";
 export * from "./analyzeSiteInput";
 export * from "./analyzeSiteResult";
 export * from "./analyzeSiteResultScores";

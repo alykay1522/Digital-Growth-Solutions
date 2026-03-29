@@ -17,6 +17,7 @@ import type {
 } from "@tanstack/react-query";
 
 import type {
+  AiFixInput,
   AnalyzeSiteInput,
   AnalyzeSiteResult,
   ContactFormInput,
@@ -196,6 +197,92 @@ export const useAnalyzeSite = <
   TContext
 > => {
   return useMutation(getAnalyzeSiteMutationOptions(options));
+};
+
+/**
+ * @summary Generate AI-powered fixes for selected site issues
+ */
+export const getGenerateAiFixUrl = () => {
+  return `/api/ai-fix`;
+};
+
+export const generateAiFix = async (
+  aiFixInput: AiFixInput,
+  options?: RequestInit,
+): Promise<string> => {
+  return customFetch<string>(getGenerateAiFixUrl(), {
+    ...options,
+    method: "POST",
+    headers: { "Content-Type": "application/json", ...options?.headers },
+    body: JSON.stringify(aiFixInput),
+  });
+};
+
+export const getGenerateAiFixMutationOptions = <
+  TError = ErrorType<ErrorResponse>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof generateAiFix>>,
+    TError,
+    { data: BodyType<AiFixInput> },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof generateAiFix>>,
+  TError,
+  { data: BodyType<AiFixInput> },
+  TContext
+> => {
+  const mutationKey = ["generateAiFix"];
+  const { mutation: mutationOptions, request: requestOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey }, request: undefined };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof generateAiFix>>,
+    { data: BodyType<AiFixInput> }
+  > = (props) => {
+    const { data } = props ?? {};
+
+    return generateAiFix(data, requestOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type GenerateAiFixMutationResult = NonNullable<
+  Awaited<ReturnType<typeof generateAiFix>>
+>;
+export type GenerateAiFixMutationBody = BodyType<AiFixInput>;
+export type GenerateAiFixMutationError = ErrorType<ErrorResponse>;
+
+/**
+ * @summary Generate AI-powered fixes for selected site issues
+ */
+export const useGenerateAiFix = <
+  TError = ErrorType<ErrorResponse>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof generateAiFix>>,
+    TError,
+    { data: BodyType<AiFixInput> },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationResult<
+  Awaited<ReturnType<typeof generateAiFix>>,
+  TError,
+  { data: BodyType<AiFixInput> },
+  TContext
+> => {
+  return useMutation(getGenerateAiFixMutationOptions(options));
 };
 
 /**

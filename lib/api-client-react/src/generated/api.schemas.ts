@@ -9,10 +9,16 @@ export interface HealthStatus {
   status: string;
 }
 
-export interface AnalyzeSiteInput {
-  /** The URL of the website to analyze */
-  url: string;
-}
+/**
+ * Fix ordering preference
+ */
+export type AiFixInputPriority =
+  (typeof AiFixInputPriority)[keyof typeof AiFixInputPriority];
+
+export const AiFixInputPriority = {
+  critical_first: "critical_first",
+  user_selected: "user_selected",
+} as const;
 
 export type SiteIssueCategory =
   (typeof SiteIssueCategory)[keyof typeof SiteIssueCategory];
@@ -44,6 +50,20 @@ export interface SiteIssue {
   description: string;
   fix: string;
   value?: string;
+}
+
+export interface AiFixInput {
+  /** The URL of the analyzed site */
+  url: string;
+  /** The issues to generate fixes for */
+  issues: SiteIssue[];
+  /** Fix ordering preference */
+  priority?: AiFixInputPriority;
+}
+
+export interface AnalyzeSiteInput {
+  /** The URL of the website to analyze */
+  url: string;
 }
 
 export type AnalyzeSiteResultScores = {
