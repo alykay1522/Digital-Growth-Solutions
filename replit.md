@@ -16,6 +16,16 @@ pnpm workspace monorepo using TypeScript. Each package manages its own dependenc
 - **API codegen**: Orval (from OpenAPI spec)
 - **Build**: esbuild (CJS bundle)
 
+## Artifacts
+
+### `artifacts/agency-website` — Digital Agency Website
+A full-featured agency website for a WordPress/Shopify/Mobile/Software development agency.
+
+- Pages: Home, Services, Portfolio, About, Contact
+- Stack: React + Vite, Tailwind CSS, framer-motion animations, react-hook-form + Zod validation
+- API: Uses `/api/services`, `/api/portfolio`, `/api/contact`
+- Preview path: `/`
+
 ## Structure
 
 ```text
