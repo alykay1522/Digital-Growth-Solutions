@@ -12,6 +12,8 @@ import Portfolio from "./pages/Portfolio";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import SiteAudit from "./pages/SiteAudit";
+import RoiCalculator from "./pages/RoiCalculator";
+import TechStack from "./pages/TechStack";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -32,6 +34,8 @@ function Router() {
         <Route path="/about" component={About} />
         <Route path="/contact" component={Contact} />
         <Route path="/audit" component={SiteAudit} />
+        <Route path="/roi" component={RoiCalculator} />
+        <Route path="/tech-stack" component={TechStack} />
         <Route component={NotFound} />
       </Switch>
     </Layout>
