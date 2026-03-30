@@ -21,7 +21,7 @@ pnpm workspace monorepo using TypeScript. Each package manages its own dependenc
 ### `artifacts/agency-website` — Digital Agency Website (NexaAgency)
 A full-featured agency website for a WordPress/Shopify/Mobile/Software development agency.
 
-- **Pages**: Home, Services, Portfolio, Blog, About, Contact, Site Audit, Compare, Results, Tech Stack Detector, ROI Calculator
+- **Pages**: Home, Services, Portfolio, Blog, About, Contact, Site Audit, Compare, Results, Tech Stack Detector, ROI Calculator, Product Sniffer, Site Cloner
 - **Free AI Tools**:
   - Site Audit (`/audit`) — SEO/performance/security analysis with AI code fixes via SSE
   - Competitor Comparison (`/compare`) — side-by-side site scoring via `/api/compare`

@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
-import { ArrowRight, Code, Smartphone, Zap, CheckCircle2, Star } from "lucide-react";
+import { ArrowRight, Bot, BrainCircuit, Code, FileText, Smartphone, Sparkles, Wand2, Workflow, Zap, CheckCircle2, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { useGetServices, useGetPortfolio } from "@workspace/api-client-react";
@@ -207,6 +207,58 @@ export default function Home() {
                 <p className="text-sm text-muted-foreground font-medium">Based on 100+ reviews</p>
               </div>
             </AnimatedSection>
+          </div>
+        </div>
+      </section>
+
+      {/* AI SERVICES TEASER */}
+      <section className="py-24 bg-secondary relative overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-0 left-1/3 w-72 h-72 bg-primary/10 rounded-full blur-3xl" />
+          <div className="absolute bottom-0 right-1/4 w-72 h-72 bg-accent/10 rounded-full blur-3xl" />
+        </div>
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <AnimatedSection className="text-center mb-12">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 text-white text-sm font-medium mb-5">
+              <BrainCircuit className="w-4 h-4 text-accent" />
+              New AI Services — 2026
+            </div>
+            <h2 className="text-3xl md:text-4xl font-display font-bold text-white mb-4">
+              AI built into your business,<br className="hidden sm:block" /> not bolted on
+            </h2>
+            <p className="text-white/60 text-lg max-w-2xl mx-auto">
+              From automated content pipelines to intelligent chatbots and AI-powered redesigns — we integrate practical AI that actually moves the needle.
+            </p>
+          </AnimatedSection>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-10">
+            {[
+              { icon: FileText, label: "AI Content Automation" },
+              { icon: Bot, label: "AI Chatbot Installation" },
+              { icon: Sparkles, label: "Product Description Gen" },
+              { icon: Workflow, label: "AI Workflow Automation" },
+              { icon: Wand2, label: "AI-Powered Redesigns" },
+            ].map(({ icon: Icon, label }, i) => (
+              <AnimatedSection key={label} delay={i * 0.07}>
+                <motion.div
+                  whileHover={{ y: -4 }}
+                  className="bg-white/5 border border-white/10 rounded-2xl p-5 text-center hover:bg-white/10 hover:border-white/20 transition-all cursor-pointer"
+                >
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary/30 to-accent/20 flex items-center justify-center mx-auto mb-3">
+                    <Icon className="w-5 h-5 text-white" />
+                  </div>
+                  <p className="text-sm font-semibold text-white leading-tight">{label}</p>
+                </motion.div>
+              </AnimatedSection>
+            ))}
+          </div>
+
+          <div className="text-center">
+            <Link href="/services#ai">
+              <Button className="h-12 px-8 rounded-xl bg-accent hover:bg-accent/90 text-secondary font-bold shadow-lg shadow-accent/20">
+                Explore AI Services <ArrowRight className="ml-2 w-4 h-4" />
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
