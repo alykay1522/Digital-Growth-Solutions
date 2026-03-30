@@ -1,10 +1,58 @@
-import React from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
 import { ArrowRight, Code, Smartphone, Zap, CheckCircle2, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { useGetServices, useGetPortfolio } from "@workspace/api-client-react";
+
+function useCountUp(target: number, trigger: boolean, duration = 1600) {
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    if (!trigger) return;
+    const start = performance.now();
+    const step = (now: number) => {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setCount(Math.round(eased * target));
+      if (progress < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }, [trigger, target, duration]);
+  return count;
+}
+
+function AnimatedStat({ value, suffix, label }: { value: number; suffix: string; label: string }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [triggered, setTriggered] = useState(false);
+  const count = useCountUp(value, triggered);
+  useEffect(() => {
+    const obs = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setTriggered(true); obs.disconnect(); } },
+      { threshold: 0.5 }
+    );
+    if (ref.current) obs.observe(ref.current);
+    return () => obs.disconnect();
+  }, []);
+  return (
+    <div ref={ref} className="text-center">
+      <div className="text-3xl md:text-4xl font-display font-bold text-secondary mb-2">
+        {count}{suffix}
+      </div>
+      <div className="text-sm font-medium text-muted-foreground">{label}</div>
+    </div>
+  );
+}
+
+const TESTIMONIALS = [
+  { name: "Sarah Chen", role: "CEO, Lumina Finance", quote: "NexaAgency cut our load time from 6s to under 1.5s. Conversion rate jumped 23% within 30 days." },
+  { name: "Marcus Webb", role: "Marketing Director, Aura Commerce", quote: "Best investment we made this year. WooCommerce rebuild, cart abandonment dropped 40%." },
+  { name: "Priya Sharma", role: "Founder, CoralSkin", quote: "We went from invisible on Google to ranking page one for our key terms in three months." },
+  { name: "James Okafor", role: "CTO, FlowDesk", quote: "Their WordPress plugin work saved us from building a $50k custom solution. Built exactly right." },
+  { name: "Rachel Torres", role: "Operations, BrightCycle", quote: "The mobile redesign was transformative. Mobile sessions up 65%, bounce rate down 38%." },
+  { name: "Daniel Kim", role: "VP Growth, TechLayer", quote: "Three agencies failed before Nexa. They shipped our custom app in 10 weeks, on budget." },
+];
 
 export default function Home() {
   const { data: servicesData } = useGetServices();
@@ -73,20 +121,13 @@ export default function Home() {
         </div>
       </section>
 
-      {/* STATS SECTION */}
+      {/* STATS SECTION - animated counters */}
       <section className="py-12 bg-white relative -mt-10 mx-4 sm:mx-6 lg:mx-auto max-w-6xl rounded-2xl shadow-xl border border-border/50 z-20">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 px-8">
-          {[
-            { label: "Projects Delivered", value: "300+" },
-            { label: "Years Experience", value: "10+" },
-            { label: "Happy Clients", value: "150+" },
-            { label: "Team Members", value: "25+" },
-          ].map((stat, i) => (
-            <div key={i} className="text-center">
-              <div className="text-3xl md:text-4xl font-display font-bold text-secondary mb-2">{stat.value}</div>
-              <div className="text-sm font-medium text-muted-foreground">{stat.label}</div>
-            </div>
-          ))}
+          <AnimatedStat value={300} suffix="+" label="Projects Delivered" />
+          <AnimatedStat value={10} suffix="+" label="Years Experience" />
+          <AnimatedStat value={150} suffix="+" label="Happy Clients" />
+          <AnimatedStat value={25} suffix="+" label="Team Members" />
         </div>
       </section>
 
@@ -166,6 +207,50 @@ export default function Home() {
                 <p className="text-sm text-muted-foreground font-medium">Based on 100+ reviews</p>
               </div>
             </AnimatedSection>
+          </div>
+        </div>
+      </section>
+
+      {/* TESTIMONIALS STRIP */}
+      <section className="py-16 bg-gray-50 overflow-hidden">
+        <style>{`
+          @keyframes marquee-slide {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+          }
+          .marquee-track { animation: marquee-slide 40s linear infinite; }
+          .marquee-track:hover { animation-play-state: paused; }
+        `}</style>
+        <div className="max-w-7xl mx-auto px-4 mb-10 text-center">
+          <AnimatedSection>
+            <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-2">What our clients say</p>
+            <h2 className="text-3xl font-display font-bold text-secondary">Real results from real businesses</h2>
+          </AnimatedSection>
+        </div>
+        <div className="relative">
+          <div className="flex gap-5 marquee-track w-max">
+            {[...TESTIMONIALS, ...TESTIMONIALS].map((t, i) => (
+              <div
+                key={i}
+                className="w-72 flex-shrink-0 bg-white rounded-2xl border border-border p-6 shadow-sm"
+              >
+                <div className="flex mb-3">
+                  {[...Array(5)].map((_, j) => (
+                    <Star key={j} className="w-4 h-4 text-yellow-400 fill-yellow-400" />
+                  ))}
+                </div>
+                <p className="text-sm text-muted-foreground leading-relaxed mb-4">"{t.quote}"</p>
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-xs font-bold text-primary">
+                    {t.name.split(" ").map((n) => n[0]).join("")}
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold text-secondary leading-none">{t.name}</p>
+                    <p className="text-xs text-muted-foreground">{t.role}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>

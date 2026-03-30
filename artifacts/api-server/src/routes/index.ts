@@ -6,6 +6,8 @@ import portfolioRouter from "./portfolio";
 import analyzeRouter from "./analyze";
 import aiFix from "./ai-fix";
 import detectStack from "./detect-stack";
+import chat from "./chat";
+import compare from "./compare";
 
 const router: IRouter = Router();
 
@@ -16,5 +18,7 @@ router.use(portfolioRouter);
 router.use(analyzeRouter);
 router.use(aiFix);
 router.use(detectStack);
+router.use(chat);
+router.use(compare);
 
 export default router;

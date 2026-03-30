@@ -16,6 +16,7 @@ import {
   Loader2,
   Lock,
   Search,
+  Share2,
   Shield,
   Smartphone,
   Sparkles,
@@ -326,6 +327,7 @@ export default function SiteAudit() {
   const [aiLoading, setAiLoading] = useState(false);
   const [aiError, setAiError] = useState<string | null>(null);
   const [aiPanelOpen, setAiPanelOpen] = useState(false);
+  const [shareCopied, setShareCopied] = useState(false);
   const aiPanelRef = useRef<HTMLDivElement>(null);
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -437,6 +439,35 @@ export default function SiteAudit() {
     : 0;
 
   const fixableCount = result ? result.issues.filter((i: any) => i.severity !== "pass").length : 0;
+
+  const handleShare = useCallback(() => {
+    if (!result) return;
+    const payload = {
+      url: result.url,
+      title: result.title,
+      overall: overallScore,
+      scores: {
+        seo: result.scores.seo,
+        performance: result.scores.performance,
+        security: result.scores.security,
+        accessibility: result.scores.accessibility,
+        mobile: result.scores.mobile || 0,
+      },
+      issueCount: {
+        critical: result.summary.critical,
+        warning: result.summary.warnings,
+        info: 0,
+        pass: result.summary.passes,
+      },
+      scannedAt: result.fetchedAt,
+    };
+    const encoded = btoa(JSON.stringify(payload)).replace(/\+/g, "-").replace(/\//g, "_").replace(/=/g, "");
+    const shareUrl = `${window.location.origin}${BASE_URL}/results?r=${encoded}`;
+    navigator.clipboard.writeText(shareUrl).then(() => {
+      setShareCopied(true);
+      setTimeout(() => setShareCopied(false), 2500);
+    });
+  }, [result, overallScore]);
 
   return (
     <div className="min-h-screen bg-background pt-20">
@@ -550,11 +581,25 @@ export default function SiteAudit() {
                   <h2 className="font-bold text-xl">Overall Score</h2>
                   <p className="text-muted-foreground text-sm">Across all audit categories</p>
                 </div>
-                <div className="flex items-center gap-2">
-                  <span className={`text-5xl font-black ${overallScore >= 80 ? "text-emerald-600" : overallScore >= 60 ? "text-amber-500" : "text-red-500"}`}>
-                    {overallScore}
-                  </span>
-                  <span className="text-2xl text-muted-foreground font-light">/100</span>
+                <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-2">
+                    <span className={`text-5xl font-black ${overallScore >= 80 ? "text-emerald-600" : overallScore >= 60 ? "text-amber-500" : "text-red-500"}`}>
+                      {overallScore}
+                    </span>
+                    <span className="text-2xl text-muted-foreground font-light">/100</span>
+                  </div>
+                  <button
+                    onClick={handleShare}
+                    className={`flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-lg border transition-all ${
+                      shareCopied
+                        ? "bg-emerald-50 border-emerald-300 text-emerald-700"
+                        : "bg-muted border-border text-muted-foreground hover:border-primary/40 hover:text-primary"
+                    }`}
+                    title="Copy shareable link to these results"
+                  >
+                    {shareCopied ? <Check className="w-3.5 h-3.5" /> : <Share2 className="w-3.5 h-3.5" />}
+                    {shareCopied ? "Link copied!" : "Share"}
+                  </button>
                 </div>
               </div>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 justify-items-center">

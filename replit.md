@@ -18,12 +18,25 @@ pnpm workspace monorepo using TypeScript. Each package manages its own dependenc
 
 ## Artifacts
 
-### `artifacts/agency-website` — Digital Agency Website
+### `artifacts/agency-website` — Digital Agency Website (NexaAgency)
 A full-featured agency website for a WordPress/Shopify/Mobile/Software development agency.
 
-- Pages: Home, Services, Portfolio, About, Contact
-- Stack: React + Vite, Tailwind CSS, framer-motion animations, react-hook-form + Zod validation
-- API: Uses `/api/services`, `/api/portfolio`, `/api/contact`
+- **Pages**: Home, Services, Portfolio, Blog, About, Contact, Site Audit, Compare, Results, Tech Stack Detector, ROI Calculator
+- **Free AI Tools**:
+  - Site Audit (`/audit`) — SEO/performance/security analysis with AI code fixes via SSE
+  - Competitor Comparison (`/compare`) — side-by-side site scoring via `/api/compare`
+  - Tech Stack Detector (`/detect`) — detects technologies on any URL via `/api/detect-stack`
+  - ROI Calculator (`/roi`) — calculates expected ROI from a website rebuild
+  - Shareable Score Cards (`/results`) — base64-encoded URL params render audit scorecards
+- **AI Chat Widget** — floating assistant in `ChatWidget.tsx`, streams via `/api/chat` SSE, mounted globally in `Layout.tsx`
+- **Blog** — 5 articles in `src/data/blogPosts.ts`, rendered with react-markdown; listing + individual post pages with sidebar/prev-next/related
+- **Home page** — animated count-up stats (IntersectionObserver), scrolling CSS marquee testimonials
+- **Stack**: React + Vite, Tailwind CSS, framer-motion, react-hook-form + Zod validation
+- **API routes**: `/api/services`, `/api/portfolio`, `/api/contact`, `/api/detect-stack`, `/api/ai-fix` (SSE), `/api/chat` (SSE), `/api/compare`
+- **Important**: API server mounts all routes at `/api` prefix; sub-router paths must NOT repeat `/api`
+- **Network**: always use Node.js `https`/`http` modules with `rejectUnauthorized: false` for external fetches
+- **AI**: Replit AI Integrations proxy; model `gpt-5.2`; SSE pattern in `ai-fix.ts` and `chat.ts`
+- **Share URL**: `btoa(JSON.stringify(payload))` + base64url encode; decoded in `Results.tsx`
 - Preview path: `/`
 
 ## Structure

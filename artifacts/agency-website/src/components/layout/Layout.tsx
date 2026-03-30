@@ -1,6 +1,7 @@
 import React, { ReactNode } from "react";
 import { Navbar } from "./Navbar";
 import { Footer } from "./Footer";
+import { ChatWidget } from "@/components/ChatWidget";
 
 interface LayoutProps {
   children: ReactNode;
@@ -14,6 +15,7 @@ export function Layout({ children }: LayoutProps) {
         {children}
       </main>
       <Footer />
+      <ChatWidget />
     </div>
   );
 }

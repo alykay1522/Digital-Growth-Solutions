@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown, DollarSign, Layers, Menu, ScanSearch, X, Sparkles } from "lucide-react";
+import { ChevronDown, DollarSign, GitCompare, Layers, Menu, ScanSearch, X, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const TOOLS = [
@@ -28,6 +28,14 @@ const TOOLS = [
     icon: DollarSign,
     badge: "Free",
     color: "text-amber-600 bg-amber-50",
+  },
+  {
+    href: "/compare",
+    label: "Competitor Comparison",
+    description: "Your site vs any competitor",
+    icon: GitCompare,
+    badge: "Free",
+    color: "text-orange-600 bg-orange-50",
   },
 ];
 
@@ -63,6 +71,7 @@ export function Navbar() {
     { label: "Home", href: "/" },
     { label: "Services", href: "/services" },
     { label: "Portfolio", href: "/portfolio" },
+    { label: "Blog", href: "/blog" },
     { label: "About", href: "/about" },
   ];
 
