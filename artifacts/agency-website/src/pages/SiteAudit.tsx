@@ -317,7 +317,13 @@ function AiFixPanel({
 }
 
 export default function SiteAudit() {
-  const [url, setUrl] = useState("");
+  const [url, setUrl] = useState(() => {
+    try {
+      const saved = sessionStorage.getItem("auditUrl");
+      if (saved) { sessionStorage.removeItem("auditUrl"); return saved; }
+    } catch {}
+    return "";
+  });
   const [submittedUrl, setSubmittedUrl] = useState("");
   const { mutate: analyze, data: result, isPending, error, reset } = useAnalyzeSite();
 

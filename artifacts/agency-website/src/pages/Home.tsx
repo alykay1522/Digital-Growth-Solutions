@@ -131,6 +131,53 @@ export default function Home() {
         </div>
       </section>
 
+      {/* LEAD MAGNET — Free Audit */}
+      <section className="py-16 bg-gradient-to-r from-primary to-violet-600 relative overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute -top-8 left-1/3 w-64 h-64 bg-white/5 rounded-full blur-3xl" />
+          <div className="absolute -bottom-8 right-1/4 w-48 h-48 bg-white/5 rounded-full blur-3xl" />
+        </div>
+        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 text-center">
+          <AnimatedSection>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 border border-white/30 text-white text-sm font-semibold mb-5">
+              <Zap className="w-4 h-4" />
+              Free — No Credit Card Required
+            </div>
+            <h2 className="text-3xl md:text-4xl font-display font-bold text-white mb-3">
+              Get your free website audit in 24 hours
+            </h2>
+            <p className="text-white/80 text-lg mb-8 max-w-xl mx-auto">
+              Enter your URL and we'll run an instant AI-powered check — plus a human expert will follow up with a detailed report within 24 hours.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3 max-w-xl mx-auto">
+              <input
+                type="url"
+                placeholder="https://yourwebsite.com"
+                className="flex-1 h-13 px-5 py-3.5 rounded-xl bg-white/15 border border-white/30 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/50 backdrop-blur-sm text-base"
+                id="lead-url-input"
+              />
+              <Link href="/audit">
+                <Button
+                  className="h-13 px-7 py-3.5 rounded-xl bg-white text-primary hover:bg-white/90 font-bold shadow-xl shadow-black/10 shrink-0 w-full sm:w-auto"
+                  onClick={() => {
+                    const input = document.getElementById("lead-url-input") as HTMLInputElement;
+                    if (input?.value) {
+                      sessionStorage.setItem("auditUrl", input.value);
+                    }
+                  }}
+                >
+                  Audit My Site Free
+                  <ArrowRight className="ml-2 w-4 h-4" />
+                </Button>
+              </Link>
+            </div>
+            <p className="text-white/50 text-xs mt-4">
+              Used by 2,000+ businesses · Instant AI results · Human follow-up within 24 hrs
+            </p>
+          </AnimatedSection>
+        </div>
+      </section>
+
       {/* SERVICES PREVIEW */}
       <section className="py-24 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

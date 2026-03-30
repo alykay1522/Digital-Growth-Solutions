@@ -154,6 +154,11 @@ export default function Contact() {
                       <option value="ecommerce">eCommerce / Shopify</option>
                       <option value="mobile">Mobile Design</option>
                       <option value="custom">Custom Software</option>
+                      <option value="ai-chatbot">AI Chatbot Installation</option>
+                      <option value="ai-content">AI Content Automation</option>
+                      <option value="ai-products">AI Product Description Generation</option>
+                      <option value="ai-workflow">AI Workflow Automation</option>
+                      <option value="ai-redesign">AI-Powered Redesign</option>
                       <option value="other">Other</option>
                     </select>
                   </div>
