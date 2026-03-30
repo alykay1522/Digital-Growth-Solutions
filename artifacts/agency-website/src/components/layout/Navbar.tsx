@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown, DollarSign, GitCompare, Layers, Menu, ScanSearch, X, Sparkles } from "lucide-react";
+import { ChevronDown, DollarSign, GitCompare, Layers, Menu, ScanSearch, ShoppingBag, X, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const TOOLS = [
@@ -36,6 +36,14 @@ const TOOLS = [
     icon: GitCompare,
     badge: "Free",
     color: "text-orange-600 bg-orange-50",
+  },
+  {
+    href: "/sniff",
+    label: "Product Sniffer",
+    description: "Extract product data from any store",
+    icon: ShoppingBag,
+    badge: "Free",
+    color: "text-pink-600 bg-pink-50",
   },
 ];
 

@@ -8,6 +8,7 @@ import aiFix from "./ai-fix";
 import detectStack from "./detect-stack";
 import chat from "./chat";
 import compare from "./compare";
+import sniff from "./sniff";
 
 const router: IRouter = Router();
 
@@ -20,5 +21,6 @@ router.use(aiFix);
 router.use(detectStack);
 router.use(chat);
 router.use(compare);
+router.use(sniff);
 
 export default router;

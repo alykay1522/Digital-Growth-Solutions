@@ -18,6 +18,7 @@ import Compare from "./pages/Compare";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import Results from "./pages/Results";
+import Sniff from "./pages/Sniff";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -44,6 +45,7 @@ function Router() {
         <Route path="/blog/:slug" component={BlogPost} />
         <Route path="/blog" component={Blog} />
         <Route path="/results" component={Results} />
+        <Route path="/sniff" component={Sniff} />
         <Route component={NotFound} />
       </Switch>
     </Layout>
