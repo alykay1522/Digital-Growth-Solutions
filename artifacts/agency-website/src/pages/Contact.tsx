@@ -150,16 +150,39 @@ export default function Contact() {
                       className="flex h-12 w-full rounded-md border border-input bg-gray-50 px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/20 disabled:cursor-not-allowed disabled:opacity-50"
                     >
                       <option value="">Select a service...</option>
-                      <option value="wordpress">WordPress Development</option>
-                      <option value="ecommerce">eCommerce / Shopify</option>
-                      <option value="mobile">Mobile Design</option>
-                      <option value="custom">Custom Software</option>
-                      <option value="ai-chatbot">AI Chatbot Installation</option>
-                      <option value="ai-content">AI Content Automation</option>
-                      <option value="ai-products">AI Product Description Generation</option>
-                      <option value="ai-workflow">AI Workflow Automation</option>
-                      <option value="ai-redesign">AI-Powered Redesign</option>
-                      <option value="other">Other</option>
+                      <optgroup label="── Project Builds">
+                        <option value="wordpress">WordPress Development</option>
+                        <option value="ecommerce">eCommerce / Shopify</option>
+                        <option value="mobile">Mobile-First Design</option>
+                        <option value="custom">Custom Software / Web App</option>
+                        <option value="plugin">Custom Plugin Development</option>
+                      </optgroup>
+                      <optgroup label="── Website Rescue (24–48 hr fix)">
+                        <option value="rescue-down">WordPress Site Down</option>
+                        <option value="rescue-checkout">WooCommerce Checkout Fix</option>
+                        <option value="rescue-malware">Malware / Hack Removal</option>
+                        <option value="rescue-plugin">Plugin / Theme Conflict</option>
+                        <option value="rescue-speed">Site Speed Overhaul</option>
+                        <option value="rescue-other">Other Emergency Fix</option>
+                      </optgroup>
+                      <optgroup label="── Monthly Care Plans">
+                        <option value="care-basic">Care Basic ($99/mo)</option>
+                        <option value="care-pro">Care Pro ($249/mo)</option>
+                        <option value="care-elite">Care Elite ($399/mo)</option>
+                      </optgroup>
+                      <optgroup label="── AI Services">
+                        <option value="ai-chatbot">AI Chatbot Installation</option>
+                        <option value="ai-content">AI Content Automation</option>
+                        <option value="ai-products">AI Product Description Generation</option>
+                        <option value="ai-workflow">AI Workflow Automation</option>
+                        <option value="ai-redesign">AI-Powered Redesign</option>
+                      </optgroup>
+                      <optgroup label="── Digital Products">
+                        <option value="product-plugin">Micro-Plugin</option>
+                        <option value="product-template">Website Starter Kit</option>
+                        <option value="product-custom">Custom Script / Tool</option>
+                      </optgroup>
+                      <option value="other">Other / Not sure</option>
                     </select>
                   </div>
                 </div>
