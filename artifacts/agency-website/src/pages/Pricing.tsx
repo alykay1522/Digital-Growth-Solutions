@@ -12,6 +12,7 @@ import {
   Check,
   Clock,
   Code,
+  CreditCard,
   Download,
   FileCode,
   FileText,
@@ -590,11 +591,19 @@ export default function Pricing() {
                     </div>
                   </div>
                   <p className="text-sm text-muted-foreground leading-relaxed flex-1 mb-4">{fix.description}</p>
-                  <Link href="/contact">
-                    <button className="text-sm font-semibold text-primary hover:text-secondary transition-colors flex items-center gap-1">
-                      Request this fix <ArrowRight className="w-3.5 h-3.5" />
-                    </button>
-                  </Link>
+                  <div className="flex items-center justify-between gap-2">
+                    <Link href="/contact">
+                      <button className="text-sm font-semibold text-muted-foreground hover:text-secondary transition-colors flex items-center gap-1">
+                        Request this fix <ArrowRight className="w-3.5 h-3.5" />
+                      </button>
+                    </Link>
+                    <Link href="/pay">
+                      <button className="flex items-center gap-1.5 text-sm font-semibold text-primary hover:text-secondary transition-colors">
+                        <CreditCard className="w-3.5 h-3.5" />
+                        Pay Online
+                      </button>
+                    </Link>
+                  </div>
                 </motion.div>
               </AnimatedSection>
             );
@@ -755,10 +764,10 @@ export default function Pricing() {
                   <p className="text-sm text-muted-foreground leading-relaxed flex-1 mb-4">{product.desc}</p>
                   <div className="flex items-center justify-between">
                     <span className="text-lg font-display font-bold text-secondary">{product.price}</span>
-                    <Link href="/contact">
+                    <Link href="/pay">
                       <button className="flex items-center gap-1.5 text-sm font-semibold text-primary hover:text-secondary transition-colors">
-                        <Tag className="w-3.5 h-3.5" />
-                        Enquire
+                        <CreditCard className="w-3.5 h-3.5" />
+                        Buy Now
                       </button>
                     </Link>
                   </div>

@@ -10,6 +10,7 @@ import chat from "./chat";
 import compare from "./compare";
 import sniff from "./sniff";
 import clone from "./clone";
+import paypal from "./paypal";
 
 const router: IRouter = Router();
 
@@ -24,5 +25,6 @@ router.use(chat);
 router.use(compare);
 router.use(sniff);
 router.use(clone);
+router.use(paypal);
 
 export default router;

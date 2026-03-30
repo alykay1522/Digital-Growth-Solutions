@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown, DollarSign, GitCompare, Layers, Menu, ScanSearch, Scissors, ShoppingBag, X, Sparkles } from "lucide-react";
+import { ChevronDown, CreditCard, DollarSign, GitCompare, Layers, Menu, ScanSearch, Scissors, ShoppingBag, X, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const TOOLS = [
@@ -197,7 +197,20 @@ export function Navbar() {
                 </AnimatePresence>
               </div>
 
-              <Link href="/contact" className="ml-4">
+              <Link href="/pay" className="ml-2">
+                <Button
+                  variant="outline"
+                  className={`rounded-full px-4 gap-1.5 transition-all hover:scale-105 text-sm ${
+                    !onWhite
+                      ? "border-white/40 text-white hover:bg-white/10 bg-transparent"
+                      : "border-primary/40 text-primary hover:bg-primary/5 hover:border-primary bg-transparent"
+                  }`}
+                >
+                  <CreditCard className="w-3.5 h-3.5" />
+                  Pay Online
+                </Button>
+              </Link>
+              <Link href="/contact" className="ml-2">
                 <Button
                   className={`rounded-full px-6 transition-all hover:scale-105 hover:shadow-lg ${
                     !onWhite
@@ -289,7 +302,13 @@ export function Navbar() {
                 </div>
               </div>
 
-              <div className="mt-auto pb-8">
+              <div className="mt-auto pb-8 space-y-3">
+                <Link href="/pay" onClick={() => setIsMobileMenuOpen(false)}>
+                  <Button variant="outline" className="w-full rounded-xl h-12 text-base border-primary/30 text-primary gap-2">
+                    <CreditCard className="w-4 h-4" />
+                    Pay Online
+                  </Button>
+                </Link>
                 <Link href="/contact" onClick={() => setIsMobileMenuOpen(false)}>
                   <Button className="w-full rounded-xl h-14 text-lg bg-primary hover:bg-primary/90 text-white shadow-xl shadow-primary/25">
                     Start a Project

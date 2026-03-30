@@ -21,6 +21,7 @@ import Results from "./pages/Results";
 import Sniff from "./pages/Sniff";
 import Clone from "./pages/Clone";
 import Pricing from "./pages/Pricing";
+import Pay from "./pages/Pay";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -50,6 +51,7 @@ function Router() {
         <Route path="/sniff" component={Sniff} />
         <Route path="/clone" component={Clone} />
         <Route path="/pricing" component={Pricing} />
+        <Route path="/pay" component={Pay} />
         <Route component={NotFound} />
       </Switch>
     </Layout>
