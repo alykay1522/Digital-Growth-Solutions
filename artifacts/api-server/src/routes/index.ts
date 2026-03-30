@@ -9,6 +9,7 @@ import detectStack from "./detect-stack";
 import chat from "./chat";
 import compare from "./compare";
 import sniff from "./sniff";
+import clone from "./clone";
 
 const router: IRouter = Router();
 
@@ -22,5 +23,6 @@ router.use(detectStack);
 router.use(chat);
 router.use(compare);
 router.use(sniff);
+router.use(clone);
 
 export default router;

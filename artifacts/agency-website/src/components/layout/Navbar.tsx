@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown, DollarSign, GitCompare, Layers, Menu, ScanSearch, ShoppingBag, X, Sparkles } from "lucide-react";
+import { ChevronDown, DollarSign, GitCompare, Layers, Menu, ScanSearch, Scissors, ShoppingBag, X, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const TOOLS = [
@@ -44,6 +44,14 @@ const TOOLS = [
     icon: ShoppingBag,
     badge: "Free",
     color: "text-pink-600 bg-pink-50",
+  },
+  {
+    href: "/clone",
+    label: "Site Cloner",
+    description: "Clone any website as a single HTML file",
+    icon: Scissors,
+    badge: "Free",
+    color: "text-violet-600 bg-violet-50",
   },
 ];
 
