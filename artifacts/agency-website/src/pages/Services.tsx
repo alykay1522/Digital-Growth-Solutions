@@ -3,6 +3,7 @@ import { Link } from "wouter";
 import { motion } from "framer-motion";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { Button } from "@/components/ui/button";
+import { useMeta } from "@/hooks/useMeta";
 import {
   ArrowRight,
   Bot,
@@ -152,6 +153,7 @@ const AI_SERVICES = [
 ];
 
 export default function Services() {
+  useMeta({ title: "Services", description: "WordPress development, Shopify builds, custom software, and AI automation services. Fast delivery, transparent pricing, and expert support from NexaAgency." });
   const { data: apiServices, isLoading } = useGetServices();
   const services = apiServices?.length ? apiServices : FALLBACK_SERVICES;
 

@@ -1,10 +1,11 @@
 import React, { useRef, useEffect, useState } from "react";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
-import { ArrowRight, Bot, BrainCircuit, Code, FileText, Smartphone, Sparkles, Wand2, Workflow, Zap, CheckCircle2, Star } from "lucide-react";
+import { ArrowRight, Bot, BrainCircuit, Code, FileText, Smartphone, Sparkles, Wand2, Workflow, Zap, CheckCircle2, Star, ClipboardList, Cpu, Rocket } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { useGetServices, useGetPortfolio } from "@workspace/api-client-react";
+import { useMeta } from "@/hooks/useMeta";
 
 function useCountUp(target: number, trigger: boolean, duration = 1600) {
   const [count, setCount] = useState(0);
@@ -55,6 +56,11 @@ const TESTIMONIALS = [
 ];
 
 export default function Home() {
+  useMeta({
+    title: "WordPress, Shopify & AI Automation Experts",
+    description: "NexaAgency builds high-converting websites, eCommerce stores, and AI automation systems. Fast delivery, transparent pricing, and results you can measure."
+  });
+
   const { data: servicesData } = useGetServices();
   const { data: portfolioData } = useGetPortfolio();
 
@@ -90,9 +96,15 @@ export default function Home() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
             >
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 mb-6">
-                <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
-                <span className="text-white/90 text-sm font-medium">Award-winning Digital Agency</span>
+              <div className="flex flex-wrap gap-3 mb-6">
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20">
+                  <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
+                  <span className="text-white/90 text-sm font-medium">Award-winning Digital Agency</span>
+                </div>
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/20 backdrop-blur-md border border-accent/40">
+                  <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
+                  <span className="text-accent text-sm font-semibold">Currently accepting 3 new clients this month</span>
+                </div>
               </div>
               
               <h1 className="text-5xl md:text-7xl font-display font-bold text-white leading-tight mb-6">
@@ -128,6 +140,83 @@ export default function Home() {
           <AnimatedStat value={10} suffix="+" label="Years Experience" />
           <AnimatedStat value={150} suffix="+" label="Happy Clients" />
           <AnimatedStat value={25} suffix="+" label="Team Members" />
+        </div>
+      </section>
+
+      {/* HOW IT WORKS */}
+      <section className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <AnimatedSection className="text-center max-w-2xl mx-auto mb-16">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-semibold mb-4">
+              <Zap className="w-4 h-4" />
+              Simple 3-step process
+            </div>
+            <h2 className="text-3xl md:text-4xl font-display font-bold text-secondary mb-4">
+              How it works
+            </h2>
+            <p className="text-muted-foreground text-lg">
+              From first contact to live results — here's exactly what happens when you work with us.
+            </p>
+          </AnimatedSection>
+
+          <div className="grid md:grid-cols-3 gap-8 relative">
+            {/* Connecting line (desktop) */}
+            <div className="hidden md:block absolute top-10 left-1/3 right-1/3 h-0.5 bg-gradient-to-r from-primary/30 via-accent/50 to-primary/30" />
+
+            {[
+              {
+                step: "01",
+                icon: ClipboardList,
+                title: "Tell us what you need",
+                description: "Fill in the contact form or pay for a package online. Describe your project, goals, and timeline — no jargon required.",
+                color: "bg-primary/10 text-primary",
+                accent: "border-primary/20",
+              },
+              {
+                step: "02",
+                icon: Cpu,
+                title: "AI + our team builds it",
+                description: "Our AI-powered pipeline gets to work immediately — planning, designing, and building your project with expert oversight at every step.",
+                color: "bg-accent/10 text-accent",
+                accent: "border-accent/20",
+              },
+              {
+                step: "03",
+                icon: Rocket,
+                title: "Review, launch & grow",
+                description: "You review the finished work, request any tweaks, then we deploy. Your site goes live fully optimised and ready to convert visitors.",
+                color: "bg-green-100 text-green-600",
+                accent: "border-green-200",
+              },
+            ].map((item, i) => (
+              <AnimatedSection key={item.step} delay={i * 0.15}>
+                <motion.div
+                  whileHover={{ y: -4 }}
+                  transition={{ duration: 0.2 }}
+                  className={`relative bg-white rounded-2xl border-2 ${item.accent} p-8 shadow-sm hover:shadow-xl transition-all duration-300`}
+                >
+                  <div className="absolute -top-4 left-8">
+                    <span className="bg-white border border-border text-xs font-bold text-muted-foreground px-3 py-1 rounded-full shadow-sm">
+                      Step {item.step}
+                    </span>
+                  </div>
+                  <div className={`w-14 h-14 rounded-2xl ${item.color} flex items-center justify-center mb-6 mt-2`}>
+                    <item.icon className="w-7 h-7" />
+                  </div>
+                  <h3 className="text-xl font-bold text-secondary mb-3">{item.title}</h3>
+                  <p className="text-muted-foreground leading-relaxed">{item.description}</p>
+                </motion.div>
+              </AnimatedSection>
+            ))}
+          </div>
+
+          <div className="mt-12 text-center">
+            <Link href="/contact">
+              <Button className="h-12 px-8 rounded-xl">
+                Start your project today <ArrowRight className="ml-2 w-4 h-4" />
+              </Button>
+            </Link>
+          </div>
         </div>
       </section>
 

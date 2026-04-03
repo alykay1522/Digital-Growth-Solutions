@@ -3,6 +3,7 @@ import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { Badge } from "@/components/ui/badge";
 import { ArrowUpRight } from "lucide-react";
 import { useGetPortfolio } from "@workspace/api-client-react";
+import { useMeta } from "@/hooks/useMeta";
 import { Skeleton } from "@/components/ui/skeleton";
 
 const FALLBACK_PORTFOLIO = [
@@ -51,6 +52,7 @@ const FALLBACK_PORTFOLIO = [
 const CATEGORIES = ["All", "WordPress", "eCommerce", "Web App", "Mobile"];
 
 export default function Portfolio() {
+  useMeta({ title: "Portfolio", description: "Browse our portfolio of WordPress sites, Shopify stores, custom apps, and AI automation projects. Real work, real results." });
   const { data: apiPortfolio, isLoading } = useGetPortfolio();
   const portfolio = apiPortfolio?.length ? apiPortfolio : FALLBACK_PORTFOLIO;
   

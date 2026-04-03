@@ -10,6 +10,7 @@ import { Label } from "@/components/ui/label";
 import { Mail, CheckCircle2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useSubmitContact } from "@workspace/api-client-react";
+import { useMeta } from "@/hooks/useMeta";
 
 // Re-defining schema client-side for immediate feedback matching OpenAPI
 const contactSchema = z.object({
@@ -24,6 +25,7 @@ const contactSchema = z.object({
 type ContactFormData = z.infer<typeof contactSchema>;
 
 export default function Contact() {
+  useMeta({ title: "Contact Us", description: "Get in touch with NexaAgency. Tell us about your project and we'll respond within 24 hours with a plan and a quote." });
   const { toast } = useToast();
   const { mutate: submitContact, isPending } = useSubmitContact();
   const [isSuccess, setIsSuccess] = React.useState(false);

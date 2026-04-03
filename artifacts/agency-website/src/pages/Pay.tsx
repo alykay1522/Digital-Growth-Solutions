@@ -3,6 +3,7 @@ import { Link } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { Button } from "@/components/ui/button";
+import { useMeta } from "@/hooks/useMeta";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { PayPalCheckout } from "@/components/PayPalCheckout";
@@ -64,6 +65,7 @@ const QUICK_PACKAGES = [
 type CheckoutItem = { label: string; description: string; amount: string } | null;
 
 export default function Pay() {
+  useMeta({ title: "Pay Online", description: "Securely pay for your NexaAgency service or package online via PayPal. Instant confirmation and automated project kick-off." });
   const [selected, setSelected] = useState<CheckoutItem>(null);
   const [customMode, setCustomMode] = useState(false);
   const [customAmount, setCustomAmount] = useState("");

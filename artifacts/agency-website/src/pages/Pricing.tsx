@@ -3,6 +3,7 @@ import { Link } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { Button } from "@/components/ui/button";
+import { useMeta } from "@/hooks/useMeta";
 import {
   AlertTriangle,
   ArrowRight,
@@ -392,6 +393,7 @@ function FAQ({ q, a }: { q: string; a: string }) {
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 export default function Pricing() {
+  useMeta({ title: "Pricing", description: "Clear, upfront pricing for WordPress builds, emergency fixes, monthly care plans, AI automation, and digital products. No surprises, no hidden fees." });
   return (
     <div className="pt-20 bg-gray-50 min-h-screen">
 

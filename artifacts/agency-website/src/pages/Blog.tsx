@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, BookOpen, Clock, Loader2 } from "lucide-react";
 import { blogPosts as staticPosts } from "@/data/blogPosts";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
+import { useMeta } from "@/hooks/useMeta";
 
 const BASE_URL = (import.meta.env.BASE_URL || "").replace(/\/$/, "");
 
@@ -56,6 +57,7 @@ function normalize(p: Post) {
 }
 
 export default function Blog() {
+  useMeta({ title: "Blog", description: "Expert articles on WordPress, Shopify, web performance, security, and AI automation — written by the NexaAgency team." });
   const [allPosts, setAllPosts] = useState(staticPosts.map(normalize));
   const [loading, setLoading] = useState(true);
 

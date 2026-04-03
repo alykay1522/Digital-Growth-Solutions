@@ -2,9 +2,11 @@ import React from "react";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
+import { useMeta } from "@/hooks/useMeta";
 import { Code2, HeartHandshake, Lightbulb, Target } from "lucide-react";
 
 export default function About() {
+  useMeta({ title: "About Us", description: "Learn how NexaAgency uses AI-powered tools and expert knowledge to build websites and digital solutions that generate real results for businesses worldwide." });
   return (
     <div className="pt-20 bg-white">
       {/* Hero */}
