@@ -17,7 +17,7 @@ export function httpGet(
         method: "GET",
         headers: {
           "User-Agent":
-            "Mozilla/5.0 (compatible; NexaAuditBot/1.0; +https://nexaagency.com)",
+            "Mozilla/5.0 (compatible; DGSAuditBot/1.0; +https://nexaagency.com)",
           Accept:
             "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
           "Accept-Language": "en-US,en;q=0.9",

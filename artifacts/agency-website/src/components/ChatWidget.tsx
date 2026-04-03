@@ -13,7 +13,7 @@ const BASE_URL = (import.meta.env.BASE_URL || "").replace(/\/$/, "");
 const WELCOME: Message = {
   role: "assistant",
   content:
-    "Hi! I'm NexaAI. Ask me anything about web development, WordPress, SEO, pricing, or which platform is right for your project — I'll give you a straight answer.",
+    "Hi! I'm DGS AI. Ask me anything about web development, WordPress, SEO, pricing, or which platform is right for your project — I'll give you a straight answer.",
 };
 
 const SUGGESTED = [
@@ -152,7 +152,7 @@ export function ChatWidget() {
                 <Sparkles className="w-5 h-5" />
               </div>
               <div className="flex-1 min-w-0">
-                <p className="font-semibold text-sm leading-none mb-1">NexaAI Assistant</p>
+                <p className="font-semibold text-sm leading-none mb-1">DGS AI Assistant</p>
                 <div className="flex items-center gap-1.5">
                   <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
                   <span className="text-xs text-white/80">Online · Replies instantly</span>

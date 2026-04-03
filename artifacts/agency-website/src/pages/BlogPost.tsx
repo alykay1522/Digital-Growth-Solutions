@@ -68,7 +68,7 @@ function normalizeDb(p: Record<string, unknown>): NPost {
     readTime: (p.read_time as number) || (p.readTime as number) || 5,
     category: (p.category as string) || "General",
     coverImage: (p.cover_image as string) || (p.coverImage as string) || "",
-    authorName: (p.author_name as string) || "NexaAgency Team",
+    authorName: (p.author_name as string) || "Digital Growth Solutions Agency Team",
     authorRole: (p.author_role as string) || "Agency",
     tags: (p.tags as string[]) || [],
   };
@@ -187,7 +187,7 @@ export default function BlogPost() {
               </div>
               <div>
                 <p className="text-sm font-semibold">{post.authorName}</p>
-                <p className="text-xs text-white/70">{post.authorRole} · NexaAgency</p>
+                <p className="text-xs text-white/70">{post.authorRole} · Digital Growth Solutions Agency</p>
               </div>
             </div>
           </motion.div>

@@ -47,18 +47,18 @@ function AnimatedStat({ value, suffix, label }: { value: number; suffix: string;
 }
 
 const TESTIMONIALS = [
-  { name: "Sarah Chen", role: "CEO, Lumina Finance", quote: "NexaAgency cut our load time from 6s to under 1.5s. Conversion rate jumped 23% within 30 days." },
+  { name: "Sarah Chen", role: "CEO, Lumina Finance", quote: "Digital Growth Solutions Agency cut our load time from 6s to under 1.5s. Conversion rate jumped 23% within 30 days." },
   { name: "Marcus Webb", role: "Marketing Director, Aura Commerce", quote: "Best investment we made this year. WooCommerce rebuild, cart abandonment dropped 40%." },
   { name: "Priya Sharma", role: "Founder, CoralSkin", quote: "We went from invisible on Google to ranking page one for our key terms in three months." },
   { name: "James Okafor", role: "CTO, FlowDesk", quote: "Their WordPress plugin work saved us from building a $50k custom solution. Built exactly right." },
   { name: "Rachel Torres", role: "Operations, BrightCycle", quote: "The mobile redesign was transformative. Mobile sessions up 65%, bounce rate down 38%." },
-  { name: "Daniel Kim", role: "VP Growth, TechLayer", quote: "Three agencies failed before Nexa. They shipped our custom app in 10 weeks, on budget." },
+  { name: "Daniel Kim", role: "VP Growth, TechLayer", quote: "Three agencies failed before Digital Growth Solutions Agency. They shipped our custom app in 10 weeks, on budget." },
 ];
 
 export default function Home() {
   useMeta({
     title: "WordPress, Shopify & AI Automation Experts",
-    description: "NexaAgency builds high-converting websites, eCommerce stores, and AI automation systems. Fast delivery, transparent pricing, and results you can measure."
+    description: "Digital Growth Solutions Agency builds high-converting websites, eCommerce stores, and AI automation systems. Fast delivery, transparent pricing, and results you can measure."
   });
 
   const { data: servicesData } = useGetServices();
@@ -99,7 +99,7 @@ export default function Home() {
               <div className="flex flex-wrap gap-3 mb-6">
                 <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20">
                   <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
-                  <span className="text-white/90 text-sm font-medium">Award-winning Digital Agency</span>
+                  <span className="text-white/90 text-sm font-medium">AI-Powered Digital Agency</span>
                 </div>
                 <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/20 backdrop-blur-md border border-accent/40">
                   <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
@@ -107,24 +107,30 @@ export default function Home() {
                 </div>
               </div>
               
-              <h1 className="text-5xl md:text-7xl font-display font-bold text-white leading-tight mb-6">
-                We build <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-primary">digital experiences</span> that deliver results.
+              <h1 className="text-5xl md:text-7xl font-display font-bold text-white leading-[1.05] tracking-tight mb-6">
+                Most websites look great.<br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-primary">Ours actually sell.</span>
               </h1>
               
-              <p className="text-lg md:text-xl text-white/70 leading-relaxed mb-10 max-w-2xl">
-                From high-performing WordPress and Shopify sites to custom mobile apps. We blend innovation with practicality to help you work smarter, reach wider, and grow faster.
+              <p className="text-lg md:text-xl text-white/70 leading-relaxed mb-4 max-w-2xl">
+                WordPress sites, Shopify stores, custom software, and AI automation — all built and delivered for you. You focus on running your business. We handle the rest.
+              </p>
+
+              <p className="text-sm text-white/50 mb-10 flex items-center gap-2">
+                <span className="inline-block w-4 h-0.5 bg-accent rounded" />
+                No long-term contracts · Fixed pricing · Satisfaction guaranteed
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4">
-                <Link href="/contact">
+                <Link href="/audit">
                   <Button className="h-14 px-8 text-lg rounded-xl bg-primary hover:bg-primary/90 text-white shadow-xl shadow-primary/25 hover:-translate-y-1 transition-all">
-                    Start Your Project
+                    Audit My Site Free
                     <ArrowRight className="ml-2 w-5 h-5" />
                   </Button>
                 </Link>
-                <Link href="/portfolio">
+                <Link href="/pricing">
                   <Button variant="outline" className="h-14 px-8 text-lg rounded-xl border-white/20 text-white hover:bg-white/10 hover:text-white backdrop-blur-sm transition-all">
-                    View Our Work
+                    See Pricing
                   </Button>
                 </Link>
               </div>
@@ -152,10 +158,10 @@ export default function Home() {
               Simple 3-step process
             </div>
             <h2 className="text-3xl md:text-4xl font-display font-bold text-secondary mb-4">
-              How it works
+              From idea to live in weeks — not months
             </h2>
             <p className="text-muted-foreground text-lg">
-              From first contact to live results — here's exactly what happens when you work with us.
+              Here's exactly what happens after you reach out — no guesswork, no waiting.
             </p>
           </AnimatedSection>
 
@@ -271,8 +277,8 @@ export default function Home() {
       <section className="py-24 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedSection className="text-center max-w-2xl mx-auto mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Everything you need to succeed online</h2>
-            <p className="text-muted-foreground text-lg">Technology should make life easier. We provide end-to-end solutions tailored to your business needs.</p>
+            <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">Pick your weapon.</h2>
+            <p className="text-muted-foreground text-lg">From a brand-new website to a complete AI-powered business system — we've built it before and we'll build it for you.</p>
           </AnimatedSection>
 
           <div className="grid md:grid-cols-3 gap-8">
@@ -307,19 +313,22 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <AnimatedSection direction="right">
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">Listen first, plan smart, build right.</h2>
+              <h2 className="text-3xl md:text-4xl font-display font-bold mb-6 leading-tight">
+                Your competitors have a website.<br />
+                <span className="text-primary">You'll have a sales machine.</span>
+              </h2>
               <p className="text-lg text-muted-foreground mb-8">
-                Whether you're a startup finding your first customers or an established brand ready to scale, we work alongside you to ensure your digital presence not only looks amazing but works hard for your business.
+                We don't just build sites — we build systems that attract visitors, convert them into leads, and automate the follow-up. AI does the heavy lifting so you don't have to.
               </p>
               <ul className="space-y-4">
                 {[
-                  "Lightning-fast & SEO-optimized code",
-                  "Mobile-first responsive design across all devices",
-                  "Secure and scalable architectures",
-                  "Dedicated ongoing support & maintenance"
+                  "Pages that load in under 2 seconds — critical for SEO ranking",
+                  "Mobile-first design that converts on every screen size",
+                  "AI automation that handles enquiries even while you sleep",
+                  "Ongoing support — we're still here after launch"
                 ].map((item, i) => (
                   <li key={i} className="flex items-center gap-3">
-                    <CheckCircle2 className="w-6 h-6 text-accent" />
+                    <CheckCircle2 className="w-6 h-6 text-accent shrink-0" />
                     <span className="font-medium text-secondary">{item}</span>
                   </li>
                 ))}
@@ -443,17 +452,52 @@ export default function Home() {
         </div>
       </section>
 
+      {/* GUARANTEE SECTION */}
+      <section className="py-16 bg-white border-y border-border">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <AnimatedSection>
+            <div className="grid md:grid-cols-3 gap-8 text-center">
+              {[
+                { icon: "🔒", title: "Fixed Pricing", body: "You see the price before we start. No hourly surprises, no scope creep charges." },
+                { icon: "⚡", title: "7-Day Satisfaction Guarantee", body: "Not happy after the first week? You don't pay. Simple as that." },
+                { icon: "🤖", title: "AI-Powered Delivery", body: "AI tools mean faster builds, fewer errors, and more value for the same price." },
+              ].map((g) => (
+                <div key={g.title} className="flex flex-col items-center">
+                  <span className="text-4xl mb-4">{g.icon}</span>
+                  <h3 className="font-display font-bold text-secondary text-lg mb-2">{g.title}</h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed">{g.body}</p>
+                </div>
+              ))}
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+
       {/* CTA SECTION */}
       <section className="py-24 bg-navy-mesh relative">
         <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
           <AnimatedSection>
-            <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-6">Ready to transform your digital presence?</h2>
-            <p className="text-xl text-white/80 mb-10">Let's discuss how we can help your business work smarter, reach wider, and grow faster.</p>
-            <Link href="/contact">
-              <Button className="h-14 px-10 text-lg rounded-xl bg-accent hover:bg-accent/90 text-secondary font-bold shadow-xl shadow-accent/25 hover:-translate-y-1 transition-all">
-                Get a Free Consultation
-              </Button>
-            </Link>
+            <p className="text-accent font-semibold uppercase tracking-widest text-sm mb-4">Ready when you are</p>
+            <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-6">
+              Ready to get more clients<br className="hidden sm:block" /> from your website?
+            </h2>
+            <p className="text-xl text-white/70 mb-10 max-w-2xl mx-auto">
+              Tell us about your project. We'll respond within 24 hours with a clear plan and a fixed price — no surprises, no obligation.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link href="/contact">
+                <Button className="h-14 px-10 text-lg rounded-xl bg-accent hover:bg-accent/90 text-secondary font-bold shadow-xl shadow-accent/25 hover:-translate-y-1 transition-all">
+                  Get My Quote in 24 Hours
+                  <ArrowRight className="ml-2 w-5 h-5" />
+                </Button>
+              </Link>
+              <Link href="/pay">
+                <Button variant="outline" className="h-14 px-8 text-lg rounded-xl border-white/20 text-white hover:bg-white/10 hover:text-white backdrop-blur-sm transition-all">
+                  Pay for a Package
+                </Button>
+              </Link>
+            </div>
+            <p className="text-white/40 text-sm mt-6">7-day satisfaction guarantee · Fixed pricing · No long-term contracts</p>
           </AnimatedSection>
         </div>
       </section>

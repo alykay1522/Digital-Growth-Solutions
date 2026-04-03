@@ -2,7 +2,7 @@ import { useEffect } from "react";
 
 export function useMeta({ title, description }: { title: string; description: string }) {
   useEffect(() => {
-    const base = "NexaAgency";
+    const base = "Digital Growth Solutions Agency";
     document.title = title ? `${title} | ${base}` : base;
 
     const setMeta = (name: string, content: string, prop = false) => {

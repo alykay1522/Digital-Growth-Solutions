@@ -65,7 +65,7 @@ const QUICK_PACKAGES = [
 type CheckoutItem = { label: string; description: string; amount: string } | null;
 
 export default function Pay() {
-  useMeta({ title: "Pay Online", description: "Securely pay for your NexaAgency service or package online via PayPal. Instant confirmation and automated project kick-off." });
+  useMeta({ title: "Pay Online", description: "Securely pay for your Digital Growth Solutions Agency service or package online via PayPal. Instant confirmation and automated project kick-off." });
   const [selected, setSelected] = useState<CheckoutItem>(null);
   const [customMode, setCustomMode] = useState(false);
   const [customAmount, setCustomAmount] = useState("");
@@ -73,7 +73,7 @@ export default function Pay() {
   const [customReady, setCustomReady] = useState(false);
 
   const activeItem: CheckoutItem = customMode && customReady
-    ? { label: "Custom Invoice Payment", description: customDesc || "NexaAgency Service", amount: customAmount }
+    ? { label: "Custom Invoice Payment", description: customDesc || "Digital Growth Solutions Agency Service", amount: customAmount }
     : selected;
 
   return (
@@ -250,7 +250,7 @@ export default function Pay() {
 
                 <PayPalCheckout
                   amount={activeItem.amount}
-                  description={`NexaAgency: ${activeItem.label}`}
+                  description={`Digital Growth Solutions Agency: ${activeItem.label}`}
                   onSuccess={() => {
                     setSelected(null);
                     setCustomReady(false);

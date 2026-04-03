@@ -51,13 +51,13 @@ function normalize(p: Post) {
     readTime: p.readTime || p.read_time || 5,
     category: p.category,
     coverImage: p.coverImage || p.cover_image || "",
-    authorName: p.author?.name || p.author_name || "NexaAgency Team",
+    authorName: p.author?.name || p.author_name || "Digital Growth Solutions Agency Team",
     authorRole: p.author?.role || p.author_role || "Agency",
   };
 }
 
 export default function Blog() {
-  useMeta({ title: "Blog", description: "Expert articles on WordPress, Shopify, web performance, security, and AI automation — written by the NexaAgency team." });
+  useMeta({ title: "Blog", description: "Expert articles on WordPress, Shopify, web performance, security, and AI automation — written by the Digital Growth Solutions Agency team." });
   const [allPosts, setAllPosts] = useState(staticPosts.map(normalize));
   const [loading, setLoading] = useState(true);
 
@@ -102,7 +102,7 @@ export default function Blog() {
           <AnimatedSection className="max-w-2xl">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">
               <BookOpen className="w-4 h-4" />
-              The NexaAgency Blog
+              The Digital Growth Solutions Agency Blog
             </div>
             <h1 className="text-4xl md:text-5xl font-display font-bold text-secondary mb-4">
               Insights for smarter web decisions

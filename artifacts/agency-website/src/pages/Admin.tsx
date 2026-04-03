@@ -94,7 +94,7 @@ function LoginScreen({ onLogin }: { onLogin: (pw: string) => void }) {
             <FileText className="w-6 h-6 text-primary" />
           </div>
           <h1 className="text-xl font-display font-bold text-secondary">Admin Panel</h1>
-          <p className="text-sm text-muted-foreground mt-1">NexaAgency</p>
+          <p className="text-sm text-muted-foreground mt-1">Digital Growth Solutions Agency</p>
         </div>
         <form onSubmit={submit} className="space-y-4">
           <div>
@@ -152,7 +152,7 @@ function PostEditor({
     read_time: post?.read_time || 5,
     category: post?.category || "General",
     cover_image: post?.cover_image || "",
-    author_name: post?.author_name || "NexaAgency Team",
+    author_name: post?.author_name || "Digital Growth Solutions Agency Team",
     author_role: post?.author_role || "Agency",
     tags: (post?.tags || []).join(", "),
     published: post?.published !== false,
@@ -423,7 +423,7 @@ export default function Admin() {
                 </div>
                 <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-wrap">{s.message}</p>
                 <div className="mt-3 pt-3 border-t border-border">
-                  <a href={`mailto:${s.email}?subject=Re: Your enquiry – NexaAgency`} className="text-xs font-semibold text-primary hover:underline">Reply via email →</a>
+                  <a href={`mailto:${s.email}?subject=Re: Your enquiry – Digital Growth Solutions Agency`} className="text-xs font-semibold text-primary hover:underline">Reply via email →</a>
                 </div>
               </div>
             ))}

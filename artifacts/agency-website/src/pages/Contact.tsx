@@ -25,7 +25,7 @@ const contactSchema = z.object({
 type ContactFormData = z.infer<typeof contactSchema>;
 
 export default function Contact() {
-  useMeta({ title: "Contact Us", description: "Get in touch with NexaAgency. Tell us about your project and we'll respond within 24 hours with a plan and a quote." });
+  useMeta({ title: "Contact Us", description: "Get in touch with Digital Growth Solutions Agency. Tell us about your project and we'll respond within 24 hours with a plan and a quote." });
   const { toast } = useToast();
   const { mutate: submitContact, isPending } = useSubmitContact();
   const [isSuccess, setIsSuccess] = React.useState(false);

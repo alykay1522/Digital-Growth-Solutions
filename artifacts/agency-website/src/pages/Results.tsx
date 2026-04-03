@@ -182,7 +182,7 @@ export default function Results() {
 
         {/* Scanned info */}
         <p className="text-center text-xs text-muted-foreground">
-          Audited on {new Date(data.scannedAt).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })} by NexaAgency Site Audit
+          Audited on {new Date(data.scannedAt).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })} by Digital Growth Solutions Agency Site Audit
         </p>
 
         {/* Actions */}

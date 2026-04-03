@@ -38,7 +38,7 @@ function fetchUrl(rawUrl: string): Promise<{ body: string; finalUrl: string; hea
       hostname: parsed.hostname,
       path: parsed.pathname + parsed.search,
       headers: {
-        "User-Agent": "Mozilla/5.0 (compatible; NexaSniffer/1.0)",
+        "User-Agent": "Mozilla/5.0 (compatible; DGSAuditBot/1.0)",
         Accept: "text/html,application/json,*/*",
       },
       rejectUnauthorized: false,

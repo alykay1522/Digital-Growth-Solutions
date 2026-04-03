@@ -118,7 +118,7 @@ export function Navbar() {
                 className={`w-8 h-8 transition-transform duration-300 group-hover:rotate-12 ${!onWhite ? "brightness-0 invert" : ""}`}
               />
               <span className={`font-display font-bold text-xl tracking-tight ${!onWhite ? "text-white" : "text-secondary"}`}>
-                Nexa<span className="text-primary">Agency</span>
+                Digital Growth Solutions<span className="text-primary"> Agency</span>
               </span>
             </Link>
 
@@ -245,7 +245,7 @@ export function Navbar() {
               <div className="flex items-center gap-2">
                 <img src={`${import.meta.env.BASE_URL}images/logo-mark.png`} alt="Logo" className="w-8 h-8" />
                 <span className="font-display font-bold text-xl text-secondary">
-                  Nexa<span className="text-primary">Agency</span>
+                  Digital Growth Solutions<span className="text-primary"> Agency</span>
                 </span>
               </div>
               <button onClick={() => setIsMobileMenuOpen(false)} className="p-2 bg-muted rounded-full">

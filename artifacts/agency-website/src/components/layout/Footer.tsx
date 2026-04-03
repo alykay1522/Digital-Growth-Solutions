@@ -15,7 +15,7 @@ export function Footer() {
                 className="w-8 h-8 brightness-0 invert"
               />
               <span className="font-display font-bold text-2xl tracking-tight text-white">
-                Nexa<span className="text-primary">Agency</span>
+                Digital Growth Solutions<span className="text-primary"> Agency</span>
               </span>
             </Link>
             <p className="text-white/60 leading-relaxed max-w-sm">
@@ -82,7 +82,7 @@ export function Footer() {
 
         <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-white/40 text-sm">
-            © {new Date().getFullYear()} NexaAgency. All rights reserved.
+            © {new Date().getFullYear()} Digital Growth Solutions Agency. All rights reserved.
           </p>
           <div className="flex gap-6 text-sm text-white/40">
             <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>

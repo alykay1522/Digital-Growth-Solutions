@@ -153,7 +153,7 @@ const AI_SERVICES = [
 ];
 
 export default function Services() {
-  useMeta({ title: "Services", description: "WordPress development, Shopify builds, custom software, and AI automation services. Fast delivery, transparent pricing, and expert support from NexaAgency." });
+  useMeta({ title: "Services", description: "WordPress development, Shopify builds, custom software, and AI automation services. Fast delivery, transparent pricing, and expert support from Digital Growth Solutions Agency." });
   const { data: apiServices, isLoading } = useGetServices();
   const services = apiServices?.length ? apiServices : FALLBACK_SERVICES;
 

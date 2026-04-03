@@ -177,7 +177,7 @@ router.post("/clone", async (req: Request, res: Response) => {
     // Inject a banner so the user knows this is a clone
     const banner = `
 <div id="nexa-clone-banner" style="position:fixed;bottom:0;left:0;right:0;background:#1e293b;color:#f8fafc;font-family:system-ui,sans-serif;font-size:13px;padding:10px 20px;display:flex;align-items:center;justify-content:space-between;z-index:2147483647;box-shadow:0 -2px 12px rgba(0,0,0,.3)">
-  <span>🔍 <strong>NexaAgency Site Clone</strong> — cloned from <a href="${url}" target="_blank" style="color:#60a5fa">${url}</a></span>
+  <span>🔍 <strong>Digital Growth Solutions Agency Site Clone</strong> — cloned from <a href="${url}" target="_blank" style="color:#60a5fa">${url}</a></span>
   <button onclick="document.getElementById('nexa-clone-banner').remove()" style="background:transparent;border:1px solid rgba(255,255,255,.3);color:#f8fafc;padding:4px 10px;border-radius:6px;cursor:pointer;font-size:12px">Dismiss</button>
 </div>`;
     $("body").append(banner);

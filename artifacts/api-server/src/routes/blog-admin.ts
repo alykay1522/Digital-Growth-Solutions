@@ -63,7 +63,7 @@ router.post("/blog-admin/posts", async (req: Request, res: Response) => {
        RETURNING *`,
       [slug, title, excerpt || "", content, published_at || new Date().toISOString().slice(0, 10),
        read_time || 5, category || "General", cover_image || "",
-       author_name || "NexaAgency Team", author_role || "Agency",
+       author_name || "Digital Growth Solutions Agency Team", author_role || "Agency",
        tags || [], published !== false]
     );
     return res.status(201).json({ post: rows[0] });

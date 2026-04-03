@@ -51,7 +51,7 @@ router.post("/contact", async (req, res) => {
     sendClientAutoReply({
       to: email,
       name,
-      subject: "We received your message — NexaAgency",
+      subject: "We received your message — Digital Growth Solutions Agency",
       html: contactClientHtml(name),
     }),
   ]).catch((err) => req.log.error(err, "Email send failed"));

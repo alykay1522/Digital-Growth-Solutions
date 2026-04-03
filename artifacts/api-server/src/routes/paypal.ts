@@ -115,7 +115,7 @@ router.post("/paypal/capture-order/:orderId", async (req: Request, res: Response
     try {
       const unit = captureData?.purchase_units?.[0];
       const amount = unit?.payments?.captures?.[0]?.amount?.value || "?";
-      const description = unit?.description || "NexaAgency Service";
+      const description = unit?.description || "Digital Growth Solutions Agency Service";
       const payer = captureData?.payer;
       const payerName = payer ? `${payer.name?.given_name || ""} ${payer.name?.surname || ""}`.trim() : undefined;
       const payerEmail = payer?.email_address;
@@ -128,7 +128,7 @@ router.post("/paypal/capture-order/:orderId", async (req: Request, res: Response
         payerEmail ? sendClientAutoReply({
           to: payerEmail,
           name: payerName || "there",
-          subject: "Payment confirmed — NexaAgency",
+          subject: "Payment confirmed — Digital Growth Solutions Agency",
           html: paymentClientHtml({ payerName: payerName || "there", amount, description, orderId }),
         }) : Promise.resolve(),
       ]).catch(() => {});
