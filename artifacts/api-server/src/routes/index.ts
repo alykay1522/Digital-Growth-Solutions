@@ -11,6 +11,8 @@ import compare from "./compare";
 import sniff from "./sniff";
 import clone from "./clone";
 import paypal from "./paypal";
+import blog from "./blog";
+import blogAdmin from "./blog-admin";
 
 const router: IRouter = Router();
 
@@ -26,5 +28,7 @@ router.use(compare);
 router.use(sniff);
 router.use(clone);
 router.use(paypal);
+router.use(blog);
+router.use(blogAdmin);
 
 export default router;

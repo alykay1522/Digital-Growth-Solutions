@@ -1,4 +1,5 @@
 import { Router, Request, Response } from "express";
+import { sendOwnerNotification, sendClientAutoReply, paymentOwnerHtml, paymentClientHtml } from "../lib/email";
 
 const router = Router();
 
@@ -108,7 +109,31 @@ router.post("/paypal/capture-order/:orderId", async (req: Request, res: Response
       throw new Error(`PayPal capture failed: ${body}`);
     }
 
-    const captureData = await captureRes.json();
+    const captureData = await captureRes.json() as any;
+
+    // Fire email notifications (non-blocking)
+    try {
+      const unit = captureData?.purchase_units?.[0];
+      const amount = unit?.payments?.captures?.[0]?.amount?.value || "?";
+      const description = unit?.description || "NexaAgency Service";
+      const payer = captureData?.payer;
+      const payerName = payer ? `${payer.name?.given_name || ""} ${payer.name?.surname || ""}`.trim() : undefined;
+      const payerEmail = payer?.email_address;
+
+      Promise.all([
+        sendOwnerNotification({
+          subject: `💰 Payment received — $${amount}`,
+          html: paymentOwnerHtml({ orderId, amount, description, payerName, payerEmail }),
+        }),
+        payerEmail ? sendClientAutoReply({
+          to: payerEmail,
+          name: payerName || "there",
+          subject: "Payment confirmed — NexaAgency",
+          html: paymentClientHtml({ payerName: payerName || "there", amount, description, orderId }),
+        }) : Promise.resolve(),
+      ]).catch(() => {});
+    } catch (_) {}
+
     return res.json(captureData);
   } catch (err: any) {
     return res.status(500).json({
