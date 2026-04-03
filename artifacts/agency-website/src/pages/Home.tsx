@@ -140,7 +140,7 @@ export default function Home() {
       </section>
 
       {/* STATS SECTION - animated counters */}
-      <section className="py-12 bg-white relative -mt-10 mx-4 sm:mx-6 lg:mx-auto max-w-6xl rounded-2xl shadow-xl border border-border/50 z-20">
+      <section className="py-12 bg-white relative mx-4 sm:mx-6 lg:mx-auto max-w-6xl rounded-2xl shadow-xl border border-border/50 z-20">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 px-8">
           <AnimatedStat value={300} suffix="+" label="Projects Delivered" />
           <AnimatedStat value={10} suffix="+" label="Years Experience" />
