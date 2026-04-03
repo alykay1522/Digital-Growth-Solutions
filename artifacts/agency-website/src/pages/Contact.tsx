@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { Mail, MapPin, Phone, CheckCircle2 } from "lucide-react";
+import { Mail, CheckCircle2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useSubmitContact } from "@workspace/api-client-react";
 
@@ -77,29 +77,7 @@ export default function Contact() {
                 <div>
                   <h3 className="font-bold text-lg text-secondary">Email Us</h3>
                   <p className="text-muted-foreground">hello@nexaagency.com</p>
-                  <p className="text-muted-foreground">support@nexaagency.com</p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center shrink-0">
-                  <Phone className="w-6 h-6 text-accent" />
-                </div>
-                <div>
-                  <h3 className="font-bold text-lg text-secondary">Call Us</h3>
-                  <p className="text-muted-foreground">+1 (555) 123-4567</p>
-                  <p className="text-muted-foreground">Mon-Fri from 9am to 6pm EST</p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center shrink-0">
-                  <MapPin className="w-6 h-6 text-primary" />
-                </div>
-                <div>
-                  <h3 className="font-bold text-lg text-secondary">Visit Us</h3>
-                  <p className="text-muted-foreground">123 Innovation Drive</p>
-                  <p className="text-muted-foreground">Tech District, NY 10001</p>
+                  <p className="text-sm text-muted-foreground mt-1">We respond to every enquiry within 24 hours.</p>
                 </div>
               </div>
             </div>

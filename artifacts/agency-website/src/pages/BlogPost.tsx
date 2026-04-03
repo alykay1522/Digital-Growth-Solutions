@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useParams } from "wouter";
 import { motion } from "framer-motion";
-import { ArrowLeft, ArrowRight, BookOpen, Clock, Tag } from "lucide-react";
+import { ArrowLeft, ArrowRight, BookOpen, Clock, Loader2, Tag } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { blogPosts, getPostBySlug } from "@/data/blogPosts";
+import { blogPosts as staticPosts, getPostBySlug } from "@/data/blogPosts";
 import { Button } from "@/components/ui/button";
+
+const BASE_URL = (import.meta.env.BASE_URL || "").replace(/\/$/, "");
 
 const CATEGORY_COLORS: Record<string, string> = {
   Performance: "bg-amber-100 text-amber-700",
@@ -13,6 +15,8 @@ const CATEGORY_COLORS: Record<string, string> = {
   Security: "bg-green-100 text-green-700",
   Design: "bg-pink-100 text-pink-700",
   Business: "bg-violet-100 text-violet-700",
+  "AI & Automation": "bg-purple-100 text-purple-700",
+  General: "bg-gray-100 text-gray-700",
 };
 
 function formatDate(iso: string) {
@@ -23,11 +27,109 @@ function formatDate(iso: string) {
   });
 }
 
+interface NPost {
+  slug: string;
+  title: string;
+  excerpt: string;
+  content: string;
+  publishedAt: string;
+  readTime: number;
+  category: string;
+  coverImage: string;
+  authorName: string;
+  authorRole: string;
+  tags: string[];
+}
+
+function normalizeStatic(p: ReturnType<typeof getPostBySlug>): NPost | null {
+  if (!p) return null;
+  return {
+    slug: p.slug,
+    title: p.title,
+    excerpt: p.excerpt,
+    content: p.content,
+    publishedAt: p.publishedAt,
+    readTime: p.readTime,
+    category: p.category,
+    coverImage: p.coverImage,
+    authorName: p.author.name,
+    authorRole: p.author.role,
+    tags: p.tags ?? [],
+  };
+}
+
+function normalizeDb(p: Record<string, unknown>): NPost {
+  return {
+    slug: p.slug as string,
+    title: p.title as string,
+    excerpt: (p.excerpt as string) || "",
+    content: (p.content as string) || "",
+    publishedAt: (p.published_at as string) || (p.publishedAt as string) || "",
+    readTime: (p.read_time as number) || (p.readTime as number) || 5,
+    category: (p.category as string) || "General",
+    coverImage: (p.cover_image as string) || (p.coverImage as string) || "",
+    authorName: (p.author_name as string) || "NexaAgency Team",
+    authorRole: (p.author_role as string) || "Agency",
+    tags: (p.tags as string[]) || [],
+  };
+}
+
 export default function BlogPost() {
   const params = useParams<{ slug: string }>();
-  const post = getPostBySlug(params.slug);
+  const [post, setPost] = useState<NPost | null>(null);
+  const [allPosts, setAllPosts] = useState<NPost[]>(staticPosts.map(p => normalizeStatic(p)!));
+  const [loading, setLoading] = useState(true);
+  const [notFound, setNotFound] = useState(false);
 
-  if (!post) {
+  useEffect(() => {
+    const slug = params.slug;
+    // Try static first (has full content)
+    const staticPost = normalizeStatic(getPostBySlug(slug));
+    if (staticPost) {
+      setPost(staticPost);
+      setLoading(false);
+    }
+    // Always fetch DB posts list to have accurate prev/next/related
+    fetch(`${BASE_URL}/api/blog/posts`)
+      .then(r => r.json())
+      .then(data => {
+        if (data.posts?.length) {
+          const dbSlugs = new Set(data.posts.map((p: Record<string, unknown>) => p.slug));
+          const staticOnly = staticPosts
+            .filter(p => !dbSlugs.has(p.slug))
+            .map(p => normalizeStatic(p)!);
+          const merged = [...data.posts.map(normalizeDb), ...staticOnly].sort(
+            (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
+          );
+          setAllPosts(merged);
+          // If not found in static, check DB
+          if (!staticPost) {
+            const dbPost = data.posts.find((p: Record<string, unknown>) => p.slug === slug);
+            if (dbPost) {
+              setPost(normalizeDb(dbPost));
+            } else {
+              setNotFound(true);
+            }
+          }
+        } else if (!staticPost) {
+          setNotFound(true);
+        }
+      })
+      .catch(() => {
+        if (!staticPost) setNotFound(true);
+      })
+      .finally(() => setLoading(false));
+  }, [params.slug]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <Loader2 className="w-6 h-6 animate-spin text-primary" />
+      </div>
+    );
+  }
+
+  if (notFound || !post) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="text-center">
@@ -41,22 +143,18 @@ export default function BlogPost() {
     );
   }
 
-  const currentIndex = blogPosts.findIndex((p) => p.slug === post.slug);
-  const prevPost = currentIndex > 0 ? blogPosts[currentIndex - 1] : null;
-  const nextPost = currentIndex < blogPosts.length - 1 ? blogPosts[currentIndex + 1] : null;
-  const relatedPosts = blogPosts.filter((p) => p.slug !== post.slug).slice(0, 2);
+  const currentIndex = allPosts.findIndex(p => p.slug === post.slug);
+  const prevPost = currentIndex > 0 ? allPosts[currentIndex - 1] : null;
+  const nextPost = currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1] : null;
+  const relatedPosts = allPosts.filter(p => p.slug !== post.slug).slice(0, 2);
+  const initials = post.authorName.split(" ").map(n => n[0]).join("");
 
   return (
     <div className="min-h-screen bg-white">
       {/* Hero */}
       <div className="relative pt-20 bg-secondary overflow-hidden">
         <div className="absolute inset-0 opacity-20">
-          <img
-            src={post.coverImage}
-            alt=""
-            className="w-full h-full object-cover"
-            aria-hidden="true"
-          />
+          <img src={post.coverImage} alt="" className="w-full h-full object-cover" aria-hidden="true" />
           <div className="absolute inset-0 bg-gradient-to-b from-secondary/80 to-secondary" />
         </div>
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 py-16 text-white">
@@ -69,11 +167,7 @@ export default function BlogPost() {
             </Link>
 
             <div className="flex items-center gap-3 mb-5 flex-wrap">
-              <span
-                className={`text-xs font-semibold px-3 py-1.5 rounded-full ${
-                  CATEGORY_COLORS[post.category] || "bg-white/10 text-white"
-                }`}
-              >
+              <span className={`text-xs font-semibold px-3 py-1.5 rounded-full ${CATEGORY_COLORS[post.category] || "bg-white/10 text-white"}`}>
                 {post.category}
               </span>
               <span className="flex items-center gap-1.5 text-sm text-white/70">
@@ -89,11 +183,11 @@ export default function BlogPost() {
 
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center font-bold text-white">
-                {post.author.name.split(" ").map((n) => n[0]).join("")}
+                {initials}
               </div>
               <div>
-                <p className="text-sm font-semibold">{post.author.name}</p>
-                <p className="text-xs text-white/70">{post.author.role} · NexaAgency</p>
+                <p className="text-sm font-semibold">{post.authorName}</p>
+                <p className="text-xs text-white/70">{post.authorRole} · NexaAgency</p>
               </div>
             </div>
           </motion.div>
@@ -130,23 +224,21 @@ export default function BlogPost() {
           {/* Sidebar */}
           <aside className="hidden lg:block">
             <div className="sticky top-24 space-y-6">
-              {/* Tags */}
-              <div className="bg-gray-50 rounded-2xl p-5 border border-border">
-                <div className="flex items-center gap-2 mb-3">
-                  <Tag className="w-4 h-4 text-muted-foreground" />
-                  <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Topics</p>
+              {post.tags.length > 0 && (
+                <div className="bg-gray-50 rounded-2xl p-5 border border-border">
+                  <div className="flex items-center gap-2 mb-3">
+                    <Tag className="w-4 h-4 text-muted-foreground" />
+                    <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Topics</p>
+                  </div>
+                  <div className="flex flex-wrap gap-1.5">
+                    {post.tags.map(tag => (
+                      <span key={tag} className="text-xs px-2.5 py-1 bg-white border border-border rounded-full text-muted-foreground">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-                <div className="flex flex-wrap gap-1.5">
-                  {post.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="text-xs px-2.5 py-1 bg-white border border-border rounded-full text-muted-foreground"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
+              )}
 
               {/* Free tools CTA */}
               <div className="bg-primary rounded-2xl p-5 text-white">
@@ -166,11 +258,11 @@ export default function BlogPost() {
               <div className="bg-gray-50 rounded-2xl p-5 border border-border">
                 <div className="flex items-center gap-3 mb-3">
                   <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center font-bold text-white text-sm">
-                    {post.author.name.split(" ").map((n) => n[0]).join("")}
+                    {initials}
                   </div>
                   <div>
-                    <p className="text-sm font-bold text-secondary">{post.author.name}</p>
-                    <p className="text-xs text-muted-foreground">{post.author.role}</p>
+                    <p className="text-sm font-bold text-secondary">{post.authorName}</p>
+                    <p className="text-xs text-muted-foreground">{post.authorRole}</p>
                   </div>
                 </div>
                 <Link href="/contact">
@@ -217,14 +309,10 @@ export default function BlogPost() {
         <div className="pb-20">
           <h3 className="text-xl font-display font-bold text-secondary mb-6">More from the blog</h3>
           <div className="grid sm:grid-cols-2 gap-5">
-            {relatedPosts.map((p) => (
+            {relatedPosts.map(p => (
               <Link key={p.slug} href={`/blog/${p.slug}`}>
                 <div className="group flex gap-4 p-4 bg-gray-50 rounded-xl border border-border hover:border-primary/30 hover:bg-primary/5 transition-all cursor-pointer">
-                  <img
-                    src={p.coverImage}
-                    alt={p.title}
-                    className="w-16 h-16 rounded-lg object-cover shrink-0"
-                  />
+                  <img src={p.coverImage} alt={p.title} className="w-16 h-16 rounded-lg object-cover shrink-0" />
                   <div className="min-w-0">
                     <p className="text-xs text-muted-foreground mb-1">{p.category}</p>
                     <p className="text-sm font-semibold text-secondary group-hover:text-primary transition-colors leading-snug line-clamp-2">

@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
-import { ArrowRight, BookOpen, Clock } from "lucide-react";
-import { blogPosts } from "@/data/blogPosts";
+import { ArrowRight, BookOpen, Clock, Loader2 } from "lucide-react";
+import { blogPosts as staticPosts } from "@/data/blogPosts";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
+
+const BASE_URL = (import.meta.env.BASE_URL || "").replace(/\/$/, "");
 
 const CATEGORY_COLORS: Record<string, string> = {
   Performance: "bg-amber-100 text-amber-700",
@@ -11,6 +13,8 @@ const CATEGORY_COLORS: Record<string, string> = {
   Security: "bg-green-100 text-green-700",
   Design: "bg-pink-100 text-pink-700",
   Business: "bg-violet-100 text-violet-700",
+  "AI & Automation": "bg-purple-100 text-purple-700",
+  General: "bg-gray-100 text-gray-700",
 };
 
 function formatDate(iso: string) {
@@ -21,8 +25,72 @@ function formatDate(iso: string) {
   });
 }
 
+interface Post {
+  slug: string;
+  title: string;
+  excerpt: string;
+  publishedAt?: string;
+  published_at?: string;
+  readTime?: number;
+  read_time?: number;
+  category: string;
+  coverImage?: string;
+  cover_image?: string;
+  author?: { name: string; role: string };
+  author_name?: string;
+  author_role?: string;
+}
+
+function normalize(p: Post) {
+  return {
+    slug: p.slug,
+    title: p.title,
+    excerpt: p.excerpt,
+    publishedAt: p.publishedAt || p.published_at || "",
+    readTime: p.readTime || p.read_time || 5,
+    category: p.category,
+    coverImage: p.coverImage || p.cover_image || "",
+    authorName: p.author?.name || p.author_name || "NexaAgency Team",
+    authorRole: p.author?.role || p.author_role || "Agency",
+  };
+}
+
 export default function Blog() {
-  const [featured, ...rest] = blogPosts;
+  const [allPosts, setAllPosts] = useState(staticPosts.map(normalize));
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch(`${BASE_URL}/api/blog/posts`)
+      .then((r) => r.json())
+      .then((data) => {
+        if (data.posts?.length) {
+          const dbSlugs = new Set(data.posts.map((p: Post) => p.slug));
+          // Keep static posts not overridden by DB, then add all DB posts
+          const staticOnly = staticPosts
+            .filter((p) => !dbSlugs.has(p.slug))
+            .map(normalize);
+          const dbNorm = data.posts.map(normalize);
+          // Merge and sort by date descending
+          const merged = [...dbNorm, ...staticOnly].sort(
+            (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
+          );
+          setAllPosts(merged);
+        }
+      })
+      .catch(() => {/* keep static posts on error */})
+      .finally(() => setLoading(false));
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <Loader2 className="w-6 h-6 animate-spin text-primary" />
+      </div>
+    );
+  }
+
+  const [featured, ...rest] = allPosts;
+  if (!featured) return null;
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -62,11 +130,7 @@ export default function Blog() {
               </div>
               <div className="p-8 flex flex-col justify-center">
                 <div className="flex items-center gap-3 mb-4">
-                  <span
-                    className={`text-xs font-semibold px-2.5 py-1 rounded-full ${
-                      CATEGORY_COLORS[featured.category] || "bg-muted text-muted-foreground"
-                    }`}
-                  >
+                  <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${CATEGORY_COLORS[featured.category] || "bg-muted text-muted-foreground"}`}>
                     {featured.category}
                   </span>
                   <span className="inline-flex items-center gap-1 text-xs text-muted-foreground">
@@ -80,8 +144,8 @@ export default function Blog() {
                 <p className="text-muted-foreground leading-relaxed mb-6">{featured.excerpt}</p>
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm font-semibold text-secondary">{featured.author.name}</p>
-                    <p className="text-xs text-muted-foreground">{featured.author.role}</p>
+                    <p className="text-sm font-semibold text-secondary">{featured.authorName}</p>
+                    <p className="text-xs text-muted-foreground">{featured.authorRole}</p>
                   </div>
                   <div className="flex items-center gap-1 text-primary font-medium text-sm group-hover:gap-2 transition-all">
                     Read article <ArrowRight className="w-4 h-4" />
@@ -111,11 +175,7 @@ export default function Blog() {
                   </div>
                   <div className="p-6 flex flex-col flex-1">
                     <div className="flex items-center gap-3 mb-3">
-                      <span
-                        className={`text-xs font-semibold px-2.5 py-1 rounded-full ${
-                          CATEGORY_COLORS[post.category] || "bg-muted text-muted-foreground"
-                        }`}
-                      >
+                      <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${CATEGORY_COLORS[post.category] || "bg-muted text-muted-foreground"}`}>
                         {post.category}
                       </span>
                       <span className="inline-flex items-center gap-1 text-xs text-muted-foreground">
@@ -131,7 +191,7 @@ export default function Blog() {
                     </p>
                     <div className="flex items-center justify-between mt-auto pt-4 border-t border-border/50">
                       <div>
-                        <p className="text-xs font-semibold text-secondary">{post.author.name}</p>
+                        <p className="text-xs font-semibold text-secondary">{post.authorName}</p>
                         <p className="text-xs text-muted-foreground">{formatDate(post.publishedAt)}</p>
                       </div>
                       <ArrowRight className="w-4 h-4 text-primary opacity-0 group-hover:opacity-100 transition-opacity" />
