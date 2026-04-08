@@ -67,7 +67,7 @@ export function contactOwnerHtml(data: {
       <p style="margin:0;font-weight:600;color:#6b7280;font-size:13px;margin-bottom:8px">MESSAGE</p>
       <p style="margin:0;line-height:1.6">${data.message.replace(/\n/g, "<br>")}</p>
     </div>
-    <p style="margin-top:24px;font-size:13px;color:#9ca3af">Submitted via nexaagency.com contact form</p>
+    <p style="margin-top:24px;font-size:13px;color:#9ca3af">Submitted via digitalgrowthsolutionsagency.com contact form</p>
   </div>
 </div>`;
 }
@@ -84,7 +84,7 @@ export function contactClientHtml(name: string): string {
     <p style="margin:0 0 24px;line-height:1.6">If your matter is urgent — for example a site that's down or a broken checkout — please reply to this email and mark it URGENT and we'll prioritise accordingly.</p>
     <div style="background:#6c63ff;padding:20px 24px;border-radius:10px;margin-bottom:24px">
       <p style="color:#fff;margin:0;font-size:15px;font-weight:600">While you wait…</p>
-      <p style="color:rgba(255,255,255,0.85);margin:8px 0 0;font-size:14px;line-height:1.5">Run our free <a href="https://nexaagency.com/audit" style="color:#ffd166;font-weight:600">Site Audit</a> to get an instant performance, SEO and security report — no signup needed.</p>
+      <p style="color:rgba(255,255,255,0.85);margin:8px 0 0;font-size:14px;line-height:1.5">Run our free <a href="https://digitalgrowthsolutionsagency.com/audit" style="color:#ffd166;font-weight:600">Site Audit</a> to get an instant performance, SEO and security report — no signup needed.</p>
     </div>
     <p style="margin:0;font-size:13px;color:#9ca3af">— The Digital Growth Solutions Agency Team</p>
   </div>

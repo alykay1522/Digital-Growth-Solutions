@@ -3,7 +3,7 @@ import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { useMeta } from "@/hooks/useMeta";
-import { Code2, HeartHandshake, Lightbulb, Target } from "lucide-react";
+import { Code2, HeartHandshake, Lightbulb, Target, Zap } from "lucide-react";
 
 export default function About() {
   useMeta({ title: "About Us", description: "Learn how Digital Growth Solutions Agency uses AI-powered tools and expert knowledge to build websites and digital solutions that generate real results for businesses worldwide." });

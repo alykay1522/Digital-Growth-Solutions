@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "wouter";
-import { Twitter, Linkedin, Instagram, ArrowRight, Mail, MapPin, Phone } from "lucide-react";
+import { Twitter, Linkedin, Instagram, ArrowRight, Mail } from "lucide-react";
 
 export function Footer() {
   return (
@@ -64,19 +64,14 @@ export function Footer() {
           <div>
             <h4 className="font-display font-semibold text-lg mb-6 text-white">Get in Touch</h4>
             <ul className="space-y-4 text-white/60">
-              <li className="flex items-start gap-3">
-                <MapPin className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                <span>123 Innovation Drive, Tech District, NY 10001</span>
-              </li>
-              <li className="flex items-center gap-3">
-                <Phone className="w-5 h-5 text-primary shrink-0" />
-                <span>+1 (555) 123-4567</span>
-              </li>
               <li className="flex items-center gap-3">
                 <Mail className="w-5 h-5 text-primary shrink-0" />
-                <span>hello@nexaagency.com</span>
+                <a href="mailto:hello@digitalgrowthsolutionsagency.com" className="hover:text-white transition-colors">
+                  hello@digitalgrowthsolutionsagency.com
+                </a>
               </li>
             </ul>
+            <p className="text-white/40 text-sm mt-4">We respond to every enquiry within 24 hours.</p>
           </div>
         </div>
 
