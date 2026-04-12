@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "wouter";
+import { ToolPaywall } from "@/components/ToolPaywall";
 import {
   AlertTriangle,
   CheckCircle2,
@@ -198,7 +199,7 @@ function downloadCsv(result: SniffResult) {
   a.click();
 }
 
-export default function Sniff() {
+function SniffTool() {
   const [url, setUrl] = useState("");
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<SniffResult | null>(null);
@@ -502,5 +503,29 @@ export default function Sniff() {
         </div>
       )}
     </div>
+  );
+}
+
+export default function Sniff() {
+  return (
+    <ToolPaywall
+      toolKey="product-sniffer"
+      toolName="Product Sniffer"
+      tagline="Extract every product — name, price, images, SKU, and description — from any Shopify, WooCommerce, or BigCommerce store in seconds."
+      price="$9.99"
+      priceLabel="24-hour access"
+      accentClass="text-pink-600"
+      iconBgClass="bg-pink-50"
+      features={[
+        "Extract up to 60 products per scan including names, prices, SKUs and images",
+        "Supports Shopify, WooCommerce, BigCommerce, Magento and more",
+        "Download results as CSV for Excel or Google Sheets",
+        "Copy full product data as JSON for developers",
+        "Category filtering to browse by product type",
+        "Unlimited scans for 24 hours — scan as many stores as you like",
+      ]}
+    >
+      <SniffTool />
+    </ToolPaywall>
   );
 }

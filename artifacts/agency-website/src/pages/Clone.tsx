@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "wouter";
+import { ToolPaywall } from "@/components/ToolPaywall";
 import {
   AlertTriangle,
   ArrowRight,
@@ -58,7 +59,7 @@ function formatBytes(bytes: number): string {
   return `${(bytes / 1024 / 1024).toFixed(2)} MB`;
 }
 
-export default function Clone() {
+function CloneTool() {
   const [url, setUrl] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -434,5 +435,29 @@ function StatChip({ label, value }: { label: string; value: string }) {
       <p className="text-[10px] text-muted-foreground uppercase tracking-wider leading-none">{label}</p>
       <p className="text-sm font-bold text-secondary">{value}</p>
     </div>
+  );
+}
+
+export default function Clone() {
+  return (
+    <ToolPaywall
+      toolKey="site-cloner"
+      toolName="Site Cloner"
+      tagline="Clone any public website into a single, self-contained HTML file with all CSS inlined and assets resolved — no server required."
+      price="$9.99"
+      priceLabel="24-hour access"
+      accentClass="text-violet-600"
+      iconBgClass="bg-violet-50"
+      features={[
+        "Fetches and clones any public website as a single .html file",
+        "All CSS stylesheets are inlined — no external dependencies",
+        "Images, fonts and links are converted to absolute URLs",
+        "Live preview with desktop, tablet and mobile viewports",
+        "View the raw HTML source code directly in-browser",
+        "Unlimited clones for 24 hours — use as many times as you need",
+      ]}
+    >
+      <CloneTool />
+    </ToolPaywall>
   );
 }

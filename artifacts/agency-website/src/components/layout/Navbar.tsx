@@ -11,6 +11,7 @@ const TOOLS = [
     description: "SEO, security & performance check",
     icon: ScanSearch,
     badge: "Free",
+    badgeStyle: "bg-primary/10 text-primary",
     color: "text-violet-600 bg-violet-50",
   },
   {
@@ -19,6 +20,7 @@ const TOOLS = [
     description: "See what any site is built with",
     icon: Layers,
     badge: "Free",
+    badgeStyle: "bg-primary/10 text-primary",
     color: "text-blue-600 bg-blue-50",
   },
   {
@@ -27,6 +29,7 @@ const TOOLS = [
     description: "How much is a slow site costing you?",
     icon: DollarSign,
     badge: "Free",
+    badgeStyle: "bg-primary/10 text-primary",
     color: "text-amber-600 bg-amber-50",
   },
   {
@@ -35,6 +38,7 @@ const TOOLS = [
     description: "Your site vs any competitor",
     icon: GitCompare,
     badge: "Free",
+    badgeStyle: "bg-primary/10 text-primary",
     color: "text-orange-600 bg-orange-50",
   },
   {
@@ -42,7 +46,8 @@ const TOOLS = [
     label: "Product Sniffer",
     description: "Extract product data from any store",
     icon: ShoppingBag,
-    badge: "Free",
+    badge: "$9.99",
+    badgeStyle: "bg-amber-100 text-amber-700",
     color: "text-pink-600 bg-pink-50",
   },
   {
@@ -50,7 +55,8 @@ const TOOLS = [
     label: "Site Cloner",
     description: "Clone any website as a single HTML file",
     icon: Scissors,
-    badge: "Free",
+    badge: "$9.99",
+    badgeStyle: "bg-amber-100 text-amber-700",
     color: "text-violet-600 bg-violet-50",
   },
 ];
@@ -177,7 +183,7 @@ export function Navbar() {
                                   <span className={`text-sm font-semibold ${active ? "text-primary" : "text-foreground"}`}>
                                     {tool.label}
                                   </span>
-                                  <span className="text-xs bg-primary/10 text-primary px-1.5 py-0.5 rounded-full font-medium">
+                                  <span className={`text-xs px-1.5 py-0.5 rounded-full font-medium ${tool.badgeStyle}`}>
                                     {tool.badge}
                                   </span>
                                 </div>
@@ -189,7 +195,7 @@ export function Navbar() {
                       </div>
                       <div className="border-t border-border px-4 py-3 bg-muted/30">
                         <p className="text-xs text-muted-foreground text-center">
-                          All tools are completely free — no sign-up required
+                          4 free tools · Premium tools from $9.99 · No account needed
                         </p>
                       </div>
                     </motion.div>
