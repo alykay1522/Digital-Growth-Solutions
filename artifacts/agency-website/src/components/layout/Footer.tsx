@@ -66,12 +66,23 @@ export function Footer() {
             <ul className="space-y-4 text-white/60">
               <li className="flex items-center gap-3">
                 <Mail className="w-5 h-5 text-primary shrink-0" />
-                <a href="mailto:hello@digitalgrowthsolutionsagency.com" className="hover:text-white transition-colors">
+                <a href="mailto:hello@digitalgrowthsolutionsagency.com" className="hover:text-white transition-colors text-sm">
                   hello@digitalgrowthsolutionsagency.com
                 </a>
               </li>
             </ul>
-            <p className="text-white/40 text-sm mt-4">We respond to every enquiry within 24 hours.</p>
+            <div className="mt-6 space-y-2">
+              {[
+                "⚡ 24-Hour Response Guarantee",
+                "🔒 100% Satisfaction Guarantee",
+                "✅ Fixed Pricing — No Surprises",
+                "🤖 AI-Powered, Human-Supervised",
+              ].map((badge) => (
+                <div key={badge} className="flex items-center gap-2 text-xs text-white/50 font-medium">
+                  {badge}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 

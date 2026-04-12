@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://digitalgrowthsolutionsagency.com/sitemap.xml

@@ -149,6 +149,35 @@ export default function Home() {
         </div>
       </section>
 
+      {/* TECH PARTNER LOGOS */}
+      <section className="py-10 bg-white border-b border-border/40">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6">
+          <p className="text-center text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-7">
+            Platforms & technologies we specialise in
+          </p>
+          <div className="flex flex-wrap justify-center items-center gap-x-10 gap-y-5">
+            {[
+              { label: "WordPress", color: "#21759B" },
+              { label: "Shopify", color: "#96BF48" },
+              { label: "WooCommerce", color: "#7F54B3" },
+              { label: "Cloudflare", color: "#F38020" },
+              { label: "Stripe", color: "#635BFF" },
+              { label: "PayPal", color: "#003087" },
+              { label: "Google", color: "#4285F4" },
+              { label: "Meta Ads", color: "#0081FB" },
+            ].map(({ label, color }) => (
+              <span
+                key={label}
+                className="text-base font-bold tracking-tight opacity-40 hover:opacity-80 transition-opacity"
+                style={{ color }}
+              >
+                {label}
+              </span>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* HOW IT WORKS */}
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -408,45 +437,35 @@ export default function Home() {
         </div>
       </section>
 
-      {/* TESTIMONIALS STRIP */}
-      <section className="py-16 bg-gray-50 overflow-hidden">
-        <style>{`
-          @keyframes marquee-slide {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-          }
-          .marquee-track { animation: marquee-slide 40s linear infinite; }
-          .marquee-track:hover { animation-play-state: paused; }
-        `}</style>
-        <div className="max-w-7xl mx-auto px-4 mb-10 text-center">
-          <AnimatedSection>
+      {/* TESTIMONIALS GRID */}
+      <section className="py-20 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <AnimatedSection className="text-center mb-14">
             <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-2">What our clients say</p>
-            <h2 className="text-3xl font-display font-bold text-secondary">Real results from real businesses</h2>
+            <h2 className="text-3xl md:text-4xl font-display font-bold text-secondary">Real results from real businesses</h2>
           </AnimatedSection>
-        </div>
-        <div className="relative">
-          <div className="flex gap-5 marquee-track w-max">
-            {[...TESTIMONIALS, ...TESTIMONIALS].map((t, i) => (
-              <div
-                key={i}
-                className="w-72 flex-shrink-0 bg-white rounded-2xl border border-border p-6 shadow-sm"
-              >
-                <div className="flex mb-3">
-                  {[...Array(5)].map((_, j) => (
-                    <Star key={j} className="w-4 h-4 text-yellow-400 fill-yellow-400" />
-                  ))}
-                </div>
-                <p className="text-sm text-muted-foreground leading-relaxed mb-4">"{t.quote}"</p>
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-xs font-bold text-primary">
-                    {t.name.split(" ").map((n) => n[0]).join("")}
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {TESTIMONIALS.map((t, i) => (
+              <AnimatedSection key={t.name} delay={i * 0.08}>
+                <div className="bg-white rounded-2xl border border-border p-7 shadow-sm hover:shadow-md hover:border-primary/20 transition-all h-full flex flex-col">
+                  <div className="flex mb-4">
+                    {[...Array(5)].map((_, j) => (
+                      <Star key={j} className="w-4 h-4 text-yellow-400 fill-yellow-400" />
+                    ))}
                   </div>
-                  <div>
-                    <p className="text-sm font-semibold text-secondary leading-none">{t.name}</p>
-                    <p className="text-xs text-muted-foreground">{t.role}</p>
+                  <p className="text-muted-foreground leading-relaxed mb-6 flex-1">"{t.quote}"</p>
+                  <div className="flex items-center gap-3 pt-4 border-t border-border/50">
+                    <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-sm font-bold text-primary shrink-0">
+                      {t.name.split(" ").map((n) => n[0]).join("")}
+                    </div>
+                    <div>
+                      <p className="text-sm font-bold text-secondary leading-none">{t.name}</p>
+                      <p className="text-xs text-muted-foreground mt-0.5">{t.role}</p>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </AnimatedSection>
             ))}
           </div>
         </div>
