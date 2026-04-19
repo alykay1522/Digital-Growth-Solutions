@@ -1,0 +1,202 @@
+1. Technical and performance
+Page speed optimization:
+
+Fix: Compress and lazy-load images, minify CSS/JS, enable server-side caching, and use a CDN.
+
+Fix: Remove unused plugins/themes and unnecessary script calls (fonts, tracking scripts, builders you’re not using).
+
+Core Web Vitals:
+
+Fix: Optimize Largest Contentful Paint (LCP) by reducing hero image size and critical CSS.
+
+Fix: Improve Cumulative Layout Shift (CLS) by setting explicit width/height on images and embeds.
+
+Fix: Reduce First Input Delay (FID/INP) by deferring non-critical JS.
+
+Mobile responsiveness:
+
+Fix: Test all key pages (home, services, portfolio, contact) on multiple devices; fix any overflow, tiny tap targets, or broken layouts.
+
+Fix: Ensure buttons and CTAs are thumb-friendly and visible without zooming.
+
+Security and updates:
+
+Fix: Confirm SSL is correctly installed and all URLs force HTTPS.
+
+Fix: Update WordPress core, theme, and plugins; remove anything unused.
+
+Fix: Install a reputable security plugin (firewall, login protection, file change monitoring) and configure backups.
+
+Technical hygiene:
+
+Fix: Ensure there is a clean, human-readable URL structure (no ?p=123 style URLs).
+
+Fix: Check for 404s and redirect old/incorrect URLs with 301s.
+
+Fix: Make sure there’s a valid XML sitemap and robots.txt and that they’re correctly referenced in Google Search Console.
+
+2. SEO and discoverability
+Title tags and meta descriptions:
+
+Fix: Write unique, keyword-focused titles and meta descriptions for each key page (home, services, industries, portfolio, blog, contact).
+
+Fix: Include your primary value proposition and location (if relevant) in the homepage title.
+
+On-page structure:
+
+Fix: Ensure each page has a single clear <h1> and logical heading hierarchy (h2, h3, etc.).
+
+Fix: Add descriptive, keyword-relevant copy to service pages—at least a few solid paragraphs, not just a hero and a few bullets.
+
+Internal linking:
+
+Fix: Add contextual internal links between related services, case studies, and blog posts to create topic clusters (e.g., “WordPress development” → “WordPress case study” → “WordPress maintenance”).
+
+Fix: Make sure the main nav and footer link to all key money pages.
+
+Schema markup:
+
+Fix: Add Organization schema (name, logo, URL, social profiles).
+
+Fix: Add Service schema for core offerings (WordPress, Shopify, AI automation).
+
+Fix: Add FAQ schema if you have FAQ sections, and Review schema if you show testimonials.
+
+Image SEO:
+
+Fix: Add descriptive alt text to all images (not keyword stuffing, but meaningful).
+
+Fix: Use descriptive file names (wordpress-agency-site.png instead of IMG_1234.png).
+
+3. UX, navigation, and conversion
+Above-the-fold clarity:
+
+Fix: Make sure the hero clearly answers: What do you do? For whom? What outcome?
+
+Fix: Add a single primary CTA (e.g., “Book a Strategy Call” or “Get a Quote”) visible without scrolling.
+
+Navigation:
+
+Fix: Keep the main menu simple and intuitive: Home, Services, Portfolio/Work, About, Resources/Blog, Contact.
+
+Fix: Ensure the logo always links to home and the nav is consistent across all pages.
+
+Conversion paths:
+
+Fix: Add clear CTAs on every page (not just the homepage)—service pages should push to “Schedule a Call” or “Request Proposal.”
+
+Fix: Use short, frictionless forms for first contact (name, email, brief project description).
+
+Fix: Add a secondary, low-friction CTA like “Download our Website Launch Checklist” or “Get a Free Audit.”
+
+Form UX and validation:
+
+Fix: Test all forms (desktop and mobile) for errors, success messages, and email deliverability.
+
+Fix: Add inline validation and clear error messages; avoid overly long forms.
+
+Trust and social proof:
+
+Fix: Add client logos, testimonials, and case studies with measurable results (e.g., “+40% conversions in 60 days”).
+
+Fix: Include a clear “About” section with real names, photos, and a short story of the agency.
+
+4. Content and positioning
+Messaging consistency:
+
+Fix: Make sure your positioning is consistent: “WordPress, Shopify & AI Automation Experts” should be echoed in headings, copy, and CTAs.
+
+Fix: Avoid generic agency jargon; speak directly to the pains of your ideal clients (e.g., “slow, outdated site,” “manual processes,” “no tracking”).
+
+Service pages depth:
+
+Fix: Create separate, in-depth pages for each core service:
+
+WordPress development
+
+Shopify development
+
+AI automation / workflows / integrations
+
+Fix: For each service, include: who it’s for, problems solved, process, timeline, deliverables, and FAQs.
+
+Case studies and portfolio:
+
+Fix: Add at least a few detailed case studies with before/after metrics, screenshots, and client quotes.
+
+Fix: Organize portfolio by platform/industry so prospects can quickly find relevant examples.
+
+Blog / resources:
+
+Fix: If you have a blog, ensure posts are up to date and aligned with your services (e.g., “How to choose between WordPress and Shopify,” “5 ways AI automation saves agencies 10+ hours/week”).
+
+Fix: If you don’t have content yet, plan a small but focused content hub around your main offers.
+
+5. Accessibility
+Color contrast and readability:
+
+Fix: Check text/background contrast against WCAG AA; adjust colors where needed.
+
+Fix: Ensure body text is large enough and line spacing is comfortable.
+
+Keyboard navigation:
+
+Fix: Confirm that all interactive elements (menus, buttons, forms) are usable via keyboard only (Tab, Enter, Space).
+
+Fix: Add visible focus states for links and buttons.
+
+Alt text and ARIA:
+
+Fix: Provide meaningful alt text for images and icons; avoid decorative images with misleading alt.
+
+Fix: Use ARIA labels where needed (e.g., for icon-only buttons, mobile nav toggles).
+
+Headings and landmarks:
+
+Fix: Use headings in logical order and add landmarks (<header>, <nav>, <main>, <footer>) to help screen readers.
+
+6. Analytics, tracking, and experimentation
+Analytics setup:
+
+Fix: Ensure Google Analytics (GA4) or similar is installed and tracking all pages.
+
+Fix: Set up basic events: form submissions, button clicks on primary CTAs, outbound link clicks (e.g., Calendly).
+
+Conversion tracking:
+
+Fix: Configure goals/conversions for:
+
+Contact form submissions
+
+Discovery call bookings
+
+Lead magnet downloads
+
+Fix: Verify that thank-you pages or events are firing correctly.
+
+Heatmaps and session recordings:
+
+Fix: Add a tool like Hotjar/Clarity to see where users drop off and refine layout/CTAs accordingly.
+
+A/B testing readiness:
+
+Fix: Identify at least one high-impact test: hero headline, primary CTA text, or form length.
+
+7. Trust, legal, and operational details
+Legal pages:
+
+Fix: Add or verify: Privacy Policy, Terms of Service, Cookie Policy (if using tracking/remarketing).
+
+Fix: Ensure cookie consent banner is compliant with your audience’s regions.
+
+Contact and business info:
+
+Fix: Make your contact info easy to find (email, form, possibly phone).
+
+Fix: Add your business location (even if remote-first) for credibility and local SEO.
+
+Brand consistency:
+
+Fix: Use a consistent logo, color palette, and typography across all pages and assets.
+
+Fix: Standardize button styles, card styles, and iconography.

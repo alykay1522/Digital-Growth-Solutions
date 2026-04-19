@@ -93,6 +93,29 @@
     font-family: var(--font-display);
     @apply font-bold tracking-tight text-foreground;
   }
+
+  /* Visible focus outlines for keyboard navigation (WCAG 2.1 AA) */
+  :focus-visible {
+    outline: 2px solid hsl(var(--primary));
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  /* Remove default focus ring on mouse (keep only for keyboard) */
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Explicit image sizing to prevent layout shift (CLS) */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
 }
 
 /* Custom utility for text gradients */

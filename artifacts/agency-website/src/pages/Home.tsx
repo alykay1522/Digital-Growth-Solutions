@@ -83,7 +83,8 @@ export default function Home() {
         <div className="absolute inset-0 z-0">
           <img 
             src={`${import.meta.env.BASE_URL}images/hero-bg.png`} 
-            alt="Abstract tech background" 
+            alt=""
+            aria-hidden="true"
             className="w-full h-full object-cover opacity-60 mix-blend-screen"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-secondary/50 via-secondary/80 to-secondary" />
@@ -368,7 +369,9 @@ export default function Home() {
               {/* startup office workspace professional */}
               <img 
                 src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200&q=80" 
-                alt="Our team working" 
+                alt="Digital agency team collaborating on a project"
+                loading="lazy"
+                decoding="async"
                 className="relative z-10 rounded-[2rem] shadow-2xl"
               />
               <div className="absolute -bottom-8 -left-8 bg-white p-6 rounded-2xl shadow-xl z-20 border border-border">

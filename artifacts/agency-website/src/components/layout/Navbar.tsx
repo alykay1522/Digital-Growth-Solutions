@@ -230,8 +230,14 @@ export function Navbar() {
             </nav>
 
             {/* Mobile toggle */}
-            <button className="md:hidden p-2" onClick={() => setIsMobileMenuOpen(true)}>
-              <Menu className={`w-6 h-6 ${!onWhite ? "text-white" : "text-secondary"}`} />
+            <button
+              className="md:hidden p-2"
+              onClick={() => setIsMobileMenuOpen(true)}
+              aria-label="Open navigation menu"
+              aria-expanded={isMobileMenuOpen}
+              aria-controls="mobile-menu"
+            >
+              <Menu className={`w-6 h-6 ${!onWhite ? "text-white" : "text-secondary"}`} aria-hidden="true" />
             </button>
           </div>
         </div>
@@ -241,11 +247,15 @@ export function Navbar() {
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
+            id="mobile-menu"
             initial={{ opacity: 0, x: "100%" }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "100%" }}
             transition={{ type: "spring", damping: 25, stiffness: 200 }}
             className="fixed inset-0 z-[100] bg-white flex flex-col"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Navigation menu"
           >
             <div className="flex items-center justify-between p-5 border-b border-border/50">
               <div className="flex items-center gap-2">
@@ -254,8 +264,8 @@ export function Navbar() {
                   Digital Growth Solutions<span className="text-primary"> Agency</span>
                 </span>
               </div>
-              <button onClick={() => setIsMobileMenuOpen(false)} className="p-2 bg-muted rounded-full">
-                <X className="w-5 h-5 text-secondary" />
+              <button onClick={() => setIsMobileMenuOpen(false)} className="p-2 bg-muted rounded-full" aria-label="Close navigation menu">
+                <X className="w-5 h-5 text-secondary" aria-hidden="true" />
               </button>
             </div>
 

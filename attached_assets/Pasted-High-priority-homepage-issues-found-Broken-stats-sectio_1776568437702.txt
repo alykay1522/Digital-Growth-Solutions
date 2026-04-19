@@ -1,0 +1,187 @@
+High‑priority homepage issues found
+Broken stats section (all “0+”):  
+The “Projects Delivered / Years Experience / Happy Clients / Team Members” counters all show 0+ 0+.
+Fix: Replace with real numbers or remove the block until you have accurate data—right now it hurts credibility.
+
+Duplicate footer copyright line:  
+“© 2026 Digital Growth Solutions Agency. All rights reserved.” appears three times in a row.
+Fix: Keep a single instance; remove duplicates in the footer template.
+
+Brand/domain inconsistency risk:
+
+Domain: digitalgrowthsolutions.org
+
+Brand: “Digital Growth Solutions Agency”
+
+Email: hello@digitalgrowthsolutionsagency.com  
+Fix: Decide on a primary brand name and ensure consistency across logo, headings, footer, and email. Consider adding a short note like “Digital Growth Solutions Agency is a division of DigitalGrowthSolutions.org” if needed.
+
+Service promise vs visible detail mismatch:  
+Hero promises “WordPress, Shopify & AI Automation Experts,” but the visible services list under “Services” is only WordPress-focused (WordPress Development, Custom Plugins, Theme Customization, eCommerce Solutions, Mobile-First Design).
+Fix:
+
+Add clearly labeled sections or cards for Shopify and AI Automation on the homepage.
+
+Ensure “View All Services” and “Explore AI Services” lead to robust, dedicated pages.
+
+Too many competing CTAs above the fold:  
+“Get in Touch”, “Audit My Site Free”, “See Pricing” all appear very early.
+Fix: Choose one primary CTA for the hero (e.g., “Audit My Site Free”) and demote others to secondary positions or later sections.
+
+Lack of social proof on homepage:  
+No client logos, testimonials, or case study highlights are visible in the provided content.
+Fix: Add a “Trusted by” logo strip and at least 2–3 short testimonials or mini case studies with outcomes (e.g., “+45% conversions in 60 days”).
+
+No clear target audience statement:  
+Copy is strong but generic (“We empower businesses with reliable, creative, and results-driven technology solutions…”).
+Fix: Add a line that specifies who you serve (e.g., “for service businesses and online retailers” or “for agencies and B2B companies”).
+
+No location or operating region mentioned:  
+There’s no indication of where you’re based or which markets you serve.
+Fix: Add a short line in the footer or About snippet (e.g., “Based in [City, Country], serving clients worldwide”) for trust and local SEO.
+
+Navigation clarity and hierarchy:  
+Top nav items appear to be: Agency Home, Get in Touch, Services, Company, About Us, Portfolio, Pricing, Pay Online, Careers, Contact.
+Issues:
+
+“Get in Touch” and “Contact” are redundant.
+
+“Company” and “About Us” may overlap.
+Fix:
+
+Simplify to: Home, Services, Portfolio, Pricing, About, Resources (if any), Contact.
+
+Make “Get in Touch” a CTA button rather than a separate nav item.
+
+Site‑wide technical and performance checklist
+Page speed and Core Web Vitals:
+
+Fix: Compress and lazy‑load images, minify CSS/JS, enable caching, and use a CDN.
+
+Fix: Ensure hero images and fonts are optimized to improve LCP and CLS.
+
+Mobile responsiveness:
+
+Fix: Manually test all key pages (Services, Portfolio, Pricing, Contact) on multiple devices; fix any overflow, stacking, or tap‑target issues.
+
+Clean URL structure:
+
+Fix: Use human‑readable slugs (/services/wordpress-development, /services/shopify-development, /ai-automation) and avoid query‑string‑heavy URLs for core pages.
+
+404s and redirects:
+
+Fix: Crawl the site, identify 404s, and add 301 redirects for any legacy or mistyped URLs.
+
+Security and updates:
+
+Fix: Confirm SSL is enforced (HTTP→HTTPS), keep core/CMS, theme, and plugins updated, and remove unused plugins/themes.
+
+Fix: Ensure regular automated backups and a security plugin/firewall are configured.
+
+SEO and discoverability
+Titles and meta descriptions:
+
+Fix: Write unique, keyword‑focused titles and meta descriptions for: Home, each Service, Portfolio, Pricing, About, Contact, and any AI/Shopify pages.
+
+Fix: Include your main value proposition and possibly a location in the homepage title.
+
+Heading structure:
+
+Fix: Ensure a single <h1> per page (e.g., “WordPress, Shopify & AI Automation Experts”) and logical h2/h3 hierarchy for sections like Services, Platforms, Guarantees.
+
+Service page depth:
+
+Fix: Create separate, in‑depth pages for:
+
+WordPress Development
+
+Shopify Development
+
+AI Automation / AI‑Powered Workflows
+Each should cover: who it’s for, problems solved, process, timeline, deliverables, FAQs, and a strong CTA.
+
+Internal linking:
+
+Fix: From the homepage and each service page, link to relevant portfolio items, case studies, and pricing.
+
+Fix: Use descriptive anchor text (e.g., “see our Shopify store builds” instead of “click here”).
+
+Schema markup:
+
+Fix: Add Organization schema (name, URL, logo, contact).
+
+Fix: Add Service schema for your main offerings and FAQ schema where applicable.
+
+Image SEO:
+
+Fix: Ensure all images have descriptive alt text and meaningful filenames.
+
+UX, conversion, and offer clarity
+Primary offer framing:
+
+“Currently accepting 3 new clients this month” is strong—lean into it.
+
+Fix: Pair that line with a single, prominent CTA (e.g., “Book Your Free Strategy Call”).
+
+Free audit vs paid services:
+
+Fix: Clarify what “Audit My Site Free” includes (e.g., “10‑minute Loom video + prioritized action list”) to increase conversions and set expectations.
+
+Pricing page:
+
+Fix: Ensure pricing is transparent (tiers, what’s included, typical ranges) and aligned with “Fixed Pricing — No Surprises.”
+
+Fix: Add FAQs addressing scope, timelines, and revision policies.
+
+Contact and response expectations:
+
+You mention “⚡ 24‑Hour Response Guarantee.”
+
+Fix: Mirror that promise on the Contact/Get in Touch page and near forms to reassure visitors.
+
+Portfolio and case studies:
+
+Fix: Build a portfolio grid with filters (WordPress, Shopify, AI) and at least a few detailed case studies with metrics and screenshots.
+
+Accessibility
+Color contrast and typography:
+
+Fix: Verify all text/background combinations meet WCAG AA contrast; adjust colors or font weights if needed.
+
+Keyboard navigation and focus states:
+
+Fix: Ensure menus, buttons, and forms are fully usable via keyboard and have visible focus outlines.
+
+Alt text and landmarks:
+
+Fix: Provide meaningful alt text for non‑decorative images and use semantic landmarks (<header>, <nav>, <main>, <footer>).
+
+Analytics, tracking, and experimentation
+Analytics setup:
+
+Fix: Confirm GA4 (or similar) is installed and tracking all pages.
+
+Conversion tracking:
+
+Fix: Set up goals/events for:
+
+“Audit My Site Free” submissions
+
+Contact form submissions
+
+Any “Pay Online” or booking actions
+
+Heatmaps and testing:
+
+Fix: Add a tool like Hotjar/Clarity to see scroll depth and click patterns; test variations of hero headline and primary CTA.
+
+Trust, legal, and operational
+Legal pages:
+
+You have Privacy Policy and Terms of Service.
+
+Fix: Ensure they’re complete and up to date; add a Cookie Policy/notice if you use tracking or remarketing.
+
+Business identity:
+
+Fix: Add a short “About the Agency” snippet on the homepage with a founder/lead photo or team photo and a 2–3 sentence story.

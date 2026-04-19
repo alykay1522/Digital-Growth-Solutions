@@ -2,17 +2,21 @@ import React from "react";
 import { Link } from "wouter";
 import { Twitter, Linkedin, Instagram, ArrowRight, Mail } from "lucide-react";
 
+const BASE_URL = (import.meta.env.BASE_URL || "").replace(/\/$/, "");
+
 export function Footer() {
   return (
     <footer className="bg-secondary text-white pt-20 pb-10 border-t border-white/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           <div className="space-y-6">
-            <Link href="/" className="flex items-center gap-2">
-              <img 
-                src={`${import.meta.env.BASE_URL}images/logo-mark.png`} 
-                alt="Logo" 
+            <Link href="/" className="flex items-center gap-2" aria-label="Digital Growth Solutions Agency home">
+              <img
+                src={`${BASE_URL}/images/logo-mark.png`}
+                alt="Digital Growth Solutions Agency logo"
                 className="w-8 h-8 brightness-0 invert"
+                width={32}
+                height={32}
               />
               <span className="font-display font-bold text-2xl tracking-tight text-white">
                 Digital Growth Solutions<span className="text-primary"> Agency</span>
@@ -22,14 +26,32 @@ export function Footer() {
               We empower businesses with reliable, creative, and results-driven technology solutions blending innovation with practicality.
             </p>
             <div className="flex items-center gap-4">
-              <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-primary transition-colors">
-                <Twitter className="w-4 h-4" />
+              <a
+                href="https://twitter.com/digitalgrowthsolutions"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Follow us on Twitter / X"
+                className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+              >
+                <Twitter className="w-4 h-4" aria-hidden="true" />
               </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-primary transition-colors">
-                <Linkedin className="w-4 h-4" />
+              <a
+                href="https://linkedin.com/company/digital-growth-solutions-agency"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Connect on LinkedIn"
+                className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+              >
+                <Linkedin className="w-4 h-4" aria-hidden="true" />
               </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-primary transition-colors">
-                <Instagram className="w-4 h-4" />
+              <a
+                href="https://instagram.com/digitalgrowthsolutionsagency"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Follow us on Instagram"
+                className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+              >
+                <Instagram className="w-4 h-4" aria-hidden="true" />
               </a>
             </div>
           </div>
@@ -40,7 +62,7 @@ export function Footer() {
               {['WordPress Development', 'Custom Plugins', 'Theme Customization', 'eCommerce Solutions', 'Mobile-First Design'].map((item) => (
                 <li key={item}>
                   <Link href="/services" className="text-white/60 hover:text-primary transition-colors flex items-center gap-2 group">
-                    <ArrowRight className="w-3 h-3 opacity-0 -ml-5 group-hover:opacity-100 group-hover:ml-0 transition-all" />
+                    <ArrowRight className="w-3 h-3 opacity-0 -ml-5 group-hover:opacity-100 group-hover:ml-0 transition-all" aria-hidden="true" />
                     {item}
                   </Link>
                 </li>
@@ -51,10 +73,17 @@ export function Footer() {
           <div>
             <h4 className="font-display font-semibold text-lg mb-6 text-white">Company</h4>
             <ul className="space-y-4">
-              {['About Us', 'Portfolio', 'Pricing', 'Pay Online', 'Careers', 'Contact'].map((item) => (
-                <li key={item}>
-                  <Link href={`/${item.toLowerCase().replace(/ /g, '-')}`} className="text-white/60 hover:text-primary transition-colors">
-                    {item}
+              {[
+                { label: 'About Us', href: '/about' },
+                { label: 'Portfolio', href: '/portfolio' },
+                { label: 'Pricing', href: '/pricing' },
+                { label: 'Pay Online', href: '/pay' },
+                { label: 'Blog', href: '/blog' },
+                { label: 'Contact', href: '/contact' },
+              ].map(({ label, href }) => (
+                <li key={label}>
+                  <Link href={href} className="text-white/60 hover:text-primary transition-colors">
+                    {label}
                   </Link>
                 </li>
               ))}
@@ -65,7 +94,7 @@ export function Footer() {
             <h4 className="font-display font-semibold text-lg mb-6 text-white">Get in Touch</h4>
             <ul className="space-y-4 text-white/60">
               <li className="flex items-center gap-3">
-                <Mail className="w-5 h-5 text-primary shrink-0" />
+                <Mail className="w-5 h-5 text-primary shrink-0" aria-hidden="true" />
                 <a href="mailto:hello@digitalgrowthsolutionsagency.com" className="hover:text-white transition-colors text-sm">
                   hello@digitalgrowthsolutionsagency.com
                 </a>
@@ -91,8 +120,8 @@ export function Footer() {
             © {new Date().getFullYear()} Digital Growth Solutions Agency. All rights reserved.
           </p>
           <div className="flex gap-6 text-sm text-white/40">
-            <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
+            <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
+            <Link href="/terms" className="hover:text-white transition-colors">Terms of Service</Link>
           </div>
         </div>
       </div>
