@@ -1,0 +1,258 @@
+1. Technical & Performance
+1.1 Missing GA4 Activation
+You already wired the GA4 loader, but until VITE_GA_ID is added, analytics is effectively off.
+
+Fix:  
+Add the env var → rebuild → redeploy.
+
+1.2 No global error boundary / fallback UI
+If any React component throws, the user sees a blank screen.
+
+Fix:  
+Add a global <ErrorBoundary> around the app root.
+
+1.3 No 404 page
+The site currently has no custom 404 route.
+
+Fix:  
+Add a branded 404 with:
+
+“Page not found”
+
+CTA back to Home
+
+CTA to Contact
+
+1.4 No sitemap.xml or robots.txt
+These are required for SEO and indexing.
+
+Fix:  
+Generate both automatically at build time.
+
+1.5 No canonical URLs
+Important for duplicate‑content prevention.
+
+Fix:  
+Add <link rel="canonical" href="https://digitalgrowthsolutions.org/..."> to every route.
+
+1.6 No Open Graph / Twitter Card metadata
+Right now, sharing your site on social media will show a blank or generic preview.
+
+Fix:  
+Add OG tags:
+
+og:title
+
+og:description
+
+og:image
+
+og:url
+
+twitter:card
+
+🔎 2. SEO & Discoverability
+2.1 Missing meta descriptions on all pages
+The homepage has a meta description, but subpages do not.
+
+Fix:  
+Add unique meta descriptions for:
+
+Services
+
+Pricing
+
+Portfolio
+
+Contact
+
+AI Services
+
+Shopify Services
+
+2.2 No H1 on subpages (likely)
+Your homepage has a proper H1. Subpages need verification.
+
+Fix:  
+Ensure each page has exactly one <h1>.
+
+2.3 No schema markup
+You need at minimum:
+
+Organization schema
+
+Service schema (WordPress, Shopify, AI Automation)
+
+FAQ schema (if you add FAQs)
+
+Breadcrumb schema
+
+2.4 No internal linking strategy
+Your homepage links to Services, but deeper linking is missing.
+
+Fix:  
+Add contextual links:
+
+WordPress → Portfolio items
+
+Shopify → Pricing
+
+AI Automation → Contact
+
+Footer → Blog (once created)
+
+🎨 3. UX, Conversion & Design
+3.1 CTA overload still exists
+Even after your fixes, the homepage still has:
+
+Get in Touch
+
+Audit My Site Free
+
+See Pricing
+
+View All Services
+
+Explore AI Services
+
+Start Your Project Today
+
+Fix:  
+Choose ONE primary CTA and make the rest secondary.
+
+3.2 No testimonials or social proof
+This is the #1 missing conversion element.
+
+Fix:  
+Add a section with:
+
+3–6 testimonials
+
+Client logos
+
+Mini case studies
+
+3.3 No portfolio grid on homepage
+You mention “Portfolio” in the nav, but there’s no preview on the homepage.
+
+Fix:  
+Add a 3‑item preview grid with a “View Full Portfolio” CTA.
+
+3.4 No trust badges or credibility markers
+Examples:
+
+“5‑Star Rated on Google”
+
+“Trusted by 150+ businesses”
+
+“10+ years experience”
+
+You already have the numbers — surface them visually.
+
+3.5 No sticky header CTA
+A sticky “Get a Free Audit” or “Book a Call” button increases conversions.
+
+🧱 4. Content & Messaging
+4.1 No dedicated Shopify page
+You added Shopify to the homepage and footer — good.
+But there is no actual Shopify service page.
+
+Fix:  
+Create /services/shopify-development.
+
+4.2 No dedicated AI Automation page
+Same issue — homepage mentions it, but no deep page exists.
+
+Fix:  
+Create /services/ai-automation.
+
+4.3 No blog or resource hub
+You’re an agency — content is a major trust builder.
+
+Fix:  
+Add a simple blog with 3 starter posts:
+
+“WordPress vs Shopify: Which Should You Choose?”
+
+“5 AI Automations That Save Small Businesses 10+ Hours/Week”
+
+“How to Speed Up Your Website in 2026”
+
+4.4 No About page depth
+Your About page is extremely short.
+
+Fix:  
+Add:
+
+Founder photo
+
+Mission
+
+Values
+
+Why clients choose you
+
+Your process
+
+♿ 5. Accessibility
+5.1 Missing focus states
+Buttons and links need visible focus outlines.
+
+5.2 Missing ARIA labels
+Especially for:
+
+Mobile menu toggle
+
+Icon‑only buttons
+
+Decorative icons
+
+5.3 Color contrast needs verification
+Your accent colors may fail WCAG AA on light backgrounds.
+
+📊 6. Analytics, Tracking & CRO
+6.1 No event tracking
+Once GA4 is active, you still need events:
+
+CTA clicks
+
+Form submissions
+
+Pricing page views
+
+Portfolio item views
+
+Scroll depth
+
+6.2 No heatmaps or session recordings
+Add Hotjar or Microsoft Clarity.
+
+6.3 No A/B testing framework
+Once traffic grows, test:
+
+Hero headline
+
+CTA text
+
+Pricing layout
+
+🧾 7. Legal, Trust & Operations
+7.1 No Cookie Policy or banner
+Required if you use analytics or tracking.
+
+7.2 No Terms of Service for paid work
+You have a generic ToS, but not a project‑specific one.
+
+7.3 No “Pay Online” explanation
+You have a “Pay Online” link, but no context or trust indicators.
+
+Fix:  
+Add:
+
+What payments are for
+
+Refund policy
+
+Security badges
+
+Stripe/PayPal trust icons

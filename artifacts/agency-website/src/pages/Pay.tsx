@@ -279,6 +279,39 @@ export default function Pay() {
               </Button>
             </Link>
           </div>
+
+          {/* Payment FAQ / Trust */}
+          <div className="bg-white border border-border rounded-2xl p-6 space-y-5">
+            <h2 className="font-display font-bold text-lg text-secondary flex items-center gap-2">
+              <ShieldCheck className="w-5 h-5 text-green-500" />
+              Payment policy &amp; your guarantee
+            </h2>
+            <div className="grid sm:grid-cols-2 gap-5 text-sm">
+              {[
+                {
+                  title: "What are these payments for?",
+                  body: "These payments cover specific service packages or project deposits as agreed with us. Emergency fixes begin within 2 business hours of payment. Monthly care plans auto-renew each month.",
+                },
+                {
+                  title: "Satisfaction guarantee",
+                  body: "If we can't fix the issue for emergency packages, you receive a full refund — no questions asked. For project packages, we work until you're satisfied or issue a pro-rata refund.",
+                },
+                {
+                  title: "Secure & private",
+                  body: "All payments are processed by PayPal. We never see, receive, or store your card details. PayPal's Buyer Protection applies to eligible purchases.",
+                },
+                {
+                  title: "Need a VAT invoice?",
+                  body: "Email us at hello@digitalgrowthsolutionsagency.com after paying and we'll issue a VAT receipt or formal invoice for your records within 24 hours.",
+                },
+              ].map(({ title, body }) => (
+                <div key={title}>
+                  <p className="font-semibold text-secondary mb-1">{title}</p>
+                  <p className="text-muted-foreground leading-relaxed">{body}</p>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </div>
