@@ -4,6 +4,7 @@ import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { Button } from "@/components/ui/button";
 import { useMeta } from "@/hooks/useMeta";
 import { GA } from "@/utils/analytics";
+import { JsonLd } from "@/components/JsonLd";
 import {
   ArrowRight, Bot, BrainCircuit, CheckCircle2, Clock,
   Mail, MessageSquare, Repeat, Star, Workflow, Zap,
@@ -60,8 +61,30 @@ export default function AIService() {
     path: "/services/ai-automation",
   });
 
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: FAQS.map(({ q, a }) => ({
+      "@type": "Question",
+      name: q,
+      acceptedAnswer: { "@type": "Answer", text: a },
+    })),
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://digitalgrowthsolutionsagency.com/" },
+      { "@type": "ListItem", position: 2, name: "Services", item: "https://digitalgrowthsolutionsagency.com/services" },
+      { "@type": "ListItem", position: 3, name: "AI Automation", item: "https://digitalgrowthsolutionsagency.com/services/ai-automation" },
+    ],
+  };
+
   return (
     <main className="w-full">
+      <JsonLd id="ai-faq-schema" schema={faqSchema} />
+      <JsonLd id="ai-breadcrumb-schema" schema={breadcrumbSchema} />
       {/* HERO */}
       <section className="relative bg-secondary pt-32 pb-20 overflow-hidden">
         <div className="absolute inset-0">

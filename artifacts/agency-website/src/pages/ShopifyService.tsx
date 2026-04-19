@@ -5,6 +5,7 @@ import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { Button } from "@/components/ui/button";
 import { useMeta } from "@/hooks/useMeta";
 import { GA } from "@/utils/analytics";
+import { JsonLd } from "@/components/JsonLd";
 import {
   ArrowRight, CheckCircle2, ShoppingBag, Zap, Star,
   BarChart3, Clock, Shield, Palette, Globe, Truck, CreditCard,
@@ -66,8 +67,30 @@ export default function ShopifyService() {
     path: "/services/shopify-development",
   });
 
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: FAQS.map(({ q, a }) => ({
+      "@type": "Question",
+      name: q,
+      acceptedAnswer: { "@type": "Answer", text: a },
+    })),
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://digitalgrowthsolutionsagency.com/" },
+      { "@type": "ListItem", position: 2, name: "Services", item: "https://digitalgrowthsolutionsagency.com/services" },
+      { "@type": "ListItem", position: 3, name: "Shopify Development", item: "https://digitalgrowthsolutionsagency.com/services/shopify-development" },
+    ],
+  };
+
   return (
     <main className="w-full">
+      <JsonLd id="shopify-faq-schema" schema={faqSchema} />
+      <JsonLd id="shopify-breadcrumb-schema" schema={breadcrumbSchema} />
       {/* HERO */}
       <section className="relative bg-secondary pt-32 pb-20 overflow-hidden">
         <div className="absolute inset-0">
