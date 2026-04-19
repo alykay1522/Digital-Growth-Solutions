@@ -1,0 +1,217 @@
+1. Technical & performance
+GA4 not fully active yet:  
+Issue: Code is wired, but tracking depends on VITE_GA_ID.
+Fix: Add your GA4 Measurement ID as VITE_GA_ID → rebuild → redeploy.
+
+OG default image file:  
+Issue: Metadata is set, but the default OG image path must exist.
+Fix: Create public/images/og-default.png (1200×630, logo + brand background).
+
+ReCAPTCHA error on contact/audit forms (from Replit logs):  
+Issue: “Could not connect to the reCAPTCHA service” message.
+Fix: Verify site key/secret, domain allowlist, and network; ensure forms degrade gracefully if reCAPTCHA fails.
+
+Performance pass:  
+Issue: No explicit problems, but you haven’t run a Lighthouse/Core Web Vitals pass post‑build.
+Fix: Run Lighthouse on Home, Services, Pricing, Contact; optimize any flagged images, JS, or layout shifts.
+
+2. SEO & structured data
+Schema coverage could go further:  
+You already added ProfessionalService—great.
+Fix: Add:
+
+Organization schema (logo, sameAs social links)
+
+BreadcrumbList for multi‑page navigation
+
+FAQPage schema if you add FAQs to Services/Pricing.
+
+Per‑page SEO tuning:  
+Issue: Home is strong; subpages still need unique SEO focus.
+Fix: For each of the ~12 pages:
+
+Unique <title> and meta description
+
+One clear <h1>
+
+Keyword‑aligned copy (e.g., “Shopify Development Agency,” “AI Automation for Small Business”).
+
+Internal linking depth:  
+Fix:
+
+From Home → deep link into Shopify, AI, and key case studies.
+
+From Services → link to relevant portfolio items and Pricing.
+
+From blog/resources (once created) → link back to Services and Contact.
+
+3. UX, conversion & monetization
+Tool paywall clarity (ROI calculator, tech stack detector, etc.):  
+Issue: You’ve decided only a few tools are free; others should be paid.
+Fix:
+
+Clearly label which tools are free vs premium.
+
+Add a simple paywall flow: “Unlock this tool for $X” → checkout → access.
+
+Make sure the value of paid tools is explained (what they deliver, how fast, in what format).
+
+Primary CTA focus:  
+Issue: You now have strong CTAs (audit, pricing, contact, tools). Risk of dilution.
+Fix:
+
+Choose one primary CTA for the homepage hero (e.g., “Get a Free Site Audit”).
+
+Make others secondary or place them lower on the page.
+
+Testimonials & case studies (real vs placeholder):  
+Issue: Structure is there (grid, logos, trust badges), but content may still be generic.
+Fix:
+
+Replace any placeholder quotes with real client testimonials.
+
+Add at least 1–2 mini case studies with metrics (e.g., “+42% conversion rate,” “+60% faster load time”).
+
+Portfolio depth & filtering:  
+Fix:
+
+Ensure portfolio items cover WordPress, Shopify, and AI.
+
+Add tags/filters (e.g., “eCommerce,” “B2B,” “SaaS”) if you have enough items.
+
+Pricing clarity:  
+Fix:
+
+Make sure each tier clearly states what’s included, who it’s for, and typical project ranges.
+
+Add FAQs addressing scope creep, revisions, and timelines.
+
+4. Content & positioning
+Dedicated Shopify & AI Automation pages:  
+Issue: Homepage and footer mention them; they must be deep, conversion‑ready pages.
+Fix: Each should include:
+
+Who it’s for
+
+Problems solved
+
+Process (step‑by‑step)
+
+Deliverables
+
+Timeline & pricing guidance
+
+FAQs
+
+Strong CTA.
+
+About page depth:  
+Fix:
+
+Add founder/lead photo(s)
+
+Short origin story
+
+Values and how you work
+
+Why clients choose you vs generic agencies.
+
+Blog / resource hub:  
+Fix:
+
+Launch with 3–5 high‑intent posts (WordPress vs Shopify, AI automation use cases, site speed, etc.).
+
+Link them from the homepage and Services pages.
+
+5. Accessibility
+Keyboard navigation & focus states:  
+Fix:
+
+Confirm all buttons, links, and menus are reachable via keyboard.
+
+Ensure visible focus outlines (not removed by Tailwind resets).
+
+ARIA & semantics:  
+Fix:
+
+Add aria-label to icon‑only buttons (e.g., social icons, mobile menu).
+
+Use semantic landmarks: <header>, <nav>, <main>, <footer>.
+
+Color contrast:  
+Fix:
+
+Run a contrast checker on hero text, buttons, and accent text (like the target‑audience line).
+
+Adjust colors or font weights where needed.
+
+6. Analytics, tracking & CRO
+Event tracking (after GA4 is live):  
+Fix: Track:
+
+Clicks on “Audit My Site Free,” “See Pricing,” “Get in Touch,” and tool launches.
+
+Form submissions (audit, contact, quote).
+
+Tool completions (e.g., ROI calculator results viewed).
+
+Funnels & goals:  
+Fix:
+
+Define GA4 conversions: audit submitted, contact submitted, payment completed, tool purchased.
+
+Build simple funnels (Home → Services → Pricing → Contact/Pay).
+
+Heatmaps & recordings:  
+Fix:
+
+Add Hotjar or Clarity to see where users drop off.
+
+Use this to refine hero copy, CTA placement, and tool paywall UX.
+
+A/B testing later:  
+Once traffic grows, test:
+
+Hero headline
+
+Primary CTA text
+
+Pricing layout (cards vs table).
+
+7. Legal, trust & compliance
+Cookie banner:  
+Issue: GA4 + any future tracking requires consent handling.
+Fix:
+
+Add a cookie banner with basic opt‑in/acknowledge.
+
+Link to a Cookie Policy page.
+
+Project‑level terms:  
+Fix:
+
+Add a “Project Terms” or “Engagement Terms” section/page linked from Pricing and Pay Online.
+
+Summarize payment schedule, scope, revisions, and cancellation.
+
+Tool usage terms:  
+Fix:
+
+For paid tools, add a short “Tool Terms” note: what users get, refund policy, data handling.
+
+Short version: where you stand
+Foundation: solid (design, structure, schema, sitemap, robots, OG/Twitter, 404, error boundary, trust badges, tools concept).
+
+What’s left to be “money‑making ready”:
+
+Turn GA4 fully on
+
+Add OG default image
+
+Tighten Shopify/AI pages, portfolio, testimonials
+
+Implement clear free vs paid tool flows
+
+Add cookie banner + project/tool terms
+
+Layer in event tracking + heatmaps

@@ -62,11 +62,18 @@ export function Footer() {
           <div>
             <h4 className="font-display font-semibold text-lg mb-6 text-white">Services</h4>
             <ul className="space-y-4">
-              {['WordPress Development', 'Shopify Development', 'AI Automation', 'Custom Plugins', 'eCommerce Solutions', 'Mobile-First Design'].map((item) => (
-                <li key={item}>
-                  <Link href="/services" className="text-white/60 hover:text-primary transition-colors flex items-center gap-2 group">
+              {[
+                { label: 'WordPress Development', href: '/services' },
+                { label: 'Shopify Development', href: '/services/shopify-development' },
+                { label: 'AI Automation', href: '/services/ai-automation' },
+                { label: 'Custom Plugins', href: '/services' },
+                { label: 'eCommerce Solutions', href: '/services' },
+                { label: 'Mobile-First Design', href: '/services' },
+              ].map(({ label, href }) => (
+                <li key={label}>
+                  <Link href={href} className="text-white/60 hover:text-primary transition-colors flex items-center gap-2 group">
                     <ArrowRight className="w-3 h-3 opacity-0 -ml-5 group-hover:opacity-100 group-hover:ml-0 transition-all" aria-hidden="true" />
-                    {item}
+                    {label}
                   </Link>
                 </li>
               ))}

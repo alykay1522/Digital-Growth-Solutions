@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { useGetServices, useGetPortfolio } from "@workspace/api-client-react";
 import { useMeta } from "@/hooks/useMeta";
+import { GA } from "@/utils/analytics";
 
 function useCountUp(target: number, trigger: boolean, duration = 1600) {
   const [count, setCount] = useState(0);
@@ -131,13 +132,20 @@ export default function Home() {
               
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link href="/audit">
-                  <Button className="h-14 px-8 text-lg rounded-xl bg-primary hover:bg-primary/90 text-white shadow-xl shadow-primary/25 hover:-translate-y-1 transition-all">
+                  <Button
+                    className="h-14 px-8 text-lg rounded-xl bg-primary hover:bg-primary/90 text-white shadow-xl shadow-primary/25 hover:-translate-y-1 transition-all"
+                    onClick={() => GA.ctaClick("hero_audit_free")}
+                  >
                     Audit My Site Free
                     <ArrowRight className="ml-2 w-5 h-5" />
                   </Button>
                 </Link>
                 <Link href="/pricing">
-                  <Button variant="outline" className="h-14 px-8 text-lg rounded-xl border-white/20 text-white hover:bg-white/10 hover:text-white backdrop-blur-sm transition-all">
+                  <Button
+                    variant="outline"
+                    className="h-14 px-8 text-lg rounded-xl border-white/20 text-white hover:bg-white/10 hover:text-white backdrop-blur-sm transition-all"
+                    onClick={() => GA.ctaClick("hero_see_pricing")}
+                  >
                     See Pricing
                   </Button>
                 </Link>

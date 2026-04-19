@@ -1,0 +1,8 @@
+uploads = []
+outputs = []
+
+[[generated]]
+id = "zw7gheRKbdfWDlnPQJNF9"
+uri = "file://artifacts/agency-website/public/images/og-default.png"
+type = "image"
+title = "agency-og-social-card"

@@ -27,6 +27,8 @@ import Pay from "./pages/Pay";
 import Admin from "./pages/Admin";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import Terms from "./pages/Terms";
+import ShopifyService from "./pages/ShopifyService";
+import AIService from "./pages/AIService";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -60,6 +62,8 @@ function Router() {
         <Route path="/admin" component={Admin} />
         <Route path="/privacy" component={PrivacyPolicy} />
         <Route path="/terms" component={Terms} />
+        <Route path="/services/shopify-development" component={ShopifyService} />
+        <Route path="/services/ai-automation" component={AIService} />
         <Route component={NotFound} />
       </Switch>
     </Layout>
