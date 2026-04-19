@@ -658,6 +658,252 @@ If you're trying to justify a performance optimization project to leadership, he
 If you've done all of that and still need help pushing past a wall, [let's talk](/contact). Performance optimization is one of our core specialties.
 `,
   },
+  {
+    slug: "ai-automations-small-business-2026",
+    title: "5 AI Automations That Save Small Businesses 10+ Hours Every Week",
+    excerpt:
+      "Most small business owners spend 15–20 hours a week on tasks a well-configured AI system could handle. Here are the five automations with the fastest ROI — and how to implement each one.",
+    publishedAt: "2026-04-10",
+    readTime: 9,
+    category: "AI & Automation",
+    coverImage:
+      "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=1200&q=80",
+    author: { name: "Digital Growth Solutions Agency Team", role: "AI Automation Specialists" },
+    tags: ["AI", "Automation", "Small Business", "Productivity"],
+    content: `
+## The automation gap most small businesses are ignoring
+
+The businesses winning in 2026 aren't necessarily bigger or better-funded than their competitors. They're just spending fewer hours on the same tasks. While one business owner is manually following up with 40 leads, their competitor's AI system is sending personalised follow-ups to 400.
+
+Here are the five automations our clients implement first — because they deliver measurable time savings within the first week.
+
+---
+
+## 1. Lead follow-up sequences (saves 4–6 hours/week)
+
+The average sales lead goes cold within 5 minutes if they don't receive a response. Most small businesses respond within 24–48 hours — and wonder why conversion rates are poor.
+
+**What the automation does:** When someone fills out a contact form, requests a quote, or books a call, an AI-powered sequence immediately:
+- Sends a personalised confirmation email
+- Follows up at 2 hours, 24 hours, and 72 hours if no response
+- Qualifies the lead by asking key questions
+- Books a discovery call directly into your calendar
+
+**Tools to build this:** Make (formerly Integromat) + OpenAI + Calendly + your email provider. Total setup time: 4–6 hours. Weekly time saved: 4–6 hours.
+
+**The math:** If you're currently following up with 20 leads/week manually at 15 minutes each, that's 5 hours. This automation handles all 20 in 15 minutes of your time.
+
+---
+
+## 2. AI customer support chatbot (saves 3–5 hours/week)
+
+Every business has a set of questions it answers repeatedly: pricing, turnaround times, service inclusions, policies, FAQs. A trained AI chatbot handles these around the clock — no staff required.
+
+**What the automation does:**
+- Answers questions instantly, 24/7
+- Pulls from your FAQs, pricing pages, and service documentation
+- Escalates complex questions to you via email
+- Captures contact details before escalating
+
+**Tools to build this:** Intercom or Tidio with AI training, or a custom GPT-4o chatbot trained on your documentation. Cost: $50–$200/month for most small businesses.
+
+**Reality check:** Our clients typically see 40–60% of all chat enquiries resolved without human intervention after training the AI on their business.
+
+---
+
+## 3. Invoice and payment chasing (saves 2–3 hours/week)
+
+Late payments are one of the most consistently painful parts of running a small business. Manual chasing is awkward and time-consuming. Automated chasing is consistent and effective.
+
+**What the automation does:**
+- Sends payment reminders at 3 days before due, on due date, and at 7/14/21 days overdue
+- Escalates tone based on how overdue the invoice is
+- Stops automatically when payment is received
+- Logs all communication in your accounting software
+
+**Tools to build this:** Xero + Zapier + email provider. If you use QuickBooks or FreshBooks, both have built-in automation for this. Setup time: 1–2 hours.
+
+---
+
+## 4. Social media content scheduling (saves 3–4 hours/week)
+
+Consistent social media presence drives brand awareness, but sitting down three times a day to post is unsustainable. AI can generate and schedule a week's worth of content in under an hour.
+
+**What the automation does:**
+- Generate a week of posts in one session using ChatGPT or Claude with a custom prompt
+- Schedule to LinkedIn, Instagram, Facebook, and X using Buffer or Hootsuite
+- Repurpose blog posts automatically into social content
+- Monitor comments and flag anything requiring a response
+
+**Key tip:** Don't try to fully automate responses to comments. Use AI to *draft* responses, then approve with one click. Saves time without losing authenticity.
+
+---
+
+## 5. Reporting and analytics summaries (saves 2–3 hours/week)
+
+Most business owners look at dashboards reactively and inconsistently. An automated weekly summary pulls the numbers that matter and delivers them to your inbox every Monday morning.
+
+**What the automation does:**
+- Pulls data from Google Analytics, your CRM, payment processor, and project management tool
+- Summarises the previous week: revenue, leads, conversions, top pages, customer satisfaction
+- Highlights anomalies ("Leads down 30% vs last week — main referrer dropped off")
+- Requires no login, no dashboard — just a readable email
+
+**Tools to build this:** Zapier + Google Analytics API + OpenAI + Gmail. Or use Databox with AI Insights enabled.
+
+---
+
+## How to prioritise which automation to build first
+
+Start with the one that addresses your biggest pain point:
+
+- **You're drowning in follow-up:** → Automation 1 (lead sequences)
+- **You're answering the same questions repeatedly:** → Automation 2 (chatbot)
+- **Cash flow is unpredictable:** → Automation 3 (payment chasing)
+- **Social media feels like a burden:** → Automation 4 (content scheduling)
+- **You're flying blind on business metrics:** → Automation 5 (reporting)
+
+Build one, run it for two weeks, then add the next. Don't try to automate everything at once.
+
+---
+
+## When to bring in specialists
+
+Building these automations yourself is possible — but it takes time to research, configure, test, and maintain. Most of our clients try one themselves, get it 80% of the way there, then bring us in to make it production-ready and tie it into their existing systems cleanly.
+
+If you'd rather skip the trial-and-error phase, [book a free automation audit](/contact). We'll map your biggest time sinks and show you exactly which automation will deliver the fastest return.
+`,
+  },
+  {
+    slug: "how-to-choose-web-design-agency-2026",
+    title: "How to Choose a Web Design Agency in 2026 (Without Getting Burned)",
+    excerpt:
+      "The digital agency industry is full of beautiful portfolios, missed deadlines, and inflated invoices. Here's exactly how to evaluate agencies, spot red flags, and get the outcome you're actually paying for.",
+    publishedAt: "2026-04-03",
+    readTime: 8,
+    category: "Business",
+    coverImage:
+      "https://images.unsplash.com/photo-1553877522-43269d4ea984?w=1200&q=80",
+    author: { name: "Digital Growth Solutions Agency Team", role: "Agency Founders" },
+    tags: ["Web Design", "Agency", "Business", "Hiring"],
+    content: `
+## The uncomfortable reality about the web design industry
+
+The web design and development industry has almost no formal barriers to entry. Anyone can call themselves a web agency. This is great for competition — and a minefield for buyers.
+
+We've spoken to hundreds of businesses who hired a cheap agency, a freelancer-collective-masquerading-as-an-agency, or a prestigious-looking firm and got: late delivery, communication that disappeared after the deposit, a site that looked great in the mockup and broke in production, or a CMS so custom they couldn't update a paragraph without paying for more work.
+
+This guide is about how to avoid all of that.
+
+---
+
+## Step 1: Get clear on what "success" actually means for your project
+
+Most failed projects start with a vague brief. "We need a new website" is not a brief. Before you talk to a single agency, define:
+
+- **What business problem are you solving?** (low leads, poor mobile experience, outdated brand, slow load times)
+- **What does success look like in numbers?** (20% more enquiries, 2× conversion rate, sub-2s load time)
+- **What's your realistic budget?** (not "as little as possible" — a number you're comfortable spending)
+- **What's your real deadline?** (not "ASAP" — a date that matters and why)
+
+Agencies that can't ask these questions themselves are the ones you're trying to avoid. But going in with clarity means you'll get comparable quotes and you'll spot vague proposals immediately.
+
+---
+
+## Step 2: Evaluate the portfolio — but look past the aesthetics
+
+Every agency shows their best work. Here's how to read a portfolio critically:
+
+**Ask for results, not just visuals.** "We built this site" is table stakes. "We built this site and organic traffic went from 8,000 to 24,000 monthly visitors in six months" is evidence of real capability.
+
+**Look for work similar to yours.** An agency that's built 50 brochure sites may struggle with your eCommerce build. Specialisation matters.
+
+**Check if the sites are still live and performing.** Look up the sites from their portfolio in [PageSpeed Insights](https://pagespeed.web.dev/). A WordPress agency whose portfolio sites score 40/100 on mobile performance is telling you something important.
+
+**Ask what they'd do differently today.** An agency that can critique their own past work is one that learns. One that defends everything is one that doesn't.
+
+---
+
+## Step 3: The proposal is where you separate good agencies from bad ones
+
+A proposal should include at minimum:
+
+1. **A clear scope** — what is and isn't included, defined precisely
+2. **A fixed price or a clearly bounded estimate** — no hourly billing surprises
+3. **A milestone-based timeline** — with deliverables at each stage, not just a final delivery date
+4. **A revision policy** — how many rounds, what counts as a revision
+5. **Post-launch support terms** — what happens if something breaks in week two
+
+**Red flags in proposals:**
+- "We'll handle everything" (vague)
+- Hourly rates with open-ended scope
+- No timeline or a single delivery date with no milestones
+- No mention of what happens if you go over budget
+- Pricing that seems too low (usually means corners will be cut, or "too low" services will be upsold)
+
+---
+
+## Step 4: The questions you should ask before signing anything
+
+These are the questions our best clients ask us — and the ones that filter out bad agencies:
+
+1. **"Who will actually be doing the work?"** — Some agencies sell you senior talent and then hand the work to junior staff or offshore contractors you've never met.
+
+2. **"How do you handle scope changes?"** — There will be scope changes. An honest agency has a clear process. A bad agency will spring change requests on you mid-project.
+
+3. **"Can I talk to a past client in my industry?"** — Genuine references, not just testimonials on a website. A confident agency will connect you.
+
+4. **"What does your QA process look like?"** — Cross-browser testing, device testing, load testing, accessibility. "We test it ourselves" with no process is a red flag.
+
+5. **"What happens after launch?"** — Support terms, bug fix policy, handover process. Know before you sign.
+
+6. **"Do you have fixed pricing or do you bill by the hour?"** — Fixed pricing aligns incentives. Hourly billing does the opposite.
+
+---
+
+## Step 5: The contract matters more than the portfolio
+
+A good agency will have a clear contract. Read it. Look for:
+
+- **IP transfer** — who owns the code and designs after payment?
+- **Payment milestones** — never pay 100% upfront
+- **Dispute resolution** — what happens if deliverables aren't met?
+- **Cancellation terms** — what happens if the project stalls?
+
+Never work with an agency that refuses to put the scope, timeline, and deliverables in writing.
+
+---
+
+## The price question
+
+Cheap is rarely cheap in the long run. A $2,000 website that doesn't rank, loads in 6 seconds, and can't be updated without developer help is more expensive than a $8,000 website that drives leads from day one.
+
+Equally, high price doesn't guarantee quality. Some of the most expensive agencies have the worst processes.
+
+The right price is: the minimum to get a site built to a professional standard, by people who have demonstrably done it before, with clear accountability. For most business websites, that range is $3,000–$15,000. Anything below is corner-cutting territory. Anything above should come with enterprise-level deliverables.
+
+---
+
+## One final check: gut instinct about communication
+
+Before you sign, notice how the agency communicated during the sales process:
+
+- Did they respond promptly?
+- Did they listen, or just pitch?
+- Did they ask clarifying questions, or just quote?
+- Did they push back on anything, or agree with everything?
+
+The best agency relationships are honest ones. If an agency agrees with everything you say before the project starts, they'll agree with everything — and tell you what you want to hear — when things go wrong too.
+
+---
+
+## What to expect from us
+
+We're direct. We'll tell you if what you're asking for won't achieve your goals. We quote fixed prices with clear scopes. We report progress at every stage. And we hand over a site you can actually own and operate.
+
+If that sounds like what you're looking for, [let's start with a conversation](/contact).
+`,
+  },
 ];
 
 export function getPostBySlug(slug: string): BlogPost | undefined {
