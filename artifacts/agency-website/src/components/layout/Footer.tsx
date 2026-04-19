@@ -23,7 +23,10 @@ export function Footer() {
               </span>
             </Link>
             <p className="text-white/60 leading-relaxed max-w-sm">
-              We empower businesses with reliable, creative, and results-driven technology solutions blending innovation with practicality.
+              WordPress sites, Shopify stores, custom software, and AI automation for service businesses, online retailers, and B2B brands — built right, on budget, on time.
+            </p>
+            <p className="text-white/40 text-xs">
+              Serving clients worldwide · Remote-first agency
             </p>
             <div className="flex items-center gap-4">
               <a
@@ -59,7 +62,7 @@ export function Footer() {
           <div>
             <h4 className="font-display font-semibold text-lg mb-6 text-white">Services</h4>
             <ul className="space-y-4">
-              {['WordPress Development', 'Custom Plugins', 'Theme Customization', 'eCommerce Solutions', 'Mobile-First Design'].map((item) => (
+              {['WordPress Development', 'Shopify Development', 'AI Automation', 'Custom Plugins', 'eCommerce Solutions', 'Mobile-First Design'].map((item) => (
                 <li key={item}>
                   <Link href="/services" className="text-white/60 hover:text-primary transition-colors flex items-center gap-2 group">
                     <ArrowRight className="w-3 h-3 opacity-0 -ml-5 group-hover:opacity-100 group-hover:ml-0 transition-all" aria-hidden="true" />

@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
-import { ArrowRight, Bot, BrainCircuit, Code, FileText, Smartphone, Sparkles, Wand2, Workflow, Zap, CheckCircle2, Star, ClipboardList, Cpu, Rocket } from "lucide-react";
+import { ArrowRight, Bot, BrainCircuit, Code, FileText, Globe, ShoppingBag, Smartphone, Sparkles, Wand2, Workflow, Zap, CheckCircle2, Star, ClipboardList, Cpu, Rocket } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { useGetServices, useGetPortfolio } from "@workspace/api-client-react";
@@ -31,10 +31,12 @@ function AnimatedStat({ value, suffix, label }: { value: number; suffix: string;
   useEffect(() => {
     const obs = new IntersectionObserver(
       ([entry]) => { if (entry.isIntersecting) { setTriggered(true); obs.disconnect(); } },
-      { threshold: 0.5 }
+      { threshold: 0.1 }
     );
     if (ref.current) obs.observe(ref.current);
-    return () => obs.disconnect();
+    // Safety fallback — always show the number within 2.5s even if observer doesn't fire
+    const fallback = setTimeout(() => setTriggered(true), 2500);
+    return () => { obs.disconnect(); clearTimeout(fallback); };
   }, []);
   return (
     <div ref={ref} className="text-center">
@@ -66,9 +68,9 @@ export default function Home() {
 
   // Fallbacks in case backend is unseeded
   const services = servicesData?.length ? servicesData : [
-    { id: "1", title: "WordPress Development", description: "High-performing, fully customized, SEO-optimized, lightning-fast WordPress websites.", icon: "Globe" },
-    { id: "2", title: "Custom Plugins", description: "Tailor-made plugins and third-party integrations for a cohesive tech ecosystem.", icon: "Box" },
-    { id: "3", title: "eCommerce Solutions", description: "Scalable Shopify and WooCommerce platforms designed to convert visitors.", icon: "ShoppingCart" },
+    { id: "1", title: "WordPress Development", description: "High-performing, custom-built, SEO-optimized WordPress websites that rank and convert — delivered in weeks, not months.", icon: "Globe" },
+    { id: "2", title: "Shopify & WooCommerce", description: "Beautifully designed eCommerce stores on Shopify or WooCommerce, built to maximize conversions and average order value.", icon: "ShoppingBag" },
+    { id: "3", title: "AI Automation", description: "AI-powered workflows that handle enquiries, follow-ups, and repetitive tasks — so your business runs 24/7 without extra headcount.", icon: "Bot" },
   ];
 
   const portfolio = portfolioData?.length ? portfolioData.slice(0, 2) : [
@@ -113,8 +115,13 @@ export default function Home() {
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-primary">Ours actually sell.</span>
               </h1>
               
-              <p className="text-lg md:text-xl text-white/70 leading-relaxed mb-4 max-w-2xl">
+              <p className="text-lg md:text-xl text-white/70 leading-relaxed mb-3 max-w-2xl">
                 WordPress sites, Shopify stores, custom software, and AI automation — all built and delivered for you. You focus on running your business. We handle the rest.
+              </p>
+
+              <p className="text-sm text-primary/90 font-semibold mb-5 flex items-center gap-2">
+                <span className="inline-block w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
+                Built for service businesses, online retailers, and B2B brands ready to grow online
               </p>
 
               <p className="text-sm text-white/50 mb-10 flex items-center gap-2">
@@ -316,9 +323,9 @@ export default function Home() {
               <AnimatedSection key={service.id} delay={i * 0.1}>
                 <div className="bg-white p-8 rounded-2xl shadow-lg shadow-black/5 border border-border/50 hover:shadow-xl hover:border-primary/30 transition-all duration-300 group h-full">
                   <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                    {i === 0 ? <Globe className="w-7 h-7 text-primary" /> : 
-                     i === 1 ? <Code className="w-7 h-7 text-primary" /> : 
-                     <Smartphone className="w-7 h-7 text-primary" />}
+                    {i === 0 ? <Globe className="w-7 h-7 text-primary" /> :
+                     i === 1 ? <ShoppingBag className="w-7 h-7 text-primary" /> :
+                     <Bot className="w-7 h-7 text-primary" />}
                   </div>
                   <h3 className="text-xl font-bold mb-3">{service.title}</h3>
                   <p className="text-muted-foreground leading-relaxed mb-6">{service.description}</p>
@@ -527,7 +534,3 @@ export default function Home() {
   );
 }
 
-// Temporary icon components since lucide dynamic import can be tricky in some envs
-function Globe(props: any) {
-  return <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><circle cx="12" cy="12" r="10"/><line x1="2" x2="22" y1="12" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-}
