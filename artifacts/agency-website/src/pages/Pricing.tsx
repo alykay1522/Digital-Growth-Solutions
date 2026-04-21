@@ -39,37 +39,60 @@ import {
 
 const PACKAGES = [
   {
-    id: "starter",
-    name: "Starter",
-    tagline: "Perfect for small businesses & landing pages",
-    price: "1,499",
+    id: "local",
+    name: "Local",
+    tagline: "Perfect for local shops, tradespeople & service providers",
+    price: "499",
     priceNote: "one-time",
     highlight: false,
+    badge: "Best for Local Biz",
     icon: Globe,
+    color: "text-emerald-600",
+    bg: "bg-emerald-50",
+    features: [
+      "Up to 3 pages (Home, About, Contact)",
+      "Mobile-responsive design",
+      "Google Business Profile setup",
+      "Click-to-call & contact form",
+      "Google Maps embed",
+      "Basic on-page SEO",
+      "14-day support included",
+    ],
+    notIncluded: ["eCommerce / online payments", "Blog or content hub", "Custom integrations"],
+    cta: "Get My Site Live",
+  },
+  {
+    id: "starter",
+    name: "Starter",
+    tagline: "Growing businesses that need a polished, full website",
+    price: "997",
+    priceNote: "one-time",
+    highlight: false,
+    icon: Zap,
     color: "text-blue-600",
     bg: "bg-blue-50",
     features: [
       "WordPress or static site",
-      "Up to 5 pages",
-      "Mobile-responsive design",
-      "Basic SEO setup",
-      "Contact form integration",
-      "Google Analytics setup",
+      "Up to 8 pages",
+      "Mobile-responsive custom design",
+      "On-page SEO + Analytics setup",
+      "Contact form + email notifications",
+      "Speed optimisation included",
       "30-day support included",
-      "1 round of revisions",
+      "2 rounds of revisions",
     ],
-    notIncluded: ["Custom plugin development", "eCommerce / payments", "AI integrations"],
+    notIncluded: ["eCommerce / payments", "AI integrations"],
     cta: "Get Started",
   },
   {
     id: "growth",
     name: "Growth",
-    tagline: "For businesses ready to scale their online presence",
-    price: "3,999",
+    tagline: "Serious about growing online — sales, leads, and content",
+    price: "2,499",
     priceNote: "one-time",
     highlight: true,
     badge: "Most Popular",
-    icon: Zap,
+    icon: Sparkles,
     color: "text-primary",
     bg: "bg-primary/10",
     features: [
@@ -89,8 +112,8 @@ const PACKAGES = [
   {
     id: "pro",
     name: "Pro Build",
-    tagline: "Full-power custom sites and web applications",
-    price: "7,999",
+    tagline: "Full-power custom sites, web apps, and eCommerce stores",
+    price: "5,999",
     priceNote: "starting from",
     highlight: false,
     icon: Code,
@@ -310,16 +333,18 @@ const DIGITAL_PRODUCTS = [
 // ─── Comparison table data ────────────────────────────────────────────────────
 
 const COMPARISON_FEATURES = [
-  { label: "Custom design", starter: true, growth: true, pro: true },
-  { label: "Mobile-responsive", starter: true, growth: true, pro: true },
-  { label: "SEO setup", starter: "Basic", growth: "Advanced", pro: "Full audit" },
-  { label: "eCommerce / payments", starter: false, growth: true, pro: true },
-  { label: "Blog / CMS", starter: false, growth: true, pro: true },
-  { label: "Custom plugins", starter: false, growth: false, pro: true },
-  { label: "API integrations", starter: false, growth: "1 integration", pro: "Unlimited" },
-  { label: "Support period", starter: "30 days", growth: "60 days", pro: "90 days" },
-  { label: "Revisions", starter: "1 round", growth: "3 rounds", pro: "Unlimited" },
-  { label: "AI add-ons eligible", starter: true, growth: true, pro: true },
+  { label: "Custom design", local: true, starter: true, growth: true, pro: true },
+  { label: "Mobile-responsive", local: true, starter: true, growth: true, pro: true },
+  { label: "Google Business setup", local: true, starter: false, growth: false, pro: false },
+  { label: "SEO setup", local: "Basic", starter: "Standard", growth: "Advanced", pro: "Full audit" },
+  { label: "Number of pages", local: "Up to 3", starter: "Up to 8", growth: "Up to 20", pro: "Unlimited" },
+  { label: "eCommerce / payments", local: false, starter: false, growth: true, pro: true },
+  { label: "Blog / CMS", local: false, starter: false, growth: true, pro: true },
+  { label: "Custom plugins", local: false, starter: false, growth: false, pro: true },
+  { label: "API integrations", local: false, starter: false, growth: "1 integration", pro: "Unlimited" },
+  { label: "Support period", local: "14 days", starter: "30 days", growth: "60 days", pro: "90 days" },
+  { label: "Revisions", local: "1 round", starter: "2 rounds", growth: "3 rounds", pro: "Unlimited" },
+  { label: "AI add-ons eligible", local: false, starter: true, growth: true, pro: true },
 ];
 
 // ─── FAQs ─────────────────────────────────────────────────────────────────────
@@ -444,7 +469,7 @@ export default function Pricing() {
           <h2 className="text-3xl font-display font-bold text-secondary">Website & App Packages</h2>
         </AnimatedSection>
 
-        <div className="grid lg:grid-cols-3 gap-8">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {PACKAGES.map((pkg, i) => {
             const Icon = pkg.icon;
             return (
@@ -544,7 +569,7 @@ export default function Pricing() {
                 {COMPARISON_FEATURES.map((row, i) => (
                   <tr key={row.label} className={`border-b border-border last:border-0 ${i % 2 === 0 ? "bg-white" : "bg-gray-50/50"}`}>
                     <td className="py-3.5 px-6 text-sm text-secondary/80">{row.label}</td>
-                    {(["starter", "growth", "pro"] as const).map((tier) => (
+                    {(["local", "starter", "growth", "pro"] as const).map((tier) => (
                       <td key={tier} className={`py-3.5 px-4 text-center ${tier === "growth" ? "bg-primary/5" : ""}`}>
                         <FeatureValue value={(row as any)[tier]} />
                       </td>
@@ -792,6 +817,46 @@ export default function Pricing() {
             </Link>
           </div>
         </AnimatedSection>
+      </section>
+
+      {/* ── Referral programme ── */}
+      <section className="py-16 bg-gradient-to-r from-primary/5 via-white to-primary/5 border-y border-primary/20">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
+          <AnimatedSection>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/30 text-primary text-sm font-semibold mb-5">
+              <Star className="w-4 h-4 fill-primary" />
+              Referral Programme
+            </div>
+            <h2 className="text-2xl md:text-3xl font-display font-bold text-secondary mb-3">
+              Earn $100 every time you recommend us
+            </h2>
+            <p className="text-muted-foreground max-w-xl mx-auto mb-8">
+              Know a business that needs a website, Shopify store, or AI automation? Send them our way. When they complete a project worth $500+, we'll give you a $100 credit towards your next project — or a cash transfer, your choice.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-6">
+              <div className="flex items-center gap-3 bg-white border border-border rounded-2xl px-5 py-3 shadow-sm">
+                <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-sm">1</div>
+                <span className="text-sm font-medium text-secondary">Tell a friend or colleague about us</span>
+              </div>
+              <ArrowRight className="w-5 h-5 text-muted-foreground shrink-0 hidden sm:block" />
+              <div className="flex items-center gap-3 bg-white border border-border rounded-2xl px-5 py-3 shadow-sm">
+                <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-sm">2</div>
+                <span className="text-sm font-medium text-secondary">They mention your name when they get in touch</span>
+              </div>
+              <ArrowRight className="w-5 h-5 text-muted-foreground shrink-0 hidden sm:block" />
+              <div className="flex items-center gap-3 bg-white border border-border rounded-2xl px-5 py-3 shadow-sm">
+                <div className="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600 font-bold text-sm">$</div>
+                <span className="text-sm font-medium text-secondary">You receive $100 when their project is complete</span>
+              </div>
+            </div>
+            <Link href="/contact">
+              <Button className="h-12 px-8 rounded-xl bg-primary hover:bg-primary/90 text-white shadow-lg shadow-primary/20 font-semibold">
+                Refer Someone Now <ArrowRight className="ml-2 w-4 h-4" />
+              </Button>
+            </Link>
+            <p className="text-xs text-muted-foreground mt-4">No cap on referrals · Applies to all projects $500 and above</p>
+          </AnimatedSection>
+        </div>
       </section>
 
       {/* ── FAQ ── */}

@@ -2,6 +2,8 @@ import { Router, type Request, type Response } from "express";
 import https from "https";
 import http from "http";
 import { load } from "cheerio";
+import { heavyLimiter } from "../middlewares/rateLimits";
+import { assertSafeUrl } from "../lib/assertSafeUrl";
 
 const router = Router();
 
@@ -9,9 +11,9 @@ function fetchRaw(rawUrl: string, timeoutMs = 10000): Promise<{ body: string; co
   return new Promise((resolve, reject) => {
     let parsed: URL;
     try {
-      parsed = new URL(rawUrl);
+      parsed = assertSafeUrl(rawUrl);
     } catch {
-      return reject(new Error(`Invalid URL: ${rawUrl}`));
+      return reject(new Error(`Invalid or disallowed URL: ${rawUrl}`));
     }
     const lib = parsed.protocol === "https:" ? https : http;
     const options = {
@@ -76,11 +78,12 @@ function absoluteUrl(base: string, rel: string): string {
   }
 }
 
-router.post("/clone", async (req: Request, res: Response) => {
+router.post("/clone", heavyLimiter, async (req: Request, res: Response) => {
   try {
     let { url, inlineStyles = true } = req.body as { url: string; inlineStyles?: boolean };
     if (!url?.trim()) return res.status(400).json({ error: "URL is required" });
     if (!/^https?:\/\//i.test(url)) url = `https://${url}`;
+    try { assertSafeUrl(url); } catch (e: any) { return res.status(400).json({ error: e.message }); }
 
     const { body: rawHtml } = await fetchRaw(url, 15000);
     const $ = load(rawHtml);

@@ -2,6 +2,8 @@ import { Router, type Request, type Response } from "express";
 import https from "https";
 import http from "http";
 import { load } from "cheerio";
+import { heavyLimiter } from "../middlewares/rateLimits";
+import { assertSafeUrl } from "../lib/assertSafeUrl";
 
 const router = Router();
 
@@ -32,7 +34,12 @@ interface SniffResult {
 
 function fetchUrl(rawUrl: string): Promise<{ body: string; finalUrl: string; headers: Record<string, string> }> {
   return new Promise((resolve, reject) => {
-    const parsed = new URL(rawUrl);
+    let parsed: URL;
+    try {
+      parsed = assertSafeUrl(rawUrl);
+    } catch (e: any) {
+      return reject(e);
+    }
     const lib = parsed.protocol === "https:" ? https : http;
     const options = {
       hostname: parsed.hostname,
@@ -41,7 +48,7 @@ function fetchUrl(rawUrl: string): Promise<{ body: string; finalUrl: string; hea
         "User-Agent": "Mozilla/5.0 (compatible; DGSAuditBot/1.0)",
         Accept: "text/html,application/json,*/*",
       },
-      rejectUnauthorized: false,
+      rejectUnauthorized: true,
       timeout: 12000,
     };
 
@@ -270,7 +277,7 @@ function detectPageType(body: string, $: ReturnType<typeof load>): "product" | "
   return "unknown";
 }
 
-router.post("/sniff", async (req: Request, res: Response) => {
+router.post("/sniff", heavyLimiter, async (req: Request, res: Response) => {
   try {
     let { url, limit = 50 } = req.body as { url: string; limit?: number };
     if (!url?.trim()) {
@@ -279,7 +286,12 @@ router.post("/sniff", async (req: Request, res: Response) => {
 
     // Normalize URL
     if (!/^https?:\/\//i.test(url)) url = `https://${url}`;
-    const parsedBase = new URL(url);
+    let parsedBase: URL;
+    try {
+      parsedBase = assertSafeUrl(url);
+    } catch (e: any) {
+      return res.status(400).json({ error: e.message });
+    }
     const baseOrigin = `${parsedBase.protocol}//${parsedBase.hostname}`;
     const maxProducts = Math.min(limit, 100);
 

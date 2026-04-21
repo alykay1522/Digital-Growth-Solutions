@@ -1,12 +1,13 @@
 import React, { useRef, useEffect, useState } from "react";
 import { Link } from "wouter";
-import { motion } from "framer-motion";
-import { ArrowRight, Bot, BrainCircuit, Code, FileText, Globe, ShoppingBag, Smartphone, Sparkles, Wand2, Workflow, Zap, CheckCircle2, Star, ClipboardList, Cpu, Rocket } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ArrowRight, Bot, BrainCircuit, Code, FileText, Globe, ShoppingBag, Smartphone, Sparkles, Wand2, Workflow, Zap, CheckCircle2, Star, ClipboardList, Cpu, Rocket, HelpCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { useGetServices, useGetPortfolio } from "@workspace/api-client-react";
 import { useMeta } from "@/hooks/useMeta";
 import { GA } from "@/utils/analytics";
+import { ServiceFinder } from "@/components/ServiceFinder";
 
 function useCountUp(target: number, trigger: boolean, duration = 1600) {
   const [count, setCount] = useState(0);
@@ -63,6 +64,8 @@ export default function Home() {
     title: "WordPress, Shopify & AI Automation Experts",
     description: "Digital Growth Solutions Agency builds high-converting websites, eCommerce stores, and AI automation systems. Fast delivery, transparent pricing, and results you can measure."
   });
+
+  const [finderOpen, setFinderOpen] = useState(false);
 
   const { data: servicesData } = useGetServices();
   const { data: portfolioData } = useGetPortfolio();
@@ -140,15 +143,14 @@ export default function Home() {
                     <ArrowRight className="ml-2 w-5 h-5" />
                   </Button>
                 </Link>
-                <Link href="/pricing">
-                  <Button
-                    variant="outline"
-                    className="h-14 px-8 text-lg rounded-xl border-white/20 text-white hover:bg-white/10 hover:text-white backdrop-blur-sm transition-all"
-                    onClick={() => GA.ctaClick("hero_see_pricing")}
-                  >
-                    See Pricing
-                  </Button>
-                </Link>
+                <Button
+                  variant="outline"
+                  className="h-14 px-8 text-lg rounded-xl border-white/20 text-white hover:bg-white/10 hover:text-white backdrop-blur-sm transition-all"
+                  onClick={() => { setFinderOpen(true); GA.ctaClick("hero_service_finder"); }}
+                >
+                  <HelpCircle className="mr-2 w-5 h-5" />
+                  What do I need?
+                </Button>
               </div>
             </motion.div>
           </div>
@@ -538,6 +540,31 @@ export default function Home() {
           </AnimatedSection>
         </div>
       </section>
+
+      {/* ── Referral teaser ── */}
+      <section className="py-10 bg-gradient-to-r from-primary/5 via-white to-emerald-50 border-t border-border">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-lg shrink-0">$</div>
+              <div>
+                <p className="font-display font-bold text-secondary text-lg">Earn $100 per referral</p>
+                <p className="text-sm text-muted-foreground">Know a business that needs a website? Send them our way and earn $100 when they complete their project.</p>
+              </div>
+            </div>
+            <Link href="/pricing" className="shrink-0">
+              <Button variant="outline" className="h-11 px-6 rounded-xl border-primary text-primary hover:bg-primary hover:text-white font-semibold transition-all">
+                Learn how it works <ArrowRight className="ml-2 w-4 h-4" />
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Service Finder quiz modal */}
+      <AnimatePresence>
+        {finderOpen && <ServiceFinder onClose={() => setFinderOpen(false)} />}
+      </AnimatePresence>
     </div>
   );
 }

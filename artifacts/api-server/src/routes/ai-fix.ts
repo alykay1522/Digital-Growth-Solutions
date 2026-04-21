@@ -1,5 +1,6 @@
 import { Router, type IRouter, type Request, type Response } from "express";
 import { openai } from "@workspace/integrations-openai-ai-server";
+import { heavyLimiter } from "../middlewares/rateLimits";
 
 const router: IRouter = Router();
 
@@ -56,7 +57,7 @@ function buildUserPrompt(issues: SiteIssue[]): string {
   return `Please generate precise, copy-paste-ready fixes for these ${issues.length} site issues:\n\n${lines.join("\n\n")}`;
 }
 
-router.post("/ai-fix", async (req: Request, res: Response) => {
+router.post("/ai-fix", heavyLimiter, async (req: Request, res: Response) => {
   try {
     const { url, issues, priority } = req.body as {
       url: string;

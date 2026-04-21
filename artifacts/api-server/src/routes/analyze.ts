@@ -2,6 +2,8 @@ import { Router, type IRouter } from "express";
 import * as cheerio from "cheerio";
 import https from "https";
 import http from "http";
+import { heavyLimiter } from "../middlewares/rateLimits";
+import { assertSafeUrl } from "../lib/assertSafeUrl";
 
 const router: IRouter = Router();
 
@@ -17,7 +19,12 @@ interface SiteIssue {
 
 function httpGet(url: string, redirectsLeft = 5): Promise<{ html: string; headers: Record<string, string>; status: number }> {
   return new Promise((resolve, reject) => {
-    const parsed = new URL(url);
+    let parsed: URL;
+    try {
+      parsed = assertSafeUrl(url);
+    } catch (e: any) {
+      return reject(e);
+    }
     const lib = parsed.protocol === "https:" ? https : http;
 
     const req = lib.request(
@@ -33,7 +40,7 @@ function httpGet(url: string, redirectsLeft = 5): Promise<{ html: string; header
           Connection: "close",
         },
         timeout: 15000,
-        rejectUnauthorized: false,
+        rejectUnauthorized: true,
       },
       (res) => {
         const status = res.statusCode || 0;
@@ -270,7 +277,7 @@ function scoreCategory(issues: SiteIssue[], category: string): number {
   return Math.max(0, score);
 }
 
-router.post("/analyze", async (req, res) => {
+router.post("/analyze", heavyLimiter, async (req, res) => {
   let { url } = req.body as { url?: string };
 
   if (!url || typeof url !== "string") {
