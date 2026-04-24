@@ -1,15 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Core pages -->
   <url><loc>https://digitalgrowthsolutionsagency.com/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
   <url><loc>https://digitalgrowthsolutionsagency.com/services</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
   <url><loc>https://digitalgrowthsolutionsagency.com/pricing</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://digitalgrowthsolutionsagency.com/portfolio</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://digitalgrowthsolutionsagency.com/about</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://digitalgrowthsolutionsagency.com/contact</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://digitalgrowthsolutionsagency.com/portfolio</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://digitalgrowthsolutionsagency.com/blog</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://digitalgrowthsolutionsagency.com/about</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://digitalgrowthsolutionsagency.com/contact</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://digitalgrowthsolutionsagency.com/audit</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://digitalgrowthsolutionsagency.com/roi</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://digitalgrowthsolutionsagency.com/tech-stack</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://digitalgrowthsolutionsagency.com/compare</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <!-- AI Agents -->
+  <url><loc>https://digitalgrowthsolutionsagency.com/agents</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://digitalgrowthsolutionsagency.com/agents/audit</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://digitalgrowthsolutionsagency.com/agents/quote</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://digitalgrowthsolutionsagency.com/agents/support</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://digitalgrowthsolutionsagency.com/agents/intake</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://digitalgrowthsolutionsagency.com/agents/seo</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://digitalgrowthsolutionsagency.com/agents/content</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://digitalgrowthsolutionsagency.com/agents/care-plan</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://digitalgrowthsolutionsagency.com/agents/rescue</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <!-- Free Tools -->
+  <url><loc>https://digitalgrowthsolutionsagency.com/audit</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://digitalgrowthsolutionsagency.com/roi</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://digitalgrowthsolutionsagency.com/detect</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://digitalgrowthsolutionsagency.com/compare</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <!-- Services pages -->
+  <url><loc>https://digitalgrowthsolutionsagency.com/rescue</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <!-- Transactional -->
   <url><loc>https://digitalgrowthsolutionsagency.com/pay</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <!-- Legal -->
+  <url><loc>https://digitalgrowthsolutionsagency.com/privacy</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
 </urlset>
