@@ -66,9 +66,9 @@ export function Footer() {
                 { label: 'WordPress Development', href: '/services' },
                 { label: 'Shopify Development', href: '/services/shopify-development' },
                 { label: 'AI Automation', href: '/services/ai-automation' },
-                { label: 'Custom Plugins', href: '/services' },
                 { label: 'eCommerce Solutions', href: '/services' },
                 { label: 'Mobile-First Design', href: '/services' },
+                { label: '🚨 Website Rescue', href: '/rescue' },
               ].map(({ label, href }) => (
                 <li key={label}>
                   <Link href={href} className="text-white/60 hover:text-primary transition-colors flex items-center gap-2 group">

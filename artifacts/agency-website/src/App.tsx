@@ -29,6 +29,7 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import Terms from "./pages/Terms";
 import ShopifyService from "./pages/ShopifyService";
 import AIService from "./pages/AIService";
+import WebsiteRescue from "./pages/WebsiteRescue";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -64,6 +65,7 @@ function Router() {
         <Route path="/terms" component={Terms} />
         <Route path="/services/shopify-development" component={ShopifyService} />
         <Route path="/services/ai-automation" component={AIService} />
+        <Route path="/rescue" component={WebsiteRescue} />
         <Route component={NotFound} />
       </Switch>
     </Layout>

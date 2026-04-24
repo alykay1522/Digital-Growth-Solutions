@@ -360,23 +360,33 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <AnimatedSection direction="right">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-semibold mb-5">
+                <CheckCircle2 className="w-4 h-4" />
+                Why small businesses choose us
+              </div>
               <h2 className="text-3xl md:text-4xl font-display font-bold mb-6 leading-tight">
-                Your competitors have a website.<br />
-                <span className="text-primary">You'll have a sales machine.</span>
+                The agency experience —<br />
+                <span className="text-primary">without the agency price tag.</span>
               </h2>
               <p className="text-lg text-muted-foreground mb-8">
-                We don't just build sites — we build systems that attract visitors, convert them into leads, and automate the follow-up. AI does the heavy lifting so you don't have to.
+                Big agencies charge big prices and make you wait months. We're built differently — fast, affordable, and honest.
               </p>
-              <ul className="space-y-4">
+              <ul className="space-y-5">
                 {[
-                  "Pages that load in under 2 seconds — critical for SEO ranking",
-                  "Mobile-first design that converts on every screen size",
-                  "AI automation that handles enquiries even while you sleep",
-                  "Ongoing support — we're still here after launch"
+                  { title: "Affordable for small businesses", body: "Sites from $495. Transparent fixed pricing — you know the full cost before we start. No surprises." },
+                  { title: "Fast turnaround", body: "Starter sites in 5 days. Business sites in 2 weeks. We move fast without cutting corners." },
+                  { title: "Clear communication", body: "You'll always know where your project stands. No chasing, no ghosting, no agency runaround." },
+                  { title: "No agency fluff", body: "No account managers, discovery phases, or 40-slide decks. We skip the theatre and build things." },
+                  { title: "Real results", body: "We measure success by leads, sales, and rankings — not by how pretty the portfolio looks." },
                 ].map((item, i) => (
-                  <li key={i} className="flex items-center gap-3">
-                    <CheckCircle2 className="w-6 h-6 text-accent shrink-0" />
-                    <span className="font-medium text-secondary">{item}</span>
+                  <li key={i} className="flex items-start gap-4">
+                    <div className="w-6 h-6 rounded-full bg-accent/20 flex items-center justify-center shrink-0 mt-0.5">
+                      <CheckCircle2 className="w-4 h-4 text-accent" />
+                    </div>
+                    <div>
+                      <span className="font-bold text-secondary">{item.title} — </span>
+                      <span className="text-muted-foreground">{item.body}</span>
+                    </div>
                   </li>
                 ))}
               </ul>
@@ -492,18 +502,32 @@ export default function Home() {
       </section>
 
       {/* GUARANTEE SECTION */}
-      <section className="py-16 bg-white border-y border-border">
+      <section className="py-16 bg-gradient-to-br from-primary/5 via-white to-accent/5 border-y border-border">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedSection>
-            <div className="grid md:grid-cols-3 gap-8 text-center">
+            {/* Main guarantee badge */}
+            <div className="text-center mb-12">
+              <div className="inline-flex flex-col items-center gap-3 bg-white border-2 border-primary/20 rounded-3xl px-10 py-8 shadow-xl shadow-primary/10 mx-auto">
+                <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center">
+                  <span className="text-3xl">🛡️</span>
+                </div>
+                <h3 className="font-display font-bold text-secondary text-2xl">Satisfaction Guarantee</h3>
+                <p className="text-muted-foreground text-lg max-w-sm text-center leading-snug">
+                  We don't launch until you're happy.<br />
+                  <span className="text-secondary font-semibold">Simple as that.</span>
+                </p>
+              </div>
+            </div>
+            {/* Supporting pillars */}
+            <div className="grid md:grid-cols-3 gap-6 text-center">
               {[
-                { icon: "🔒", title: "Fixed Pricing", body: "You see the price before we start. No hourly surprises, no scope creep charges." },
-                { icon: "⚡", title: "7-Day Satisfaction Guarantee", body: "Not happy after the first week? You don't pay. Simple as that." },
-                { icon: "🤖", title: "AI-Powered Delivery", body: "AI tools mean faster builds, fewer errors, and more value for the same price." },
+                { icon: "💰", title: "Fixed Pricing", body: "You see the full cost before we start. No hourly surprises, no scope creep, no hidden fees." },
+                { icon: "⚡", title: "Fast Delivery", body: "Starter sites in 5 days. Business sites in 2 weeks. We respect your time." },
+                { icon: "🤝", title: "Real Support", body: "Every package includes post-launch support. You're not alone after we hit publish." },
               ].map((g) => (
-                <div key={g.title} className="flex flex-col items-center">
-                  <span className="text-4xl mb-4">{g.icon}</span>
-                  <h3 className="font-display font-bold text-secondary text-lg mb-2">{g.title}</h3>
+                <div key={g.title} className="bg-white rounded-2xl border border-border/60 p-6 shadow-sm">
+                  <span className="text-3xl mb-3 block">{g.icon}</span>
+                  <h4 className="font-display font-bold text-secondary text-base mb-2">{g.title}</h4>
                   <p className="text-muted-foreground text-sm leading-relaxed">{g.body}</p>
                 </div>
               ))}
