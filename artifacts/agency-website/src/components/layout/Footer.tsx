@@ -85,6 +85,7 @@ export function Footer() {
             <ul className="space-y-4">
               {[
                 { label: 'About Us', href: '/about' },
+                { label: 'AI Agents', href: '/agents' },
                 { label: 'Portfolio', href: '/portfolio' },
                 { label: 'Pricing', href: '/pricing' },
                 { label: 'Pay Online', href: '/pay' },

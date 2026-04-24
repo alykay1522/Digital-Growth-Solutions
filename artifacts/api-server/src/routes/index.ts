@@ -13,6 +13,7 @@ import clone from "./clone";
 import paypal from "./paypal";
 import blog from "./blog";
 import blogAdmin from "./blog-admin";
+import agents from "./agents";
 
 const router: IRouter = Router();
 
@@ -30,5 +31,6 @@ router.use(clone);
 router.use(paypal);
 router.use(blog);
 router.use(blogAdmin);
+router.use("/agents", agents);
 
 export default router;

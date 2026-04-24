@@ -21,13 +21,23 @@ pnpm workspace monorepo using TypeScript. Each package manages its own dependenc
 ### `artifacts/agency-website` — Digital Agency Website (NexaAgency)
 A full-featured agency website for a WordPress/Shopify/Mobile/Software development agency.
 
-- **Pages**: Home, Services, Portfolio, Blog, About, Contact, Site Audit, Compare, Results, Tech Stack Detector, ROI Calculator, Product Sniffer, Site Cloner
+- **Pages**: Home, Services, Portfolio, Blog, About, Contact, Site Audit, Compare, Results, Tech Stack Detector, ROI Calculator, Product Sniffer, Site Cloner, Website Rescue, AI Agents Hub + 8 agent pages
 - **Free AI Tools**:
   - Site Audit (`/audit`) — SEO/performance/security analysis with AI code fixes via SSE
   - Competitor Comparison (`/compare`) — side-by-side site scoring via `/api/compare`
   - Tech Stack Detector (`/detect`) — detects technologies on any URL via `/api/detect-stack`
   - ROI Calculator (`/roi`) — calculates expected ROI from a website rebuild
   - Shareable Score Cards (`/results`) — base64-encoded URL params render audit scorecards
+- **AI Agents** (`/agents`) — 8 specialist AI agents, all streaming SSE via `/api/agents/*`:
+  - Audit Agent (`/agents/audit`) → `/api/agents/audit`
+  - Quote Generator (`/agents/quote`) → `/api/agents/quote`
+  - Support/FAQ Agent (`/agents/support`) → `/api/agents/support`
+  - Intake & Onboarding (`/agents/intake`) → `/api/agents/intake`
+  - SEO Agent (`/agents/seo`) → `/api/agents/seo`
+  - Content Generator (`/agents/content`) → `/api/agents/content`
+  - Care Plan Agent (`/agents/care-plan`) → `/api/agents/care-plan`
+  - Website Rescue Agent (`/agents/rescue`) → `/api/agents/rescue`
+  - Shared `AgentShell` component + `useAgentStream` hook in `src/components/agents/AgentShell.tsx`
 - **AI Chat Widget** — floating assistant in `ChatWidget.tsx`, streams via `/api/chat` SSE, mounted globally in `Layout.tsx`
 - **Blog** — 5 articles in `src/data/blogPosts.ts`, rendered with react-markdown; listing + individual post pages with sidebar/prev-next/related
 - **Home page** — animated count-up stats (IntersectionObserver), scrolling CSS marquee testimonials

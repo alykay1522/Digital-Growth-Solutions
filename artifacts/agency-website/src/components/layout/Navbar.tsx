@@ -92,7 +92,7 @@ export function Navbar() {
   const navLinks = [
     { label: "Home", href: "/" },
     { label: "Services", href: "/services" },
-    { label: "Portfolio", href: "/portfolio" },
+    { label: "AI Agents", href: "/agents" },
     { label: "Pricing", href: "/pricing" },
     { label: "Blog", href: "/blog" },
     { label: "About", href: "/about" },

@@ -30,6 +30,16 @@ import Terms from "./pages/Terms";
 import ShopifyService from "./pages/ShopifyService";
 import AIService from "./pages/AIService";
 import WebsiteRescue from "./pages/WebsiteRescue";
+// AI Agents
+import AgentsHub from "./pages/agents/AgentsHub";
+import AuditAgent from "./pages/agents/AuditAgent";
+import QuoteAgent from "./pages/agents/QuoteAgent";
+import SupportAgent from "./pages/agents/SupportAgent";
+import IntakeAgent from "./pages/agents/IntakeAgent";
+import SeoAgent from "./pages/agents/SeoAgent";
+import ContentAgent from "./pages/agents/ContentAgent";
+import CarePlanAgent from "./pages/agents/CarePlanAgent";
+import RescueAgent from "./pages/agents/RescueAgent";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -66,6 +76,16 @@ function Router() {
         <Route path="/services/shopify-development" component={ShopifyService} />
         <Route path="/services/ai-automation" component={AIService} />
         <Route path="/rescue" component={WebsiteRescue} />
+        {/* AI Agents */}
+        <Route path="/agents" component={AgentsHub} />
+        <Route path="/agents/audit" component={AuditAgent} />
+        <Route path="/agents/quote" component={QuoteAgent} />
+        <Route path="/agents/support" component={SupportAgent} />
+        <Route path="/agents/intake" component={IntakeAgent} />
+        <Route path="/agents/seo" component={SeoAgent} />
+        <Route path="/agents/content" component={ContentAgent} />
+        <Route path="/agents/care-plan" component={CarePlanAgent} />
+        <Route path="/agents/rescue" component={RescueAgent} />
         <Route component={NotFound} />
       </Switch>
     </Layout>
