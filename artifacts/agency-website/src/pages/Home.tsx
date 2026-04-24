@@ -61,8 +61,8 @@ const TESTIMONIALS = [
 
 export default function Home() {
   useMeta({
-    title: "WordPress, Shopify & AI Automation Experts",
-    description: "Digital Growth Solutions Agency builds high-converting websites, eCommerce stores, and AI automation systems. Fast delivery, transparent pricing, and results you can measure."
+    title: "Websites & AI Automation for Small Businesses",
+    description: "Get a modern, high-converting website and real results — without agency pricing. WordPress, Shopify, and AI automation built for small businesses, local shops, and service providers."
   });
 
   const [finderOpen, setFinderOpen] = useState(false);
@@ -106,26 +106,26 @@ export default function Home() {
               <div className="flex flex-wrap gap-3 mb-6">
                 <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20">
                   <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
-                  <span className="text-white/90 text-sm font-medium">AI-Powered Digital Agency</span>
+                  <span className="text-white/90 text-sm font-medium">Built for Small Businesses</span>
                 </div>
                 <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/20 backdrop-blur-md border border-accent/40">
                   <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
-                  <span className="text-accent text-sm font-semibold">Currently accepting 3 new clients this month</span>
+                  <span className="text-accent text-sm font-semibold">Sites from $495 · Accepting 3 new clients</span>
                 </div>
               </div>
               
               <h1 className="text-5xl md:text-7xl font-display font-bold text-white leading-[1.05] tracking-tight mb-6">
-                Most websites look great.<br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-primary">Ours actually sell.</span>
+                We Build High-Converting Websites & Automations<br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-primary">for Small Businesses.</span>
               </h1>
               
               <p className="text-lg md:text-xl text-white/70 leading-relaxed mb-3 max-w-2xl">
-                WordPress sites, Shopify stores, custom software, and AI automation — all built and delivered for you. You focus on running your business. We handle the rest.
+                Get a modern site, real results, and ongoing support — without agency pricing. WordPress, Shopify, and AI automation delivered for you, on time and on budget.
               </p>
 
               <p className="text-sm text-primary/90 font-semibold mb-5 flex items-center gap-2">
                 <span className="inline-block w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
-                Built for service businesses, online retailers, and B2B brands ready to grow online
+                Perfect for local shops, service providers, tradespeople & online retailers
               </p>
 
               <p className="text-sm text-white/50 mb-10 flex items-center gap-2">
@@ -134,12 +134,12 @@ export default function Home() {
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4">
-                <Link href="/audit">
+                <Link href="/contact">
                   <Button
                     className="h-14 px-8 text-lg rounded-xl bg-primary hover:bg-primary/90 text-white shadow-xl shadow-primary/25 hover:-translate-y-1 transition-all"
-                    onClick={() => GA.ctaClick("hero_audit_free")}
+                    onClick={() => GA.ctaClick("hero_strategy_call")}
                   >
-                    Audit My Site Free
+                    Book a Free Strategy Call
                     <ArrowRight className="ml-2 w-5 h-5" />
                   </Button>
                 </Link>
