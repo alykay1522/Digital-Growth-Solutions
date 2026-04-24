@@ -4,9 +4,9 @@ import { sendOwnerNotification, sendClientAutoReply, paymentOwnerHtml, paymentCl
 const router = Router();
 
 const PAYPAL_BASE =
-  process.env.PAYPAL_MODE === "live"
-    ? "https://api-m.paypal.com"
-    : "https://api-m.sandbox.paypal.com";
+  process.env.PAYPAL_MODE === "sandbox"
+    ? "https://api-m.sandbox.paypal.com"
+    : "https://api-m.paypal.com";
 
 async function getAccessToken(): Promise<string> {
   const clientId = process.env.PAYPAL_CLIENT_ID;

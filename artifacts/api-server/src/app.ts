@@ -8,6 +8,9 @@ import { globalLimiter } from "./middlewares/rateLimits";
 
 const app: Express = express();
 
+// ─── Trust proxy (required for rate limiter behind Replit/Cloudflare) ────────
+app.set("trust proxy", 1);
+
 // ─── Security headers ─────────────────────────────────────────────────────────
 app.use(
   helmet({
