@@ -1,6 +1,7 @@
 import { Router, type IRouter, type Request, type Response } from "express";
 import { openai } from "@workspace/integrations-openai-ai-server";
 import { heavyLimiter } from "../middlewares/rateLimits";
+import { sendOwnerNotification, intakeOwnerHtml, quoteOwnerHtml } from "../lib/email";
 
 const router: IRouter = Router();
 
@@ -122,8 +123,24 @@ Be friendly, transparent, and specific. No vague estimates.`;
 
 router.post("/quote", async (req: Request, res: Response) => {
   try {
-    const { projectType, pages, features, budget, timeline, businessType, notes } = req.body as Record<string, string>;
+    const { name, email, projectType, pages, features, budget, timeline, businessType, notes } = req.body as Record<string, string>;
     if (!projectType) { res.status(400).json({ error: "projectType required" }); return; }
+
+    // Fire-and-forget owner notification
+    if (projectType) {
+      sendOwnerNotification({
+        subject: `💬 New Quote Request — ${projectType}${businessType ? ` (${businessType})` : ""}`,
+        html: quoteOwnerHtml({
+          name: name || "Anonymous",
+          business: businessType || "Not provided",
+          email: email || "",
+          projectType,
+          budget: budget || "Not specified",
+          description: [features && `Features: ${features}`, notes && `Notes: ${notes}`].filter(Boolean).join("\n") || "Not provided",
+          timeline: timeline || "No preference",
+        }),
+      }).catch((err) => console.error("[email] Quote notification failed:", err));
+    }
 
     const userMessage = `Generate a project quote for this client:
 - Project type: ${projectType}
@@ -225,6 +242,23 @@ router.post("/intake", async (req: Request, res: Response) => {
   try {
     const { name, business, email, projectType, description, goals, deadline, budget, competitors, brandStyle } = req.body as Record<string, string>;
     if (!description) { res.status(400).json({ error: "description required" }); return; }
+
+    // Fire-and-forget owner notification with full project brief
+    sendOwnerNotification({
+      subject: `📋 New Project Brief${name ? ` from ${name}` : ""}${projectType ? ` — ${projectType}` : ""}`,
+      html: intakeOwnerHtml({
+        name: name || "Anonymous",
+        business: business || "Not provided",
+        email: email || "",
+        projectType: projectType || "Not specified",
+        description,
+        goals: goals || "",
+        deadline: deadline || "Flexible",
+        budget: budget || "Not specified",
+        competitors: competitors || "",
+        brandStyle: brandStyle || "",
+      }),
+    }).catch((err) => console.error("[email] Intake notification failed:", err));
 
     const userMessage = `Process this new client intake:
 - Name: ${name || "Not provided"}

@@ -9,21 +9,30 @@ function getResend(): Resend {
   return client;
 }
 
-const OWNER = process.env.AGENCY_OWNER_EMAIL || "";
+const OWNER = process.env.AGENCY_OWNER_EMAIL || "alyshameade.1522@gmail.com";
 const FROM = "Digital Growth Solutions Agency <onboarding@resend.dev>";
+const REPLY_TO = "hello@digitalgrowthsolutionsagency.com";
 
 export async function sendOwnerNotification(opts: {
   subject: string;
   html: string;
 }): Promise<void> {
-  if (!process.env.RESEND_API_KEY) return;
+  if (!process.env.RESEND_API_KEY) {
+    console.warn("[email] RESEND_API_KEY not set — skipping owner notification");
+    return;
+  }
   const resend = getResend();
-  await resend.emails.send({
+  const result = await resend.emails.send({
     from: FROM,
     to: OWNER,
+    replyTo: REPLY_TO,
     subject: opts.subject,
     html: opts.html,
   });
+  if (result.error) {
+    throw new Error(`Resend error: ${JSON.stringify(result.error)}`);
+  }
+  console.info(`[email] Owner notification sent — id: ${result.data?.id}`);
 }
 
 export async function sendClientAutoReply(opts: {
@@ -34,12 +43,17 @@ export async function sendClientAutoReply(opts: {
 }): Promise<void> {
   if (!process.env.RESEND_API_KEY) return;
   const resend = getResend();
-  await resend.emails.send({
+  const result = await resend.emails.send({
     from: FROM,
     to: opts.to,
+    replyTo: REPLY_TO,
     subject: opts.subject,
     html: opts.html,
   });
+  if (result.error) {
+    throw new Error(`Resend error: ${JSON.stringify(result.error)}`);
+  }
+  console.info(`[email] Client auto-reply sent to ${opts.to} — id: ${result.data?.id}`);
 }
 
 // ── Email templates ────────────────────────────────────────────────────────
@@ -49,12 +63,13 @@ export function contactOwnerHtml(data: {
   email: string;
   company?: string;
   service?: string;
+  budget?: string;
   message: string;
 }): string {
   return `
 <div style="font-family:sans-serif;max-width:600px;margin:0 auto;color:#1a1a2e">
   <div style="background:#6c63ff;padding:24px 32px;border-radius:12px 12px 0 0">
-    <h2 style="color:#fff;margin:0;font-size:20px">New Enquiry — Digital Growth Solutions Agency</h2>
+    <h2 style="color:#fff;margin:0;font-size:20px">📬 New Enquiry — Digital Growth Solutions Agency</h2>
   </div>
   <div style="background:#f9f9fc;padding:32px;border:1px solid #e5e7eb;border-top:none;border-radius:0 0 12px 12px">
     <table style="width:100%;border-collapse:collapse">
@@ -62,10 +77,14 @@ export function contactOwnerHtml(data: {
       <tr><td style="padding:8px 0;font-weight:600;color:#6b7280">Email</td><td style="padding:8px 0"><a href="mailto:${data.email}" style="color:#6c63ff">${data.email}</a></td></tr>
       ${data.company ? `<tr><td style="padding:8px 0;font-weight:600;color:#6b7280">Company</td><td style="padding:8px 0">${data.company}</td></tr>` : ""}
       ${data.service ? `<tr><td style="padding:8px 0;font-weight:600;color:#6b7280">Service</td><td style="padding:8px 0">${data.service}</td></tr>` : ""}
+      ${data.budget ? `<tr><td style="padding:8px 0;font-weight:600;color:#6b7280">Budget</td><td style="padding:8px 0">${data.budget}</td></tr>` : ""}
     </table>
     <div style="margin-top:24px;padding:20px;background:#fff;border:1px solid #e5e7eb;border-radius:8px">
       <p style="margin:0;font-weight:600;color:#6b7280;font-size:13px;margin-bottom:8px">MESSAGE</p>
       <p style="margin:0;line-height:1.6">${data.message.replace(/\n/g, "<br>")}</p>
+    </div>
+    <div style="margin-top:20px;text-align:center">
+      <a href="mailto:${data.email}" style="display:inline-block;background:#6c63ff;color:#fff;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:600;font-size:14px">Reply to ${data.name}</a>
     </div>
     <p style="margin-top:24px;font-size:13px;color:#9ca3af">Submitted via digitalgrowthsolutionsagency.com contact form</p>
   </div>
@@ -81,12 +100,103 @@ export function contactClientHtml(name: string): string {
   <div style="background:#f9f9fc;padding:32px;border:1px solid #e5e7eb;border-top:none;border-radius:0 0 12px 12px">
     <p style="margin:0 0 16px">Hi <strong>${name}</strong>,</p>
     <p style="margin:0 0 16px;line-height:1.6">Thank you for reaching out to Digital Growth Solutions Agency. Your message has landed safely and one of our team will review it and get back to you <strong>within 24 hours</strong>.</p>
-    <p style="margin:0 0 24px;line-height:1.6">If your matter is urgent — for example a site that's down or a broken checkout — please reply to this email and mark it URGENT and we'll prioritise accordingly.</p>
+    <p style="margin:0 0 24px;line-height:1.6">If your matter is urgent — for example a site that's down or a broken checkout — please reply to this email marked URGENT and we'll prioritise accordingly.</p>
     <div style="background:#6c63ff;padding:20px 24px;border-radius:10px;margin-bottom:24px">
       <p style="color:#fff;margin:0;font-size:15px;font-weight:600">While you wait…</p>
       <p style="color:rgba(255,255,255,0.85);margin:8px 0 0;font-size:14px;line-height:1.5">Run our free <a href="https://digitalgrowthsolutionsagency.com/audit" style="color:#ffd166;font-weight:600">Site Audit</a> to get an instant performance, SEO and security report — no signup needed.</p>
     </div>
     <p style="margin:0;font-size:13px;color:#9ca3af">— The Digital Growth Solutions Agency Team</p>
+  </div>
+</div>`;
+}
+
+export function intakeOwnerHtml(data: {
+  name: string;
+  business: string;
+  email: string;
+  projectType: string;
+  description: string;
+  goals: string;
+  deadline: string;
+  budget: string;
+  competitors: string;
+  brandStyle: string;
+}): string {
+  const row = (label: string, value: string) =>
+    value ? `<tr><td style="padding:8px 0;font-weight:600;width:160px;color:#6b7280;vertical-align:top">${label}</td><td style="padding:8px 0">${value}</td></tr>` : "";
+
+  return `
+<div style="font-family:sans-serif;max-width:600px;margin:0 auto;color:#1a1a2e">
+  <div style="background:#6c63ff;padding:24px 32px;border-radius:12px 12px 0 0">
+    <h2 style="color:#fff;margin:0;font-size:20px">📋 New Project Brief — Intake Agent</h2>
+    <p style="color:rgba(255,255,255,0.8);margin:8px 0 0;font-size:14px">A visitor just completed the AI Intake form</p>
+  </div>
+  <div style="background:#f9f9fc;padding:32px;border:1px solid #e5e7eb;border-top:none;border-radius:0 0 12px 12px">
+    <table style="width:100%;border-collapse:collapse">
+      ${row("Name", data.name)}
+      ${row("Email", data.email ? `<a href="mailto:${data.email}" style="color:#6c63ff">${data.email}</a>` : "")}
+      ${row("Business", data.business)}
+      ${row("Project Type", data.projectType)}
+      ${row("Deadline", data.deadline)}
+      ${row("Budget", data.budget)}
+      ${row("Competitor Sites", data.competitors)}
+      ${row("Brand Style", data.brandStyle)}
+    </table>
+    <div style="margin-top:24px;padding:20px;background:#fff;border:1px solid #e5e7eb;border-radius:8px">
+      <p style="margin:0;font-weight:600;color:#6b7280;font-size:13px;margin-bottom:8px">PROJECT DESCRIPTION</p>
+      <p style="margin:0;line-height:1.6">${data.description.replace(/\n/g, "<br>")}</p>
+    </div>
+    ${data.goals ? `
+    <div style="margin-top:16px;padding:20px;background:#fff;border:1px solid #e5e7eb;border-radius:8px">
+      <p style="margin:0;font-weight:600;color:#6b7280;font-size:13px;margin-bottom:8px">GOALS</p>
+      <p style="margin:0;line-height:1.6">${data.goals.replace(/\n/g, "<br>")}</p>
+    </div>` : ""}
+    ${data.email ? `
+    <div style="margin-top:20px;text-align:center">
+      <a href="mailto:${data.email}" style="display:inline-block;background:#6c63ff;color:#fff;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:600;font-size:14px">Reply to ${data.name || "Client"}</a>
+    </div>` : ""}
+    <p style="margin-top:24px;font-size:13px;color:#9ca3af">Submitted via digitalgrowthsolutionsagency.com AI Intake Agent</p>
+  </div>
+</div>`;
+}
+
+export function quoteOwnerHtml(data: {
+  name: string;
+  business: string;
+  email: string;
+  projectType: string;
+  budget: string;
+  description: string;
+  timeline: string;
+}): string {
+  const row = (label: string, value: string) =>
+    value ? `<tr><td style="padding:8px 0;font-weight:600;width:140px;color:#6b7280">${label}</td><td style="padding:8px 0">${value}</td></tr>` : "";
+
+  return `
+<div style="font-family:sans-serif;max-width:600px;margin:0 auto;color:#1a1a2e">
+  <div style="background:#f59e0b;padding:24px 32px;border-radius:12px 12px 0 0">
+    <h2 style="color:#fff;margin:0;font-size:20px">💬 New Quote Request — AI Quote Agent</h2>
+    <p style="color:rgba(255,255,255,0.85);margin:8px 0 0;font-size:14px">A visitor just used the AI Quote Generator</p>
+  </div>
+  <div style="background:#f9f9fc;padding:32px;border:1px solid #e5e7eb;border-top:none;border-radius:0 0 12px 12px">
+    <table style="width:100%;border-collapse:collapse">
+      ${row("Name", data.name)}
+      ${row("Email", data.email ? `<a href="mailto:${data.email}" style="color:#6c63ff">${data.email}</a>` : "")}
+      ${row("Business", data.business)}
+      ${row("Project Type", data.projectType)}
+      ${row("Budget Range", data.budget)}
+      ${row("Timeline", data.timeline)}
+    </table>
+    ${data.description ? `
+    <div style="margin-top:24px;padding:20px;background:#fff;border:1px solid #e5e7eb;border-radius:8px">
+      <p style="margin:0;font-weight:600;color:#6b7280;font-size:13px;margin-bottom:8px">PROJECT DETAILS</p>
+      <p style="margin:0;line-height:1.6">${data.description.replace(/\n/g, "<br>")}</p>
+    </div>` : ""}
+    ${data.email ? `
+    <div style="margin-top:20px;text-align:center">
+      <a href="mailto:${data.email}" style="display:inline-block;background:#f59e0b;color:#fff;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:600;font-size:14px">Follow up with ${data.name || "Client"}</a>
+    </div>` : ""}
+    <p style="margin-top:24px;font-size:13px;color:#9ca3af">Submitted via digitalgrowthsolutionsagency.com AI Quote Agent</p>
   </div>
 </div>`;
 }

@@ -25,8 +25,11 @@ router.post("/contact", async (req, res) => {
     email: string;
     company?: string;
     service?: string;
+    budget?: string;
     message: string;
   };
+
+  const budget = (req.body as Record<string, string>).budget || undefined;
 
   req.log.info({ name, email }, "Contact form submission received");
 
@@ -42,11 +45,11 @@ router.post("/contact", async (req, res) => {
     req.log.error(dbErr, "Failed to store contact submission");
   }
 
-  // 2. Notify owner + send auto-reply (fire-and-forget — don't block response)
+  // 2. Notify owner + send auto-reply
   Promise.all([
     sendOwnerNotification({
-      subject: `New enquiry from ${name}${service ? ` — ${service}` : ""}`,
-      html: contactOwnerHtml({ name, email, company, service, message }),
+      subject: `📬 New enquiry from ${name}${service ? ` — ${service}` : ""}`,
+      html: contactOwnerHtml({ name, email, company, service, budget, message }),
     }),
     sendClientAutoReply({
       to: email,
