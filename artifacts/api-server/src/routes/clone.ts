@@ -4,30 +4,32 @@ import http from "http";
 import { load } from "cheerio";
 import { heavyLimiter } from "../middlewares/rateLimits";
 import { requireToolToken } from "../middlewares/requireToolToken";
-import { assertSafeUrl } from "../lib/assertSafeUrl";
+import { assertSafeUrl, secureLookup } from "../lib/assertSafeUrl";
 
 const router = Router();
 
-function fetchRaw(rawUrl: string, timeoutMs = 10000): Promise<{ body: string; contentType: string }> {
+async function fetchRaw(rawUrl: string, timeoutMs = 10000): Promise<{ body: string; contentType: string }> {
+  let parsed: URL;
+  try {
+    parsed = await assertSafeUrl(rawUrl);
+  } catch (e: any) {
+    throw new Error(`Invalid or disallowed URL: ${e.message}`);
+  }
+  const lib = parsed.protocol === "https:" ? https : http;
+  const options = {
+    hostname: parsed.hostname,
+    path: parsed.pathname + parsed.search,
+    headers: {
+      "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120 Safari/537.36",
+      Accept: "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+      "Accept-Language": "en-US,en;q=0.5",
+    },
+    rejectUnauthorized: true,
+    lookup: secureLookup,
+    timeout: timeoutMs,
+  };
+
   return new Promise((resolve, reject) => {
-    let parsed: URL;
-    try {
-      parsed = assertSafeUrl(rawUrl);
-    } catch {
-      return reject(new Error(`Invalid or disallowed URL: ${rawUrl}`));
-    }
-    const lib = parsed.protocol === "https:" ? https : http;
-    const options = {
-      hostname: parsed.hostname,
-      path: parsed.pathname + parsed.search,
-      headers: {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120 Safari/537.36",
-        Accept: "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-        "Accept-Language": "en-US,en;q=0.5",
-      },
-      rejectUnauthorized: false,
-      timeout: timeoutMs,
-    };
     const req = lib.get(options, (res) => {
       if ((res.statusCode === 301 || res.statusCode === 302 || res.statusCode === 307) && res.headers.location) {
         const next = res.headers.location.startsWith("http")
@@ -84,7 +86,7 @@ router.post("/clone", heavyLimiter, requireToolToken("site-cloner"), async (req:
     let { url, inlineStyles = true } = req.body as { url: string; inlineStyles?: boolean };
     if (!url?.trim()) return res.status(400).json({ error: "URL is required" });
     if (!/^https?:\/\//i.test(url)) url = `https://${url}`;
-    try { assertSafeUrl(url); } catch (e: any) { return res.status(400).json({ error: e.message }); }
+    try { await assertSafeUrl(url); } catch (e: any) { return res.status(400).json({ error: e.message }); }
 
     const { body: rawHtml } = await fetchRaw(url, 15000);
     const $ = load(rawHtml);

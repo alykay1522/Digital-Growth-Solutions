@@ -1,14 +1,15 @@
 import https from "https";
 import http from "http";
+import { assertSafeUrl, secureLookup } from "../lib/assertSafeUrl.js";
 
-export function httpGet(
+export async function httpGet(
   url: string,
   redirectsLeft = 5
 ): Promise<{ html: string; headers: Record<string, string>; status: number }> {
-  return new Promise((resolve, reject) => {
-    const parsed = new URL(url);
-    const lib = parsed.protocol === "https:" ? https : http;
+  const parsed = await assertSafeUrl(url);
+  const lib = parsed.protocol === "https:" ? https : http;
 
+  return new Promise((resolve, reject) => {
     const req = lib.request(
       {
         hostname: parsed.hostname,
@@ -24,7 +25,8 @@ export function httpGet(
           Connection: "close",
         },
         timeout: 15000,
-        rejectUnauthorized: false,
+        rejectUnauthorized: true,
+        lookup: secureLookup,
       },
       (res) => {
         const status = res.statusCode || 0;

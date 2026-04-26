@@ -3,7 +3,7 @@ import * as cheerio from "cheerio";
 import https from "https";
 import http from "http";
 import { heavyLimiter } from "../middlewares/rateLimits";
-import { assertSafeUrl } from "../lib/assertSafeUrl";
+import { assertSafeUrl, secureLookup } from "../lib/assertSafeUrl";
 
 const router: IRouter = Router();
 
@@ -17,16 +17,16 @@ interface SiteIssue {
   value?: string;
 }
 
-function httpGet(url: string, redirectsLeft = 5): Promise<{ html: string; headers: Record<string, string>; status: number }> {
-  return new Promise((resolve, reject) => {
-    let parsed: URL;
-    try {
-      parsed = assertSafeUrl(url);
-    } catch (e: any) {
-      return reject(e);
-    }
-    const lib = parsed.protocol === "https:" ? https : http;
+async function httpGet(url: string, redirectsLeft = 5): Promise<{ html: string; headers: Record<string, string>; status: number }> {
+  let parsed: URL;
+  try {
+    parsed = await assertSafeUrl(url);
+  } catch (e: any) {
+    throw e;
+  }
+  const lib = parsed.protocol === "https:" ? https : http;
 
+  return new Promise((resolve, reject) => {
     const req = lib.request(
       {
         hostname: parsed.hostname,
@@ -41,6 +41,7 @@ function httpGet(url: string, redirectsLeft = 5): Promise<{ html: string; header
         },
         timeout: 15000,
         rejectUnauthorized: true,
+        lookup: secureLookup,
       },
       (res) => {
         const status = res.statusCode || 0;
@@ -50,7 +51,6 @@ function httpGet(url: string, redirectsLeft = 5): Promise<{ html: string; header
           else if (Array.isArray(v)) headers[k.toLowerCase()] = v[0];
         });
 
-        // Follow redirects
         if ((status === 301 || status === 302 || status === 303 || status === 307 || status === 308) && headers.location && redirectsLeft > 0) {
           req.destroy();
           const nextUrl = headers.location.startsWith("http") ? headers.location : new URL(headers.location, url).href;

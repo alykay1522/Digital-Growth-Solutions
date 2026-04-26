@@ -4,7 +4,7 @@ import http from "http";
 import { load } from "cheerio";
 import { heavyLimiter } from "../middlewares/rateLimits";
 import { requireToolToken } from "../middlewares/requireToolToken";
-import { assertSafeUrl } from "../lib/assertSafeUrl";
+import { assertSafeUrl, secureLookup } from "../lib/assertSafeUrl";
 
 const router = Router();
 
@@ -33,28 +33,28 @@ interface SniffResult {
   scrapedAt: string;
 }
 
-function fetchUrl(rawUrl: string): Promise<{ body: string; finalUrl: string; headers: Record<string, string> }> {
-  return new Promise((resolve, reject) => {
-    let parsed: URL;
-    try {
-      parsed = assertSafeUrl(rawUrl);
-    } catch (e: any) {
-      return reject(e);
-    }
-    const lib = parsed.protocol === "https:" ? https : http;
-    const options = {
-      hostname: parsed.hostname,
-      path: parsed.pathname + parsed.search,
-      headers: {
-        "User-Agent": "Mozilla/5.0 (compatible; DGSAuditBot/1.0)",
-        Accept: "text/html,application/json,*/*",
-      },
-      rejectUnauthorized: true,
-      timeout: 12000,
-    };
+async function fetchUrl(rawUrl: string): Promise<{ body: string; finalUrl: string; headers: Record<string, string> }> {
+  let parsed: URL;
+  try {
+    parsed = await assertSafeUrl(rawUrl);
+  } catch (e: any) {
+    throw e;
+  }
+  const lib = parsed.protocol === "https:" ? https : http;
+  const options = {
+    hostname: parsed.hostname,
+    path: parsed.pathname + parsed.search,
+    headers: {
+      "User-Agent": "Mozilla/5.0 (compatible; DGSAuditBot/1.0)",
+      Accept: "text/html,application/json,*/*",
+    },
+    rejectUnauthorized: true,
+    lookup: secureLookup,
+    timeout: 12000,
+  };
 
+  return new Promise((resolve, reject) => {
     const req = lib.get(options, (res) => {
-      // Handle redirects
       if ((res.statusCode === 301 || res.statusCode === 302) && res.headers.location) {
         const next = res.headers.location.startsWith("http")
           ? res.headers.location
@@ -289,7 +289,7 @@ router.post("/sniff", heavyLimiter, requireToolToken("product-sniffer"), async (
     if (!/^https?:\/\//i.test(url)) url = `https://${url}`;
     let parsedBase: URL;
     try {
-      parsedBase = assertSafeUrl(url);
+      parsedBase = await assertSafeUrl(url);
     } catch (e: any) {
       return res.status(400).json({ error: e.message });
     }
