@@ -105,8 +105,8 @@ export function Footer() {
             <ul className="space-y-4 text-white/60">
               <li className="flex items-center gap-3">
                 <Mail className="w-5 h-5 text-primary shrink-0" aria-hidden="true" />
-                <a href="mailto:hello@digitalgrowthsolutionsagency.com" className="hover:text-white transition-colors text-sm">
-                  hello@digitalgrowthsolutionsagency.com
+                <a href="mailto:info@digitalgrowthsolutions.org" className="hover:text-white transition-colors text-sm">
+                  info@digitalgrowthsolutions.org
                 </a>
               </li>
             </ul>

@@ -53,8 +53,8 @@ export default function NotFound() {
 
         <p className="text-sm text-muted-foreground mt-10">
           Need help? Email us at{" "}
-          <a href="mailto:hello@digitalgrowthsolutionsagency.com" className="text-primary hover:underline">
-            hello@digitalgrowthsolutionsagency.com
+          <a href="mailto:info@digitalgrowthsolutions.org" className="text-primary hover:underline">
+            info@digitalgrowthsolutions.org
           </a>
         </p>
       </div>

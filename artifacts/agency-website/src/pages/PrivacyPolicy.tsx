@@ -8,7 +8,7 @@ export default function PrivacyPolicy() {
   });
 
   const updated = "19 April 2026";
-  const email = "hello@digitalgrowthsolutionsagency.com";
+  const email = "info@digitalgrowthsolutions.org";
   const site = "digitalgrowthsolutionsagency.com";
 
   return (

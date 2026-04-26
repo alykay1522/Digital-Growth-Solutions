@@ -76,7 +76,7 @@ export default function SupportAgent() {
         }
       }
     } catch {
-      setMessages((prev) => [...prev, { role: "assistant", content: "Sorry, I hit an error. Please try again or email hello@digitalgrowthsolutionsagency.com" }]);
+      setMessages((prev) => [...prev, { role: "assistant", content: "Sorry, I hit an error. Please try again or email info@digitalgrowthsolutions.org" }]);
     } finally {
       setIsLoading(false);
     }

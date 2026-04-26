@@ -663,7 +663,7 @@ export default function Pricing() {
           <div className="bg-red-50 border border-red-200 rounded-2xl p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
             <div>
               <p className="font-bold text-red-800 mb-1">Site completely down right now?</p>
-              <p className="text-sm text-red-700">Email <span className="font-semibold">hello@digitalgrowthsolutionsagency.com</span> — we treat this as a priority and aim to respond within 1 hour.</p>
+              <p className="text-sm text-red-700">Email <span className="font-semibold">info@digitalgrowthsolutions.org</span> — we treat this as a priority and aim to respond within 1 hour.</p>
             </div>
             <Link href="/contact" className="shrink-0">
               <Button className="bg-red-600 hover:bg-red-700 text-white rounded-xl px-6 h-11 font-bold shadow-lg shadow-red-200">

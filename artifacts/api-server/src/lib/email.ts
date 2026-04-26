@@ -24,7 +24,7 @@ function getResend(): Resend {
 
 const OWNER = process.env.AGENCY_OWNER_EMAIL || "alyshameade.1522@gmail.com";
 const FROM = "Digital Growth Solutions Agency <onboarding@resend.dev>";
-const REPLY_TO = "hello@digitalgrowthsolutionsagency.com";
+const REPLY_TO = "info@digitalgrowthsolutions.org";
 
 export async function sendOwnerNotification(opts: {
   subject: string;

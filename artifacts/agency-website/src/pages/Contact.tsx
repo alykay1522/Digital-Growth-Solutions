@@ -78,8 +78,8 @@ export default function Contact() {
                 </div>
                 <div>
                   <h3 className="font-bold text-lg text-secondary">Email Us</h3>
-                  <p className="text-muted-foreground">hello@digitalgrowthsolutionsagency.com</p>
-                  <p className="text-sm text-muted-foreground mt-1">We respond to every enquiry within 24 hours.</p>
+                  <p className="text-muted-foreground">info@digitalgrowthsolutions.org</p>
+                  <p className="text-sm text-muted-foreground mt-1">All enquiries are automatically forwarded to our internal team. We respond within 24 hours.</p>
                 </div>
               </div>
             </div>

@@ -8,7 +8,7 @@ export default function Terms() {
   });
 
   const updated = "19 April 2026";
-  const email = "hello@digitalgrowthsolutionsagency.com";
+  const email = "info@digitalgrowthsolutions.org";
 
   return (
     <div className="min-h-screen bg-white">

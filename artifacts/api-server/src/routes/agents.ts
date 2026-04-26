@@ -170,7 +170,7 @@ Our services and pricing:
 Free tools: /audit (site audit), /tech-stack (stack detector), /roi (ROI calculator)
 Paid tools ($9.99/24hr): /sniff (product sniffer), /clone (site cloner)
 
-Contact: hello@digitalgrowthsolutionsagency.com | /contact page for strategy calls
+Contact: info@digitalgrowthsolutions.org | /contact page for strategy calls
 
 Guidelines:
 - Answer questions clearly and directly — no jargon

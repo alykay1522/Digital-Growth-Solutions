@@ -223,8 +223,8 @@ export function ToolPaywall({
               <div className="mt-4 pt-4 border-t border-border/50 text-center">
                 <p className="text-xs text-muted-foreground">
                   Questions? Email us at{" "}
-                  <a href="mailto:hello@digitalgrowthsolutionsagency.com" className="text-primary hover:underline">
-                    hello@digitalgrowthsolutionsagency.com
+                  <a href="mailto:info@digitalgrowthsolutions.org" className="text-primary hover:underline">
+                    info@digitalgrowthsolutions.org
                   </a>
                 </p>
               </div>

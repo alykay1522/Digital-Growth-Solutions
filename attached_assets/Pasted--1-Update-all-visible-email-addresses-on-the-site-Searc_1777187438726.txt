@@ -1,0 +1,169 @@
+✅ 1. Update all visible email addresses on the site
+Search your entire project for:
+
+hello@digitalgrowthsolutionsagency.com
+
+hello@digitalgrowthsolutionsagency.org
+
+contact@...
+
+any other old email
+
+Replace with:
+
+Code
+info@digitalgrowthsolutions.org
+Places to update:
+
+Header “Get in Touch” page
+
+Footer
+
+Contact page
+
+Pricing page
+
+AI Agents pages
+
+Blog footer
+
+Any CTA buttons
+
+Any forms that show the email in confirmation messages
+
+✅ 2. Update all form submission endpoints
+Your forms (contact, audit, quote, etc.) must now send to:
+
+Code
+info@digitalgrowthsolutions.org
+If you’re using:
+
+A. Formspree / Web3Forms / Netlify Forms
+Update the target email in the dashboard.
+
+B. Custom API route (Node/Express/Vercel/Next API)
+Update your mailer config:
+
+js
+to: "info@digitalgrowthsolutions.org"
+C. SMTP (SendGrid, Mailgun, Gmail API)
+Update:
+
+from
+
+reply-to
+
+to
+
+Example:
+
+js
+from: "info@digitalgrowthsolutions.org",
+to: "info@digitalgrowthsolutions.org",
+replyTo: emailFromForm
+✅ 3. Set up email forwarding to your Gmail
+Your domain registrar or hosting provider will handle this.
+
+If your domain is on Namecheap
+Go to:
+
+Dashboard → Domain → Redirect Email → Add Forwarder
+
+Code
+info@digitalgrowthsolutions.org → alyshameade.1522@gmail.com
+If your domain is on Cloudflare
+Use:
+
+Email → Email Routing → Create Address
+
+Code
+info@digitalgrowthsolutions.org → alyshameade.1522@gmail.com
+If your domain is on GoDaddy
+Use:
+
+Email Forwarding → Add Forwarding
+
+✅ 4. Update DNS records for proper email deliverability
+To avoid spam issues, add:
+
+SPF
+Code
+v=spf1 include:_spf.google.com ~all
+DKIM
+If using Google Workspace or Gmail routing, enable DKIM and copy the TXT record.
+
+DMARC
+Code
+v=DMARC1; p=none; rua=mailto:info@digitalgrowthsolutions.org
+This ensures your emails land in inboxes, not spam.
+
+✅ 5. Update all Open Graph, Schema, and meta tags
+Anywhere your email appears in metadata:
+
+og:email
+
+contactPoint
+
+Organization schema
+
+LocalBusiness schema
+
+Footer structured data
+
+Update to:
+
+Code
+"email": "info@digitalgrowthsolutions.org"
+✅ 6. Update your Contact page content
+Make sure it now reads:
+
+Email: info@digitalgrowthsolutions.org
+All enquiries are automatically forwarded to our internal team.
+
+(You don’t need to mention Gmail publicly.)
+
+✅ 7. Update your Privacy Policy and Terms
+Anywhere it references:
+
+“Digital Growth Solutions Agency email”
+
+“hello@…”
+
+“contact@…”
+
+Replace with:
+
+Code
+info@digitalgrowthsolutions.org
+✅ 8. Update your email templates
+If your site sends:
+
+Contact form confirmations
+
+Audit results
+
+Quote generator emails
+
+Booking confirmations
+
+Blog subscription emails
+
+Update the footer:
+
+Code
+Digital Growth Solutions  
+info@digitalgrowthsolutions.org
+⭐ You’re now fully aligned under ONE brand + ONE domain
+This fixes:
+
+Trust issues
+
+SEO consistency
+
+Email deliverability
+
+Branding clarity
+
+Legal compliance
+
+User experience

@@ -302,7 +302,7 @@ export default function Pay() {
                 },
                 {
                   title: "Need a VAT invoice?",
-                  body: "Email us at hello@digitalgrowthsolutionsagency.com after paying and we'll issue a VAT receipt or formal invoice for your records within 24 hours.",
+                  body: "Email us at info@digitalgrowthsolutions.org after paying and we'll issue a VAT receipt or formal invoice for your records within 24 hours.",
                 },
               ].map(({ title, body }) => (
                 <div key={title}>
