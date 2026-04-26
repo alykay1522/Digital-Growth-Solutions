@@ -1,5 +1,7 @@
 import { Router, Request, Response } from "express";
 import { sendOwnerNotification, sendClientAutoReply, paymentOwnerHtml, paymentClientHtml } from "../lib/email";
+import { issueToolToken } from "../lib/toolToken";
+import { getDb } from "../lib/db";
 
 const router = Router();
 
@@ -7,6 +9,32 @@ const PAYPAL_BASE =
   process.env.PAYPAL_MODE === "sandbox"
     ? "https://api-m.sandbox.paypal.com"
     : "https://api-m.paypal.com";
+
+const TOOL_CATALOG: Record<string, { name: string; price: string }> = {
+  "site-cloner": { name: "Site Cloner", price: "9.99" },
+  "product-sniffer": { name: "Product Sniffer", price: "9.99" },
+};
+
+const pendingOrders = new Map<string, { toolKey: string; amount: string; createdAt: number }>();
+const PENDING_ORDER_TTL_MS = 30 * 60 * 1000;
+
+function cleanupPendingOrders() {
+  const cutoff = Date.now() - PENDING_ORDER_TTL_MS;
+  for (const [id, entry] of pendingOrders) {
+    if (entry.createdAt < cutoff) pendingOrders.delete(id);
+  }
+}
+
+async function ensureEntitlementsTable() {
+  const db = getDb();
+  await db.query(`
+    CREATE TABLE IF NOT EXISTS tool_entitlements (
+      order_id TEXT PRIMARY KEY,
+      tool_key TEXT NOT NULL,
+      issued_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+    )
+  `);
+}
 
 async function getAccessToken(): Promise<string> {
   const clientId = process.env.PAYPAL_CLIENT_ID;
@@ -38,15 +66,29 @@ async function getAccessToken(): Promise<string> {
 
 // POST /paypal/create-order
 router.post("/paypal/create-order", async (req: Request, res: Response) => {
-  const { amount, description, currency = "USD" } = req.body as {
+  const { amount, description, toolKey } = req.body as {
     amount: string | number;
     description: string;
-    currency?: string;
+    toolKey?: string;
   };
 
   if (!amount || !description) {
     return res.status(400).json({ error: "amount and description are required" });
   }
+
+  if (toolKey && !TOOL_CATALOG[toolKey]) {
+    return res.status(400).json({ error: "Invalid toolKey" });
+  }
+
+  if (toolKey) {
+    const expected = TOOL_CATALOG[toolKey];
+    const requestedAmount = Number(amount).toFixed(2);
+    if (requestedAmount !== expected.price) {
+      return res.status(400).json({ error: "Amount does not match the tool price" });
+    }
+  }
+
+  const currency = "USD";
 
   try {
     const token = await getAccessToken();
@@ -66,6 +108,7 @@ router.post("/paypal/create-order", async (req: Request, res: Response) => {
               value: String(Number(amount).toFixed(2)),
             },
             description,
+            custom_id: toolKey || "",
           },
         ],
       }),
@@ -77,6 +120,16 @@ router.post("/paypal/create-order", async (req: Request, res: Response) => {
     }
 
     const order = (await orderRes.json()) as { id: string };
+
+    if (toolKey) {
+      cleanupPendingOrders();
+      pendingOrders.set(order.id, {
+        toolKey,
+        amount: String(Number(amount).toFixed(2)),
+        createdAt: Date.now(),
+      });
+    }
+
     return res.json({ id: order.id });
   } catch (err: any) {
     const isNotConfigured = err.message?.includes("not configured");
@@ -139,6 +192,80 @@ router.post("/paypal/capture-order/:orderId", async (req: Request, res: Response
     return res.status(500).json({
       error: err.message || "Failed to capture PayPal order",
     });
+  }
+});
+
+// POST /paypal/issue-token — verify a completed PayPal order and issue a signed tool-access token
+router.post("/paypal/issue-token", async (req: Request, res: Response) => {
+  const { orderId, toolKey } = req.body as { orderId: string; toolKey: string };
+
+  if (!orderId || !toolKey || !TOOL_CATALOG[toolKey]) {
+    return res.status(400).json({ error: "orderId and a valid toolKey are required" });
+  }
+
+  const expectedTool = TOOL_CATALOG[toolKey];
+
+  try {
+    await ensureEntitlementsTable();
+    const db = getDb();
+
+    const existing = await db.query(
+      "SELECT order_id FROM tool_entitlements WHERE order_id = $1",
+      [orderId]
+    );
+    if (existing.rows.length > 0) {
+      return res.status(409).json({ error: "This order has already been used to unlock a tool" });
+    }
+
+    const ppToken = await getAccessToken();
+    const orderRes = await fetch(`${PAYPAL_BASE}/v2/checkout/orders/${orderId}`, {
+      headers: { Authorization: `Bearer ${ppToken}` },
+    });
+
+    if (!orderRes.ok) {
+      return res.status(402).json({ error: "Could not verify PayPal order" });
+    }
+
+    const order = (await orderRes.json()) as any;
+
+    if (order.status !== "COMPLETED") {
+      return res.status(402).json({ error: "Payment has not been completed" });
+    }
+
+    const unit = order.purchase_units?.[0];
+    const capture = unit?.payments?.captures?.[0];
+    const capturedAmount = capture?.amount?.value;
+    const capturedCurrency = capture?.amount?.currency_code;
+    const customId = unit?.custom_id;
+
+    if (capturedAmount !== expectedTool.price) {
+      return res.status(402).json({ error: "Order amount does not match the tool price" });
+    }
+
+    if (capturedCurrency !== "USD") {
+      return res.status(402).json({ error: "Order currency does not match the required currency" });
+    }
+
+    if (customId !== toolKey) {
+      return res.status(403).json({ error: "This order was not created for the requested tool" });
+    }
+
+    const pending = pendingOrders.get(orderId);
+    if (pending && pending.toolKey !== toolKey) {
+      return res.status(403).json({ error: "This order was not created for the requested tool" });
+    }
+
+    await db.query(
+      "INSERT INTO tool_entitlements (order_id, tool_key) VALUES ($1, $2)",
+      [orderId, toolKey]
+    );
+
+    pendingOrders.delete(orderId);
+
+    const accessToken = issueToolToken(toolKey, orderId);
+    return res.json({ token: accessToken });
+  } catch (err: any) {
+    return res.status(500).json({ error: err.message || "Failed to issue token" });
   }
 });
 

@@ -3,6 +3,7 @@ import https from "https";
 import http from "http";
 import { load } from "cheerio";
 import { heavyLimiter } from "../middlewares/rateLimits";
+import { requireToolToken } from "../middlewares/requireToolToken";
 import { assertSafeUrl } from "../lib/assertSafeUrl";
 
 const router = Router();
@@ -277,7 +278,7 @@ function detectPageType(body: string, $: ReturnType<typeof load>): "product" | "
   return "unknown";
 }
 
-router.post("/sniff", heavyLimiter, async (req: Request, res: Response) => {
+router.post("/sniff", heavyLimiter, requireToolToken("product-sniffer"), async (req: Request, res: Response) => {
   try {
     let { url, limit = 50 } = req.body as { url: string; limit?: number };
     if (!url?.trim()) {

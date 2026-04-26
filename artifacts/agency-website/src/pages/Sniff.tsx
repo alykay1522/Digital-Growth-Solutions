@@ -20,6 +20,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { getToolToken } from "@/utils/toolAccess";
 
 const BASE_URL = (import.meta.env.BASE_URL || "").replace(/\/$/, "");
 
@@ -214,9 +215,13 @@ function SniffTool() {
     setLoading(true);
     setResult(null);
     try {
+      const toolToken = getToolToken("product-sniffer");
       const res = await fetch(`${BASE_URL}/api/sniff`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          ...(toolToken ? { "x-tool-token": toolToken } : {}),
+        },
         body: JSON.stringify({ url: sniffUrl, limit: 60 }),
       });
       const data = await res.json();

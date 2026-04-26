@@ -8,6 +8,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { PayPalCheckout } from "@/components/PayPalCheckout";
 import { GA } from "@/utils/analytics";
+import { storeToolToken, isToolUnlocked } from "@/utils/toolAccess";
 
 interface ToolPaywallProps {
   toolKey: string;
@@ -21,30 +22,6 @@ interface ToolPaywallProps {
   preview?: React.ReactNode;
   usageCount?: number;
   children: React.ReactNode;
-}
-
-const UNLOCK_DURATION_MS = 24 * 60 * 60 * 1000;
-
-function getUnlockKey(toolKey: string) {
-  return `tool_unlock_${toolKey}`;
-}
-
-function isUnlocked(toolKey: string): boolean {
-  try {
-    const raw = localStorage.getItem(getUnlockKey(toolKey));
-    if (!raw) return false;
-    const { expiresAt } = JSON.parse(raw);
-    return Date.now() < expiresAt;
-  } catch {
-    return false;
-  }
-}
-
-function setUnlocked(toolKey: string) {
-  localStorage.setItem(
-    getUnlockKey(toolKey),
-    JSON.stringify({ expiresAt: Date.now() + UNLOCK_DURATION_MS })
-  );
 }
 
 export function ToolPaywall({
@@ -64,11 +41,11 @@ export function ToolPaywall({
   const [paid, setPaid] = useState(false);
 
   useEffect(() => {
-    setUnlockedState(isUnlocked(toolKey));
+    setUnlockedState(isToolUnlocked(toolKey));
   }, [toolKey]);
 
-  const handleSuccess = (_orderId: string) => {
-    setUnlocked(toolKey);
+  const handleSuccess = (_orderId: string, accessToken: string) => {
+    storeToolToken(toolKey, accessToken);
     GA.paymentSuccess(toolKey, parseFloat(price.replace("$", "")));
     setTimeout(() => {
       setPaid(true);
@@ -237,6 +214,7 @@ export function ToolPaywall({
               <PayPalCheckout
                 amount={price.replace("$", "")}
                 description={`${toolName} — 24-hour access`}
+                toolKey={toolKey}
                 onSuccess={handleSuccess}
               />
               <p className="text-xs text-muted-foreground text-center mt-4">

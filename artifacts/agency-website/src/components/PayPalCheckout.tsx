@@ -7,12 +7,13 @@ const BASE_URL = (import.meta.env.BASE_URL || "").replace(/\/$/, "");
 interface PayPalCheckoutProps {
   amount: string;
   description: string;
-  onSuccess?: (orderId: string) => void;
+  toolKey?: string;
+  onSuccess?: (orderId: string, accessToken: string) => void;
   onError?: (err: unknown) => void;
   className?: string;
 }
 
-function Buttons({ amount, description, onSuccess, onError }: PayPalCheckoutProps) {
+function Buttons({ amount, description, toolKey, onSuccess, onError }: PayPalCheckoutProps) {
   const [{ isPending }] = usePayPalScriptReducer();
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState("");
@@ -52,20 +53,33 @@ function Buttons({ amount, description, onSuccess, onError }: PayPalCheckoutProp
           const res = await fetch(`${BASE_URL}/api/paypal/create-order`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ amount, description }),
+            body: JSON.stringify({ amount, description, toolKey }),
           });
           const data = await res.json();
           if (!res.ok || data.error) throw new Error(data.error || "Order creation failed");
           return data.id;
         }}
         onApprove={async (data) => {
-          const res = await fetch(`${BASE_URL}/api/paypal/capture-order/${data.orderID}`, {
+          const captureRes = await fetch(`${BASE_URL}/api/paypal/capture-order/${data.orderID}`, {
             method: "POST",
           });
-          const capture = await res.json();
-          if (!res.ok || capture.error) throw new Error(capture.error || "Capture failed");
+          const capture = await captureRes.json();
+          if (!captureRes.ok || capture.error) throw new Error(capture.error || "Capture failed");
+
+          let accessToken = "";
+          if (toolKey) {
+            const tokenRes = await fetch(`${BASE_URL}/api/paypal/issue-token`, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ orderId: data.orderID, toolKey }),
+            });
+            const tokenData = await tokenRes.json();
+            if (!tokenRes.ok || tokenData.error) throw new Error(tokenData.error || "Token issuance failed");
+            accessToken = tokenData.token;
+          }
+
           setStatus("success");
-          onSuccess?.(data.orderID);
+          onSuccess?.(data.orderID, accessToken);
         }}
         onError={(err) => {
           setStatus("error");
@@ -73,7 +87,6 @@ function Buttons({ amount, description, onSuccess, onError }: PayPalCheckoutProp
           onError?.(err);
         }}
         onCancel={() => {
-          // user cancelled — stay on idle, no error message
         }}
       />
     </div>

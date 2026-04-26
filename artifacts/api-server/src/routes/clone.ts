@@ -3,6 +3,7 @@ import https from "https";
 import http from "http";
 import { load } from "cheerio";
 import { heavyLimiter } from "../middlewares/rateLimits";
+import { requireToolToken } from "../middlewares/requireToolToken";
 import { assertSafeUrl } from "../lib/assertSafeUrl";
 
 const router = Router();
@@ -78,7 +79,7 @@ function absoluteUrl(base: string, rel: string): string {
   }
 }
 
-router.post("/clone", heavyLimiter, async (req: Request, res: Response) => {
+router.post("/clone", heavyLimiter, requireToolToken("site-cloner"), async (req: Request, res: Response) => {
   try {
     let { url, inlineStyles = true } = req.body as { url: string; inlineStyles?: boolean };
     if (!url?.trim()) return res.status(400).json({ error: "URL is required" });
