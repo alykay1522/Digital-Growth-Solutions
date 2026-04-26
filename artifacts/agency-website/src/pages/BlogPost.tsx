@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "wouter";
 import { useMeta } from "@/hooks/useMeta";
+import { useJsonLd } from "@/hooks/useJsonLd";
 import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight, BookOpen, Clock, Loader2, Tag } from "lucide-react";
 import ReactMarkdown from "react-markdown";
@@ -89,6 +90,33 @@ export default function BlogPost() {
     path: `/blog/${params.slug || ""}`,
     type: "article",
   });
+
+  useJsonLd("blog-posting-jsonld", post ? {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": post.title,
+    "image": post.coverImage || "https://digitalgrowthsolutionsagency.com/images/og-default.png",
+    "author": {
+      "@type": "Organization",
+      "name": "Digital Growth Solutions Agency",
+      "url": "https://digitalgrowthsolutionsagency.com"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Digital Growth Solutions Agency",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://digitalgrowthsolutionsagency.com/images/logo-mark.png"
+      }
+    },
+    "datePublished": post.publishedAt,
+    "description": post.excerpt,
+    "url": `https://digitalgrowthsolutionsagency.com/blog/${post.slug}`,
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": `https://digitalgrowthsolutionsagency.com/blog/${post.slug}`
+    }
+  } : null);
 
   useEffect(() => {
     const slug = params.slug;

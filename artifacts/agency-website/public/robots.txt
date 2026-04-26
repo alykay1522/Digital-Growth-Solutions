@@ -6,3 +6,4 @@ Disallow: /agents
 Disallow: /agents/
 
 Sitemap: https://digitalgrowthsolutionsagency.com/sitemap.xml
+Sitemap: https://digitalgrowthsolutions.org/sitemap.xml
