@@ -2,19 +2,29 @@ import React, { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   AlertTriangle,
+  ArrowRight,
+  Bot,
+  BrainCircuit,
   CheckCircle2,
   Edit2,
   Eye,
   EyeOff,
   FileText,
+  HeartHandshake,
   Inbox,
   Loader2,
   LogOut,
+  MessageSquare,
   Plus,
   Save,
+  Search,
+  Shield,
+  Sparkles,
   Trash2,
+  Wrench,
   X,
 } from "lucide-react";
+import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -273,7 +283,7 @@ function PostEditor({
 
 export default function Admin() {
   const [password, setPassword] = useState(() => sessionStorage.getItem("admin_pw") || "");
-  const [tab, setTab] = useState<"posts" | "submissions">("posts");
+  const [tab, setTab] = useState<"posts" | "submissions" | "agents">("posts");
   const [posts, setPosts] = useState<Post[]>([]);
   const [submissions, setSubmissions] = useState<Submission[]>([]);
   const [loading, setLoading] = useState(false);
@@ -306,7 +316,7 @@ export default function Admin() {
     if (!password) return;
     sessionStorage.setItem("admin_pw", password);
     if (tab === "posts") loadPosts();
-    else loadSubmissions();
+    else if (tab === "submissions") loadSubmissions();
   }, [password, tab, loadPosts, loadSubmissions]);
 
   const deletePost = async (id: number) => {
@@ -336,6 +346,7 @@ export default function Admin() {
             {[
               { id: "posts", label: "Blog Posts", icon: FileText },
               { id: "submissions", label: "Enquiries", icon: Inbox },
+              { id: "agents", label: "AI Agents", icon: Bot },
             ].map(({ id, label, icon: Icon }) => (
               <button
                 key={id}
@@ -360,7 +371,45 @@ export default function Admin() {
       </div>
 
       <div className="max-w-5xl mx-auto px-4 py-8">
-        {loading ? (
+        {tab === "agents" ? (
+          <div>
+            <div className="mb-6">
+              <h2 className="text-lg font-display font-bold text-secondary mb-1">Your AI Agents</h2>
+              <p className="text-sm text-muted-foreground">Eight AI-powered assistants to help you run the agency. Click any agent to open it.</p>
+            </div>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {[
+                { id: "audit", title: "Website Audit", desc: "SEO, performance & security analysis", icon: Search, color: "bg-blue-100 text-blue-600", href: "/agents/audit", eta: "~30s" },
+                { id: "quote", title: "Quote Generator", desc: "Project quote, packages & timeline", icon: FileText, color: "bg-violet-100 text-violet-600", href: "/agents/quote", eta: "~15s" },
+                { id: "support", title: "Support Agent", desc: "Answer client questions 24/7", icon: MessageSquare, color: "bg-primary/10 text-primary", href: "/agents/support", eta: "Instant" },
+                { id: "intake", title: "Intake & Onboarding", desc: "Full project brief from a form", icon: HeartHandshake, color: "bg-emerald-100 text-emerald-600", href: "/agents/intake", eta: "~20s" },
+                { id: "seo", title: "SEO Strategy", desc: "Keywords, fixes & 30-day plan", icon: BrainCircuit, color: "bg-orange-100 text-orange-600", href: "/agents/seo", eta: "~30s" },
+                { id: "content", title: "Content Generator", desc: "Homepage copy, meta tags & more", icon: Sparkles, color: "bg-pink-100 text-pink-600", href: "/agents/content", eta: "~20s" },
+                { id: "care-plan", title: "Care Plan Advisor", desc: "Maintenance plan & ROI breakdown", icon: Shield, color: "bg-teal-100 text-teal-600", href: "/agents/care-plan", eta: "~15s" },
+                { id: "rescue", title: "Website Rescue", desc: "Diagnose & fix broken sites fast", icon: Wrench, color: "bg-red-100 text-red-600", href: "/agents/rescue", eta: "~15s" },
+              ].map((agent) => {
+                const Icon = agent.icon;
+                return (
+                  <Link key={agent.id} href={agent.href}>
+                    <div className="bg-white rounded-2xl border border-border p-5 shadow-sm hover:shadow-lg hover:border-primary/30 transition-all duration-200 cursor-pointer group h-full flex flex-col">
+                      <div className="flex items-center justify-between mb-3">
+                        <div className={`w-10 h-10 rounded-xl ${agent.color} flex items-center justify-center`}>
+                          <Icon className="w-5 h-5" />
+                        </div>
+                        <span className="text-xs text-muted-foreground">{agent.eta}</span>
+                      </div>
+                      <p className="font-bold text-secondary text-sm mb-1">{agent.title}</p>
+                      <p className="text-xs text-muted-foreground leading-relaxed flex-1">{agent.desc}</p>
+                      <div className="flex items-center gap-1 mt-3 text-xs font-semibold text-primary group-hover:gap-2 transition-all">
+                        Open <ArrowRight className="w-3 h-3" />
+                      </div>
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        ) : loading ? (
           <div className="flex items-center justify-center py-20 gap-2 text-muted-foreground">
             <Loader2 className="w-5 h-5 animate-spin" />Loading…
           </div>

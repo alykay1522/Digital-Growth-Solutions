@@ -4,6 +4,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Layout } from "@/components/layout/Layout";
 import { CookieBanner } from "@/components/CookieBanner";
+import { AdminGuard } from "@/components/AdminGuard";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import NotFound from "@/pages/not-found";
 
@@ -76,16 +77,16 @@ function Router() {
         <Route path="/services/shopify-development" component={ShopifyService} />
         <Route path="/services/ai-automation" component={AIService} />
         <Route path="/rescue" component={WebsiteRescue} />
-        {/* AI Agents */}
-        <Route path="/agents" component={AgentsHub} />
-        <Route path="/agents/audit" component={AuditAgent} />
-        <Route path="/agents/quote" component={QuoteAgent} />
-        <Route path="/agents/support" component={SupportAgent} />
-        <Route path="/agents/intake" component={IntakeAgent} />
-        <Route path="/agents/seo" component={SeoAgent} />
-        <Route path="/agents/content" component={ContentAgent} />
-        <Route path="/agents/care-plan" component={CarePlanAgent} />
-        <Route path="/agents/rescue" component={RescueAgent} />
+        {/* AI Agents — admin only */}
+        <Route path="/agents" component={() => <AdminGuard><AgentsHub /></AdminGuard>} />
+        <Route path="/agents/audit" component={() => <AdminGuard><AuditAgent /></AdminGuard>} />
+        <Route path="/agents/quote" component={() => <AdminGuard><QuoteAgent /></AdminGuard>} />
+        <Route path="/agents/support" component={() => <AdminGuard><SupportAgent /></AdminGuard>} />
+        <Route path="/agents/intake" component={() => <AdminGuard><IntakeAgent /></AdminGuard>} />
+        <Route path="/agents/seo" component={() => <AdminGuard><SeoAgent /></AdminGuard>} />
+        <Route path="/agents/content" component={() => <AdminGuard><ContentAgent /></AdminGuard>} />
+        <Route path="/agents/care-plan" component={() => <AdminGuard><CarePlanAgent /></AdminGuard>} />
+        <Route path="/agents/rescue" component={() => <AdminGuard><RescueAgent /></AdminGuard>} />
         <Route component={NotFound} />
       </Switch>
     </Layout>
