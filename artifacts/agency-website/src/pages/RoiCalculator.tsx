@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "wouter";
+import { useMeta } from "@/hooks/useMeta";
 import { Button } from "@/components/ui/button";
 import {
   ArrowRight,
@@ -111,6 +112,11 @@ const SPEED_IMPACT = [
 ];
 
 export default function RoiCalculator() {
+  useMeta({
+    title: "ROI Calculator — How Much Is a Slow Website Costing You?",
+    description: "Calculate the exact revenue your slow website is losing every month. Free interactive calculator — see how a faster site directly increases your sales.",
+    path: "/roi",
+  });
   const [visitors, setVisitors] = useState(10_000);
   const [convRate, setConvRate] = useState(2.5);
   const [orderValue, setOrderValue] = useState(85);

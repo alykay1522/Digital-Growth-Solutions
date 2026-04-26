@@ -2,6 +2,7 @@ import React, { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "wouter";
 import { ToolPaywall } from "@/components/ToolPaywall";
+import { useMeta } from "@/hooks/useMeta";
 import {
   AlertTriangle,
   ArrowRight,
@@ -445,6 +446,11 @@ function StatChip({ label, value }: { label: string; value: string }) {
 }
 
 export default function Clone() {
+  useMeta({
+    title: "Site Cloner — Clone Any Website",
+    description: "Clone any public website into a single self-contained HTML file with all CSS inlined and assets resolved. One-time $9.99 access, no account needed.",
+    path: "/clone",
+  });
   return (
     <ToolPaywall
       toolKey="site-cloner"

@@ -1,4 +1,8 @@
 User-agent: *
 Allow: /
 
+Disallow: /admin
+Disallow: /agents
+Disallow: /agents/
+
 Sitemap: https://digitalgrowthsolutionsagency.com/sitemap.xml

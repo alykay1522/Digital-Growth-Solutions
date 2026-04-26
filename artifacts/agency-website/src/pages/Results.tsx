@@ -1,5 +1,6 @@
 import React, { useMemo } from "react";
 import { Link, useSearch } from "wouter";
+import { useMeta } from "@/hooks/useMeta";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
@@ -42,6 +43,11 @@ function gradeFromScore(score: number) {
 }
 
 export default function Results() {
+  useMeta({
+    title: "Audit Results",
+    description: "View the detailed website audit report including SEO, performance, security, and mobile-friendliness scores with actionable recommendations.",
+    path: "/results",
+  });
   const search = useSearch();
   const { toast } = useToast();
 

@@ -1,6 +1,6 @@
 [project]
 domains = []
-name = "digital-growth-agency"
+name = "digital-growth-solutions-agency"
 
 [crawler]
 max_pages = 100

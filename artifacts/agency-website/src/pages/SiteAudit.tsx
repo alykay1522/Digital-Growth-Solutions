@@ -2,6 +2,7 @@ import React, { useState, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { useMeta } from "@/hooks/useMeta";
 import { useAnalyzeSite } from "@workspace/api-client-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -317,6 +318,11 @@ function AiFixPanel({
 }
 
 export default function SiteAudit() {
+  useMeta({
+    title: "Free Website Audit — SEO, Performance & Security Check",
+    description: "Run a free instant audit of any website. Get a full SEO, performance, security, and mobile-friendliness report with actionable recommendations in seconds.",
+    path: "/audit",
+  });
   const [url, setUrl] = useState(() => {
     try {
       const saved = sessionStorage.getItem("auditUrl");

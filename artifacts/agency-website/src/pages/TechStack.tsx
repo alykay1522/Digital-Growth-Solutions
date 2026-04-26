@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { useMeta } from "@/hooks/useMeta";
 import {
   AlertCircle,
   CheckCircle,
@@ -175,6 +176,11 @@ function CategoryGroup({ category, techs }: { category: string; techs: any[] }) 
 }
 
 export default function TechStack() {
+  useMeta({
+    title: "Tech Stack Detector — See What Any Site Is Built With",
+    description: "Instantly detect the CMS, frameworks, plugins, analytics, CDN, and hosting behind any website. Free — no account required.",
+    path: "/tech-stack",
+  });
   const [url, setUrl] = useState("");
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<any>(null);

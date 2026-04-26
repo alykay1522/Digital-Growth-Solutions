@@ -2,6 +2,7 @@ import React, { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "wouter";
 import { ToolPaywall } from "@/components/ToolPaywall";
+import { useMeta } from "@/hooks/useMeta";
 import {
   AlertTriangle,
   CheckCircle2,
@@ -512,6 +513,11 @@ function SniffTool() {
 }
 
 export default function Sniff() {
+  useMeta({
+    title: "Product Sniffer — Extract Store Data",
+    description: "Extract every product from any Shopify, WooCommerce, or BigCommerce store in seconds. Names, prices, images, SKUs — download as CSV. $9.99 for 24-hour access.",
+    path: "/sniff",
+  });
   return (
     <ToolPaywall
       toolKey="product-sniffer"

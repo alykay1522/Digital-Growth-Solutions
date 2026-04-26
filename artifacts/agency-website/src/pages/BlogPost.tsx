@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "wouter";
+import { useMeta } from "@/hooks/useMeta";
 import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight, BookOpen, Clock, Loader2, Tag } from "lucide-react";
 import ReactMarkdown from "react-markdown";
@@ -80,6 +81,14 @@ export default function BlogPost() {
   const [allPosts, setAllPosts] = useState<NPost[]>(staticPosts.map(p => normalizeStatic(p)!));
   const [loading, setLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
+
+  useMeta({
+    title: post?.title || "Blog",
+    description: post?.excerpt || "Read the latest articles on WordPress, Shopify, web performance, and AI automation from Digital Growth Solutions Agency.",
+    image: post?.coverImage,
+    path: `/blog/${params.slug || ""}`,
+    type: "article",
+  });
 
   useEffect(() => {
     const slug = params.slug;

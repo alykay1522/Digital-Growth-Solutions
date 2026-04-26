@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "wouter";
+import { useMeta } from "@/hooks/useMeta";
 import {
   ArrowRight,
   CheckCircle2,
@@ -175,6 +176,11 @@ function SiteCard({ site, label, isWinner }: { site: SiteResult; label: string; 
 }
 
 export default function Compare() {
+  useMeta({
+    title: "Competitor Comparison — Your Site vs Any Competitor",
+    description: "Compare your website head-to-head against any competitor. See SEO scores, performance, mobile-friendliness, and security side by side. Free tool.",
+    path: "/compare",
+  });
   const [urlA, setUrlA] = useState("");
   const [urlB, setUrlB] = useState("");
   const [loading, setLoading] = useState(false);
