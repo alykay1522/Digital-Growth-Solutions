@@ -2,6 +2,19 @@ import { Resend } from "resend";
 
 let client: Resend | null = null;
 
+function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#x27;");
+}
+
+function escapeHtmlNl(value: string): string {
+  return escapeHtml(value).replace(/\n/g, "<br>");
+}
+
 function getResend(): Resend {
   if (!client) {
     client = new Resend(process.env.RESEND_API_KEY);
@@ -66,6 +79,13 @@ export function contactOwnerHtml(data: {
   budget?: string;
   message: string;
 }): string {
+  const safeName = escapeHtml(data.name);
+  const safeEmail = escapeHtml(data.email);
+  const safeCompany = data.company ? escapeHtml(data.company) : "";
+  const safeService = data.service ? escapeHtml(data.service) : "";
+  const safeBudget = data.budget ? escapeHtml(data.budget) : "";
+  const safeMessage = escapeHtmlNl(data.message);
+
   return `
 <div style="font-family:sans-serif;max-width:600px;margin:0 auto;color:#1a1a2e">
   <div style="background:#6c63ff;padding:24px 32px;border-radius:12px 12px 0 0">
@@ -73,18 +93,18 @@ export function contactOwnerHtml(data: {
   </div>
   <div style="background:#f9f9fc;padding:32px;border:1px solid #e5e7eb;border-top:none;border-radius:0 0 12px 12px">
     <table style="width:100%;border-collapse:collapse">
-      <tr><td style="padding:8px 0;font-weight:600;width:120px;color:#6b7280">Name</td><td style="padding:8px 0">${data.name}</td></tr>
-      <tr><td style="padding:8px 0;font-weight:600;color:#6b7280">Email</td><td style="padding:8px 0"><a href="mailto:${data.email}" style="color:#6c63ff">${data.email}</a></td></tr>
-      ${data.company ? `<tr><td style="padding:8px 0;font-weight:600;color:#6b7280">Company</td><td style="padding:8px 0">${data.company}</td></tr>` : ""}
-      ${data.service ? `<tr><td style="padding:8px 0;font-weight:600;color:#6b7280">Service</td><td style="padding:8px 0">${data.service}</td></tr>` : ""}
-      ${data.budget ? `<tr><td style="padding:8px 0;font-weight:600;color:#6b7280">Budget</td><td style="padding:8px 0">${data.budget}</td></tr>` : ""}
+      <tr><td style="padding:8px 0;font-weight:600;width:120px;color:#6b7280">Name</td><td style="padding:8px 0">${safeName}</td></tr>
+      <tr><td style="padding:8px 0;font-weight:600;color:#6b7280">Email</td><td style="padding:8px 0"><a href="mailto:${safeEmail}" style="color:#6c63ff">${safeEmail}</a></td></tr>
+      ${safeCompany ? `<tr><td style="padding:8px 0;font-weight:600;color:#6b7280">Company</td><td style="padding:8px 0">${safeCompany}</td></tr>` : ""}
+      ${safeService ? `<tr><td style="padding:8px 0;font-weight:600;color:#6b7280">Service</td><td style="padding:8px 0">${safeService}</td></tr>` : ""}
+      ${safeBudget ? `<tr><td style="padding:8px 0;font-weight:600;color:#6b7280">Budget</td><td style="padding:8px 0">${safeBudget}</td></tr>` : ""}
     </table>
     <div style="margin-top:24px;padding:20px;background:#fff;border:1px solid #e5e7eb;border-radius:8px">
       <p style="margin:0;font-weight:600;color:#6b7280;font-size:13px;margin-bottom:8px">MESSAGE</p>
-      <p style="margin:0;line-height:1.6">${data.message.replace(/\n/g, "<br>")}</p>
+      <p style="margin:0;line-height:1.6">${safeMessage}</p>
     </div>
     <div style="margin-top:20px;text-align:center">
-      <a href="mailto:${data.email}" style="display:inline-block;background:#6c63ff;color:#fff;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:600;font-size:14px">Reply to ${data.name}</a>
+      <a href="mailto:${safeEmail}" style="display:inline-block;background:#6c63ff;color:#fff;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:600;font-size:14px">Reply to ${safeName}</a>
     </div>
     <p style="margin-top:24px;font-size:13px;color:#9ca3af">Submitted via digitalgrowthsolutionsagency.com contact form</p>
   </div>
@@ -92,13 +112,14 @@ export function contactOwnerHtml(data: {
 }
 
 export function contactClientHtml(name: string): string {
+  const safeName = escapeHtml(name);
   return `
 <div style="font-family:sans-serif;max-width:600px;margin:0 auto;color:#1a1a2e">
   <div style="background:#6c63ff;padding:24px 32px;border-radius:12px 12px 0 0">
     <h2 style="color:#fff;margin:0;font-size:20px">We got your message!</h2>
   </div>
   <div style="background:#f9f9fc;padding:32px;border:1px solid #e5e7eb;border-top:none;border-radius:0 0 12px 12px">
-    <p style="margin:0 0 16px">Hi <strong>${name}</strong>,</p>
+    <p style="margin:0 0 16px">Hi <strong>${safeName}</strong>,</p>
     <p style="margin:0 0 16px;line-height:1.6">Thank you for reaching out to Digital Growth Solutions Agency. Your message has landed safely and one of our team will review it and get back to you <strong>within 24 hours</strong>.</p>
     <p style="margin:0 0 24px;line-height:1.6">If your matter is urgent — for example a site that's down or a broken checkout — please reply to this email marked URGENT and we'll prioritise accordingly.</p>
     <div style="background:#6c63ff;padding:20px 24px;border-radius:10px;margin-bottom:24px">
@@ -125,6 +146,17 @@ export function intakeOwnerHtml(data: {
   const row = (label: string, value: string) =>
     value ? `<tr><td style="padding:8px 0;font-weight:600;width:160px;color:#6b7280;vertical-align:top">${label}</td><td style="padding:8px 0">${value}</td></tr>` : "";
 
+  const safeName = escapeHtml(data.name);
+  const safeEmail = escapeHtml(data.email);
+  const safeBusiness = escapeHtml(data.business);
+  const safeProjectType = escapeHtml(data.projectType);
+  const safeDeadline = escapeHtml(data.deadline);
+  const safeBudget = escapeHtml(data.budget);
+  const safeCompetitors = escapeHtml(data.competitors);
+  const safeBrandStyle = escapeHtml(data.brandStyle);
+  const safeDescription = escapeHtmlNl(data.description);
+  const safeGoals = data.goals ? escapeHtmlNl(data.goals) : "";
+
   return `
 <div style="font-family:sans-serif;max-width:600px;margin:0 auto;color:#1a1a2e">
   <div style="background:#6c63ff;padding:24px 32px;border-radius:12px 12px 0 0">
@@ -133,27 +165,27 @@ export function intakeOwnerHtml(data: {
   </div>
   <div style="background:#f9f9fc;padding:32px;border:1px solid #e5e7eb;border-top:none;border-radius:0 0 12px 12px">
     <table style="width:100%;border-collapse:collapse">
-      ${row("Name", data.name)}
-      ${row("Email", data.email ? `<a href="mailto:${data.email}" style="color:#6c63ff">${data.email}</a>` : "")}
-      ${row("Business", data.business)}
-      ${row("Project Type", data.projectType)}
-      ${row("Deadline", data.deadline)}
-      ${row("Budget", data.budget)}
-      ${row("Competitor Sites", data.competitors)}
-      ${row("Brand Style", data.brandStyle)}
+      ${row("Name", safeName)}
+      ${row("Email", safeEmail ? `<a href="mailto:${safeEmail}" style="color:#6c63ff">${safeEmail}</a>` : "")}
+      ${row("Business", safeBusiness)}
+      ${row("Project Type", safeProjectType)}
+      ${row("Deadline", safeDeadline)}
+      ${row("Budget", safeBudget)}
+      ${row("Competitor Sites", safeCompetitors)}
+      ${row("Brand Style", safeBrandStyle)}
     </table>
     <div style="margin-top:24px;padding:20px;background:#fff;border:1px solid #e5e7eb;border-radius:8px">
       <p style="margin:0;font-weight:600;color:#6b7280;font-size:13px;margin-bottom:8px">PROJECT DESCRIPTION</p>
-      <p style="margin:0;line-height:1.6">${data.description.replace(/\n/g, "<br>")}</p>
+      <p style="margin:0;line-height:1.6">${safeDescription}</p>
     </div>
-    ${data.goals ? `
+    ${safeGoals ? `
     <div style="margin-top:16px;padding:20px;background:#fff;border:1px solid #e5e7eb;border-radius:8px">
       <p style="margin:0;font-weight:600;color:#6b7280;font-size:13px;margin-bottom:8px">GOALS</p>
-      <p style="margin:0;line-height:1.6">${data.goals.replace(/\n/g, "<br>")}</p>
+      <p style="margin:0;line-height:1.6">${safeGoals}</p>
     </div>` : ""}
-    ${data.email ? `
+    ${safeEmail ? `
     <div style="margin-top:20px;text-align:center">
-      <a href="mailto:${data.email}" style="display:inline-block;background:#6c63ff;color:#fff;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:600;font-size:14px">Reply to ${data.name || "Client"}</a>
+      <a href="mailto:${safeEmail}" style="display:inline-block;background:#6c63ff;color:#fff;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:600;font-size:14px">Reply to ${safeName || "Client"}</a>
     </div>` : ""}
     <p style="margin-top:24px;font-size:13px;color:#9ca3af">Submitted via digitalgrowthsolutionsagency.com AI Intake Agent</p>
   </div>
@@ -172,6 +204,14 @@ export function quoteOwnerHtml(data: {
   const row = (label: string, value: string) =>
     value ? `<tr><td style="padding:8px 0;font-weight:600;width:140px;color:#6b7280">${label}</td><td style="padding:8px 0">${value}</td></tr>` : "";
 
+  const safeName = escapeHtml(data.name);
+  const safeEmail = escapeHtml(data.email);
+  const safeBusiness = escapeHtml(data.business);
+  const safeProjectType = escapeHtml(data.projectType);
+  const safeBudget = escapeHtml(data.budget);
+  const safeTimeline = escapeHtml(data.timeline);
+  const safeDescription = data.description ? escapeHtmlNl(data.description) : "";
+
   return `
 <div style="font-family:sans-serif;max-width:600px;margin:0 auto;color:#1a1a2e">
   <div style="background:#f59e0b;padding:24px 32px;border-radius:12px 12px 0 0">
@@ -180,21 +220,21 @@ export function quoteOwnerHtml(data: {
   </div>
   <div style="background:#f9f9fc;padding:32px;border:1px solid #e5e7eb;border-top:none;border-radius:0 0 12px 12px">
     <table style="width:100%;border-collapse:collapse">
-      ${row("Name", data.name)}
-      ${row("Email", data.email ? `<a href="mailto:${data.email}" style="color:#6c63ff">${data.email}</a>` : "")}
-      ${row("Business", data.business)}
-      ${row("Project Type", data.projectType)}
-      ${row("Budget Range", data.budget)}
-      ${row("Timeline", data.timeline)}
+      ${row("Name", safeName)}
+      ${row("Email", safeEmail ? `<a href="mailto:${safeEmail}" style="color:#6c63ff">${safeEmail}</a>` : "")}
+      ${row("Business", safeBusiness)}
+      ${row("Project Type", safeProjectType)}
+      ${row("Budget Range", safeBudget)}
+      ${row("Timeline", safeTimeline)}
     </table>
-    ${data.description ? `
+    ${safeDescription ? `
     <div style="margin-top:24px;padding:20px;background:#fff;border:1px solid #e5e7eb;border-radius:8px">
       <p style="margin:0;font-weight:600;color:#6b7280;font-size:13px;margin-bottom:8px">PROJECT DETAILS</p>
-      <p style="margin:0;line-height:1.6">${data.description.replace(/\n/g, "<br>")}</p>
+      <p style="margin:0;line-height:1.6">${safeDescription}</p>
     </div>` : ""}
-    ${data.email ? `
+    ${safeEmail ? `
     <div style="margin-top:20px;text-align:center">
-      <a href="mailto:${data.email}" style="display:inline-block;background:#f59e0b;color:#fff;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:600;font-size:14px">Follow up with ${data.name || "Client"}</a>
+      <a href="mailto:${safeEmail}" style="display:inline-block;background:#f59e0b;color:#fff;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:600;font-size:14px">Follow up with ${safeName || "Client"}</a>
     </div>` : ""}
     <p style="margin-top:24px;font-size:13px;color:#9ca3af">Submitted via digitalgrowthsolutionsagency.com AI Quote Agent</p>
   </div>
@@ -208,6 +248,12 @@ export function paymentOwnerHtml(data: {
   payerName?: string;
   payerEmail?: string;
 }): string {
+  const safeOrderId = escapeHtml(data.orderId);
+  const safeAmount = escapeHtml(data.amount);
+  const safeDescription = escapeHtml(data.description);
+  const safePayerName = data.payerName ? escapeHtml(data.payerName) : "";
+  const safePayerEmail = data.payerEmail ? escapeHtml(data.payerEmail) : "";
+
   return `
 <div style="font-family:sans-serif;max-width:600px;margin:0 auto;color:#1a1a2e">
   <div style="background:#10b981;padding:24px 32px;border-radius:12px 12px 0 0">
@@ -215,13 +261,13 @@ export function paymentOwnerHtml(data: {
   </div>
   <div style="background:#f9f9fc;padding:32px;border:1px solid #e5e7eb;border-top:none;border-radius:0 0 12px 12px">
     <div style="background:#ecfdf5;border:1px solid #6ee7b7;border-radius:10px;padding:20px 24px;margin-bottom:24px;text-align:center">
-      <p style="margin:0;font-size:32px;font-weight:700;color:#10b981">$${data.amount}</p>
-      <p style="margin:4px 0 0;color:#065f46;font-size:14px">${data.description}</p>
+      <p style="margin:0;font-size:32px;font-weight:700;color:#10b981">$${safeAmount}</p>
+      <p style="margin:4px 0 0;color:#065f46;font-size:14px">${safeDescription}</p>
     </div>
     <table style="width:100%;border-collapse:collapse">
-      <tr><td style="padding:8px 0;font-weight:600;width:130px;color:#6b7280">PayPal Order</td><td style="padding:8px 0;font-size:13px;font-family:monospace">${data.orderId}</td></tr>
-      ${data.payerName ? `<tr><td style="padding:8px 0;font-weight:600;color:#6b7280">Payer Name</td><td style="padding:8px 0">${data.payerName}</td></tr>` : ""}
-      ${data.payerEmail ? `<tr><td style="padding:8px 0;font-weight:600;color:#6b7280">Payer Email</td><td style="padding:8px 0">${data.payerEmail}</td></tr>` : ""}
+      <tr><td style="padding:8px 0;font-weight:600;width:130px;color:#6b7280">PayPal Order</td><td style="padding:8px 0;font-size:13px;font-family:monospace">${safeOrderId}</td></tr>
+      ${safePayerName ? `<tr><td style="padding:8px 0;font-weight:600;color:#6b7280">Payer Name</td><td style="padding:8px 0">${safePayerName}</td></tr>` : ""}
+      ${safePayerEmail ? `<tr><td style="padding:8px 0;font-weight:600;color:#6b7280">Payer Email</td><td style="padding:8px 0">${safePayerEmail}</td></tr>` : ""}
     </table>
     <p style="margin-top:24px;font-size:13px;color:#9ca3af">Check your PayPal dashboard for full transaction details. Time to deliver!</p>
   </div>
@@ -234,18 +280,23 @@ export function paymentClientHtml(data: {
   description: string;
   orderId: string;
 }): string {
+  const safePayerName = escapeHtml(data.payerName);
+  const safeAmount = escapeHtml(data.amount);
+  const safeDescription = escapeHtml(data.description);
+  const safeOrderId = escapeHtml(data.orderId);
+
   return `
 <div style="font-family:sans-serif;max-width:600px;margin:0 auto;color:#1a1a2e">
   <div style="background:#10b981;padding:24px 32px;border-radius:12px 12px 0 0">
     <h2 style="color:#fff;margin:0;font-size:20px">Payment Confirmed ✓</h2>
   </div>
   <div style="background:#f9f9fc;padding:32px;border:1px solid #e5e7eb;border-top:none;border-radius:0 0 12px 12px">
-    <p style="margin:0 0 16px">Hi <strong>${data.payerName}</strong>,</p>
-    <p style="margin:0 0 16px;line-height:1.6">Your payment of <strong>$${data.amount}</strong> for <em>${data.description}</em> has been received. You'll also receive a separate confirmation email from PayPal.</p>
+    <p style="margin:0 0 16px">Hi <strong>${safePayerName}</strong>,</p>
+    <p style="margin:0 0 16px;line-height:1.6">Your payment of <strong>$${safeAmount}</strong> for <em>${safeDescription}</em> has been received. You'll also receive a separate confirmation email from PayPal.</p>
     <div style="background:#ecfdf5;border:1px solid #6ee7b7;border-radius:10px;padding:16px 20px;margin-bottom:24px">
       <p style="margin:0;font-size:13px;color:#065f46"><strong>What happens next:</strong> A member of our team will be in touch within <strong>24 hours</strong> to kick things off. If you haven't heard from us within that window, please reply to this email.</p>
     </div>
-    <p style="margin:0;font-size:12px;color:#9ca3af">Reference: ${data.orderId}</p>
+    <p style="margin:0;font-size:12px;color:#9ca3af">Reference: ${safeOrderId}</p>
     <p style="margin:8px 0 0;font-size:13px;color:#9ca3af">— The Digital Growth Solutions Agency Team</p>
   </div>
 </div>`;
