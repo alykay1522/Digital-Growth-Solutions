@@ -75,9 +75,9 @@ export default function AIService() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://digitalgrowthsolutionsagency.com/" },
-      { "@type": "ListItem", position: 2, name: "Services", item: "https://digitalgrowthsolutionsagency.com/services" },
-      { "@type": "ListItem", position: 3, name: "AI Automation", item: "https://digitalgrowthsolutionsagency.com/services/ai-automation" },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://digitalgrowthsolutions.org/" },
+      { "@type": "ListItem", position: 2, name: "Services", item: "https://digitalgrowthsolutions.org/services" },
+      { "@type": "ListItem", position: 3, name: "AI Automation", item: "https://digitalgrowthsolutions.org/services/ai-automation" },
     ],
   };
 

@@ -81,9 +81,9 @@ export default function ShopifyService() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://digitalgrowthsolutionsagency.com/" },
-      { "@type": "ListItem", position: 2, name: "Services", item: "https://digitalgrowthsolutionsagency.com/services" },
-      { "@type": "ListItem", position: 3, name: "Shopify Development", item: "https://digitalgrowthsolutionsagency.com/services/shopify-development" },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://digitalgrowthsolutions.org/" },
+      { "@type": "ListItem", position: 2, name: "Services", item: "https://digitalgrowthsolutions.org/services" },
+      { "@type": "ListItem", position: 3, name: "Shopify Development", item: "https://digitalgrowthsolutions.org/services/shopify-development" },
     ],
   };
 

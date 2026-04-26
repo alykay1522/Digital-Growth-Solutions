@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 
 const SITE_NAME = "Digital Growth Solutions Agency";
-const SITE_URL = "https://digitalgrowthsolutionsagency.com";
+const SITE_URL = "https://digitalgrowthsolutions.org";
 const DEFAULT_OG_IMAGE = `${SITE_URL}/images/og-default.png`;
 
 interface MetaOptions {

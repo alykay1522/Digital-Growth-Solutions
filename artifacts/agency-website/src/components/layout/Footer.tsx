@@ -125,20 +125,13 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="pt-8 border-t border-white/10 space-y-4">
-          <p className="text-white/25 text-xs text-center">
-            Digital Growth Solutions Agency operates at both{" "}
-            <span className="text-white/40">digitalgrowthsolutions.org</span> and{" "}
-            <span className="text-white/40">digitalgrowthsolutionsagency.com</span> — same team, same service.
+        <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-white/40 text-sm">
+            © {new Date().getFullYear()} Digital Growth Solutions Agency. All rights reserved.
           </p>
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-white/40 text-sm">
-              © {new Date().getFullYear()} Digital Growth Solutions Agency. All rights reserved.
-            </p>
-            <div className="flex gap-6 text-sm text-white/40">
-              <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
-              <Link href="/terms" className="hover:text-white transition-colors">Terms of Service</Link>
-            </div>
+          <div className="flex gap-6 text-sm text-white/40">
+            <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
+            <Link href="/terms" className="hover:text-white transition-colors">Terms of Service</Link>
           </div>
         </div>
       </div>

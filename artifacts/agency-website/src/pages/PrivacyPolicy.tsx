@@ -9,7 +9,7 @@ export default function PrivacyPolicy() {
 
   const updated = "19 April 2026";
   const email = "info@digitalgrowthsolutions.org";
-  const site = "digitalgrowthsolutionsagency.com";
+  const site = "digitalgrowthsolutions.org";
 
   return (
     <div className="min-h-screen bg-white">

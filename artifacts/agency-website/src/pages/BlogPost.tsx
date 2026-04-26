@@ -95,26 +95,26 @@ export default function BlogPost() {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     "headline": post.title,
-    "image": post.coverImage || "https://digitalgrowthsolutionsagency.com/images/og-default.png",
+    "image": post.coverImage || "https://digitalgrowthsolutions.org/images/og-default.png",
     "author": {
       "@type": "Organization",
       "name": "Digital Growth Solutions Agency",
-      "url": "https://digitalgrowthsolutionsagency.com"
+      "url": "https://digitalgrowthsolutions.org"
     },
     "publisher": {
       "@type": "Organization",
       "name": "Digital Growth Solutions Agency",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://digitalgrowthsolutionsagency.com/images/logo-mark.png"
+        "url": "https://digitalgrowthsolutions.org/images/logo-mark.png"
       }
     },
     "datePublished": post.publishedAt,
     "description": post.excerpt,
-    "url": `https://digitalgrowthsolutionsagency.com/blog/${post.slug}`,
+    "url": `https://digitalgrowthsolutions.org/blog/${post.slug}`,
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": `https://digitalgrowthsolutionsagency.com/blog/${post.slug}`
+      "@id": `https://digitalgrowthsolutions.org/blog/${post.slug}`
     }
   } : null);
 

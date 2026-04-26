@@ -160,13 +160,13 @@ export default function Services() {
     "@context": "https://schema.org",
     "@type": "ItemList",
     "name": "Digital Agency Services",
-    "url": "https://digitalgrowthsolutionsagency.com/services",
+    "url": "https://digitalgrowthsolutions.org/services",
     "itemListElement": [
-      { "@type": "ListItem", "position": 1, "item": { "@type": "Service", "name": "WordPress Development", "provider": { "@type": "Organization", "name": "Digital Growth Solutions Agency" }, "description": "Custom WordPress websites built for speed, security, and conversions.", "url": "https://digitalgrowthsolutionsagency.com/services" } },
-      { "@type": "ListItem", "position": 2, "item": { "@type": "Service", "name": "Shopify & WooCommerce Development", "provider": { "@type": "Organization", "name": "Digital Growth Solutions Agency" }, "description": "High-converting eCommerce stores on Shopify and WooCommerce.", "url": "https://digitalgrowthsolutionsagency.com/services/shopify-development" } },
-      { "@type": "ListItem", "position": 3, "item": { "@type": "Service", "name": "Custom Software & Web Apps", "provider": { "@type": "Organization", "name": "Digital Growth Solutions Agency" }, "description": "Bespoke web applications tailored to your business workflows.", "url": "https://digitalgrowthsolutionsagency.com/services" } },
-      { "@type": "ListItem", "position": 4, "item": { "@type": "Service", "name": "AI Automation", "provider": { "@type": "Organization", "name": "Digital Growth Solutions Agency" }, "description": "AI chatbots, content automation, and intelligent workflow tools.", "url": "https://digitalgrowthsolutionsagency.com/services/ai-automation" } },
-      { "@type": "ListItem", "position": 5, "item": { "@type": "Service", "name": "Website Rescue", "provider": { "@type": "Organization", "name": "Digital Growth Solutions Agency" }, "description": "24–48 hour emergency fixes for hacked, broken, or slow websites.", "url": "https://digitalgrowthsolutionsagency.com/rescue" } }
+      { "@type": "ListItem", "position": 1, "item": { "@type": "Service", "name": "WordPress Development", "provider": { "@type": "Organization", "name": "Digital Growth Solutions Agency" }, "description": "Custom WordPress websites built for speed, security, and conversions.", "url": "https://digitalgrowthsolutions.org/services" } },
+      { "@type": "ListItem", "position": 2, "item": { "@type": "Service", "name": "Shopify & WooCommerce Development", "provider": { "@type": "Organization", "name": "Digital Growth Solutions Agency" }, "description": "High-converting eCommerce stores on Shopify and WooCommerce.", "url": "https://digitalgrowthsolutions.org/services/shopify-development" } },
+      { "@type": "ListItem", "position": 3, "item": { "@type": "Service", "name": "Custom Software & Web Apps", "provider": { "@type": "Organization", "name": "Digital Growth Solutions Agency" }, "description": "Bespoke web applications tailored to your business workflows.", "url": "https://digitalgrowthsolutions.org/services" } },
+      { "@type": "ListItem", "position": 4, "item": { "@type": "Service", "name": "AI Automation", "provider": { "@type": "Organization", "name": "Digital Growth Solutions Agency" }, "description": "AI chatbots, content automation, and intelligent workflow tools.", "url": "https://digitalgrowthsolutions.org/services/ai-automation" } },
+      { "@type": "ListItem", "position": 5, "item": { "@type": "Service", "name": "Website Rescue", "provider": { "@type": "Organization", "name": "Digital Growth Solutions Agency" }, "description": "24–48 hour emergency fixes for hacked, broken, or slow websites.", "url": "https://digitalgrowthsolutions.org/rescue" } }
     ]
   });
 
