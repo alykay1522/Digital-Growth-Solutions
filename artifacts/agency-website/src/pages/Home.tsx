@@ -110,7 +110,7 @@ export default function Home() {
                 </div>
                 <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/20 backdrop-blur-md border border-accent/40">
                   <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
-                  <span className="text-accent text-sm font-semibold">Sites from $495 · Accepting 3 new clients</span>
+                  <span className="text-accent text-sm font-semibold">Sites from $495 · Limited spots available each month</span>
                 </div>
               </div>
               

@@ -1,0 +1,130 @@
+1. Nested interactive elements (<a> wrapping <button>)
+Issue:  
+You have:
+
+html
+<a href="/pay" class="ml-2">
+  <button ...>Pay Online</button>
+</a>
+
+<a href="/contact" class="ml-2">
+  <button ...>Get in Touch</button>
+</a>
+An interactive element (button) inside another interactive element (a) is invalid HTML and bad for accessibility/keyboard users.
+
+Fix (use only <a> styled as a button):
+
+html
+<a href="/pay"
+   class="inline-flex items-center justify-center whitespace-nowrap font-medium
+          focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring
+          disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none
+          [&_svg]:size-4 [&_svg]:shrink-0 hover-elevate active-elevate-2 border
+          [border-color:var(--button-outline)] shadow-xs active:shadow-none
+          min-h-9 py-2 rounded-full px-4 gap-1.5 transition-all hover:scale-105
+          text-sm border-white/40 text-white hover:bg-white/10 bg-transparent ml-2">
+  <svg ...></svg>
+  Pay Online
+</a>
+
+<a href="/contact"
+   class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium
+          focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring
+          disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none
+          [&_svg]:size-4 [&_svg]:shrink-0 hover-elevate active-elevate-2 border
+          border-primary-border min-h-9 py-2 rounded-full px-6 transition-all
+          hover:scale-105 hover:shadow-lg bg-white text-secondary hover:bg-white/90 ml-2">
+  Get in Touch
+</a>
+2. Mobile menu button ARIA state not wired
+html
+<button class="md:hidden p-2"
+        aria-label="Open navigation menu"
+        aria-expanded="false"
+        aria-controls="mobile-menu">
+  ...
+</button>
+Issues:
+
+aria-expanded is hard‑coded to "false" and never updated.
+
+aria-controls="mobile-menu" assumes an element with id="mobile-menu" exists and is shown/hidden—your snippet doesn’t show it.
+
+Fix (JS + matching menu element):
+
+Add the mobile menu container:
+
+html
+<nav id="mobile-menu" class="md:hidden hidden">
+  <!-- mobile nav links here -->
+</nav>
+Wire up toggle logic (vanilla JS example):
+
+js
+const menuButton = document.querySelector('[aria-controls="mobile-menu"]');
+const mobileMenu = document.getElementById('mobile-menu');
+
+menuButton.addEventListener('click', () => {
+  const isOpen = menuButton.getAttribute('aria-expanded') === 'true';
+  menuButton.setAttribute('aria-expanded', String(!isOpen));
+  mobileMenu.classList.toggle('hidden', isOpen);
+});
+3. “Free Tools” button has no menu semantics
+html
+<div class="relative">
+  <button class="flex items-center gap-1.5 ...">
+    ... Free Tools ...
+  </button>
+</div>
+If this opens a dropdown, it should be announced as such to assistive tech.
+
+Fix (ARIA + menu structure):
+
+Add aria-haspopup="true" and aria-expanded to the button.
+
+Add a menu container with role="menu" and items with role="menuitem".
+
+Example:
+
+html
+<div class="relative">
+  <button type="button"
+          class="flex items-center gap-1.5 ..."
+          aria-haspopup="true"
+          aria-expanded="false"
+          aria-controls="free-tools-menu">
+    ...
+  </button>
+  <div id="free-tools-menu"
+       class="absolute right-0 mt-2 w-56 rounded-md bg-white shadow-lg hidden"
+       role="menu">
+    <a href="/tools/quote-generator" role="menuitem" class="block px-4 py-2 text-sm">AI Quote Generator</a>
+    <!-- more items -->
+  </div>
+</div>
+Then toggle aria-expanded and .hidden the same way as the mobile menu.
+
+4. Logo alt text is too generic
+html
+<img alt="Logo" ... src="/images/logo-mark.png">
+Issue:  
+“Logo” doesn’t tell a screen reader what brand this is.
+
+Fix:
+
+html
+<img alt="Digital Growth Solutions Agency logo"
+     class="w-8 h-8 transition-transform duration-300 group-hover:rotate-12 brightness-0 invert"
+     src="/images/logo-mark.png">
+5. Minor Tailwind duplication
+Example:
+
+html
+<a href="/services"
+   class="text-sm font-medium transition-colors hover:text-primary text-white/90 hover:text-white">
+You have both hover:text-primary and hover:text-white—the last one wins, so hover:text-primary is effectively ignored.
+
+Fix: keep only the one you want:
+
+html
+class="text-sm font-medium transition-colors text-white/90 hover:text-primary"

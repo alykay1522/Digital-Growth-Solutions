@@ -98,11 +98,11 @@ export function Navbar() {
   ];
 
   const linkClass = (href: string) =>
-    `text-sm font-medium transition-colors hover:text-primary ${
+    `text-sm font-medium transition-colors ${
       location === href
         ? "text-primary"
         : onWhite
-        ? "text-muted-foreground"
+        ? "text-muted-foreground hover:text-primary"
         : "text-white/90 hover:text-white"
     }`;
 
@@ -119,7 +119,7 @@ export function Navbar() {
             <Link href="/" className="flex items-center gap-2 group">
               <img
                 src={`${import.meta.env.BASE_URL}images/logo-mark.png`}
-                alt="Logo"
+                alt="Digital Growth Solutions Agency logo"
                 className={`w-8 h-8 transition-transform duration-300 group-hover:rotate-12 ${!onWhite ? "brightness-0 invert" : ""}`}
               />
               <span className={`font-display font-bold text-xl tracking-tight ${!onWhite ? "text-white" : "text-secondary"}`}>
@@ -139,6 +139,9 @@ export function Navbar() {
               <div ref={toolsRef} className="relative">
                 <button
                   onClick={() => setToolsOpen(!toolsOpen)}
+                  aria-haspopup="true"
+                  aria-expanded={toolsOpen}
+                  aria-controls="free-tools-menu"
                   className={`flex items-center gap-1.5 text-sm font-semibold px-3 py-1 rounded-full border transition-all ${
                     isOnToolPage || toolsOpen
                       ? "bg-primary text-white border-primary"
@@ -155,6 +158,8 @@ export function Navbar() {
                 <AnimatePresence>
                   {toolsOpen && (
                     <motion.div
+                      id="free-tools-menu"
+                      role="menu"
                       initial={{ opacity: 0, y: 8, scale: 0.97 }}
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: 8, scale: 0.97 }}
@@ -202,30 +207,30 @@ export function Navbar() {
                 </AnimatePresence>
               </div>
 
-              <Link href="/pay" className="ml-2">
-                <Button
-                  variant="outline"
-                  className={`rounded-full px-4 gap-1.5 transition-all hover:scale-105 text-sm ${
-                    !onWhite
-                      ? "border-white/40 text-white hover:bg-white/10 bg-transparent"
-                      : "border-primary/40 text-primary hover:bg-primary/5 hover:border-primary bg-transparent"
-                  }`}
-                >
+              <Button
+                asChild
+                variant="outline"
+                className={`ml-2 rounded-full px-4 gap-1.5 transition-all hover:scale-105 text-sm ${
+                  !onWhite
+                    ? "border-white/40 text-white hover:bg-white/10 bg-transparent"
+                    : "border-primary/40 text-primary hover:bg-primary/5 hover:border-primary bg-transparent"
+                }`}
+              >
+                <Link href="/pay">
                   <CreditCard className="w-3.5 h-3.5" />
                   Pay Online
-                </Button>
-              </Link>
-              <Link href="/contact" className="ml-2">
-                <Button
-                  className={`rounded-full px-6 transition-all hover:scale-105 hover:shadow-lg ${
-                    !onWhite
-                      ? "bg-white text-secondary hover:bg-white/90"
-                      : "bg-secondary text-white hover:bg-secondary/90 shadow-primary/20"
-                  }`}
-                >
-                  Get in Touch
-                </Button>
-              </Link>
+                </Link>
+              </Button>
+              <Button
+                asChild
+                className={`ml-2 rounded-full px-6 transition-all hover:scale-105 hover:shadow-lg ${
+                  !onWhite
+                    ? "bg-white text-secondary hover:bg-white/90"
+                    : "bg-secondary text-white hover:bg-secondary/90 shadow-primary/20"
+                }`}
+              >
+                <Link href="/contact">Get in Touch</Link>
+              </Button>
             </nav>
 
             {/* Mobile toggle */}
@@ -258,7 +263,7 @@ export function Navbar() {
           >
             <div className="flex items-center justify-between p-5 border-b border-border/50">
               <div className="flex items-center gap-2">
-                <img src={`${import.meta.env.BASE_URL}images/logo-mark.png`} alt="Logo" className="w-8 h-8" />
+                <img src={`${import.meta.env.BASE_URL}images/logo-mark.png`} alt="Digital Growth Solutions Agency logo" className="w-8 h-8" />
                 <span className="font-display font-bold text-xl text-secondary">
                   Digital Growth Solutions<span className="text-primary"> Agency</span>
                 </span>
@@ -318,17 +323,17 @@ export function Navbar() {
               </div>
 
               <div className="mt-auto pb-8 space-y-3">
-                <Link href="/pay" onClick={() => setIsMobileMenuOpen(false)}>
-                  <Button variant="outline" className="w-full rounded-xl h-12 text-base border-primary/30 text-primary gap-2">
+                <Button asChild variant="outline" className="w-full rounded-xl h-12 text-base border-primary/30 text-primary gap-2">
+                  <Link href="/pay" onClick={() => setIsMobileMenuOpen(false)}>
                     <CreditCard className="w-4 h-4" />
                     Pay Online
-                  </Button>
-                </Link>
-                <Link href="/contact" onClick={() => setIsMobileMenuOpen(false)}>
-                  <Button className="w-full rounded-xl h-14 text-lg bg-primary hover:bg-primary/90 text-white shadow-xl shadow-primary/25">
+                  </Link>
+                </Button>
+                <Button asChild className="w-full rounded-xl h-14 text-lg bg-primary hover:bg-primary/90 text-white shadow-xl shadow-primary/25">
+                  <Link href="/contact" onClick={() => setIsMobileMenuOpen(false)}>
                     Start a Project
-                  </Button>
-                </Link>
+                  </Link>
+                </Button>
               </div>
             </div>
           </motion.div>

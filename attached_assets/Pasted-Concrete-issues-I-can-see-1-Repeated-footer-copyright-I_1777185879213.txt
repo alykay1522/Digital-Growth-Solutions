@@ -1,0 +1,125 @@
+Concrete issues I can see
+1. Repeated footer copyright
+Issue:  
+The footer text is duplicated three times:
+
+© 2026 Digital Growth Solutions Agency. All rights reserved.
+© 2026 Digital Growth Solutions Agency. All rights reserved.
+© 2026 Digital Growth Solutions Agency. All rights reserved.
+
+How to fix it:
+
+In your layout/footer component, you’re almost certainly rendering the copyright block multiple times (e.g., inside a loop or nested component).
+
+Make sure it’s only rendered once, e.g.:
+
+jsx
+<footer className="site-footer">
+  <p>© 2026 Digital Growth Solutions Agency. All rights reserved.</p>
+  <a href="/privacy-policy">Privacy Policy</a>
+  <a href="/terms-of-service">Terms of Service</a>
+</footer>
+Check that no parent component also injects the same text.
+
+2. Brand/domain mismatch (potential trust friction)
+Issue:
+
+Domain: digitalgrowthsolutions.org
+
+Brand/email: Digital Growth Solutions Agency / hello@digitalgrowthsolutionsagency.com
+
+This isn’t “broken,” but it can create a subtle trust wobble for small‑biz owners.
+
+How to fix it:
+
+Either:
+
+Add a short line in the footer or hero like:
+“Digital Growth Solutions Agency operates at digitalgrowthsolutions.org and digitalgrowthsolutionsagency.com.”
+
+Or align domains over time (e.g., redirect .org → .com or vice versa).
+
+3. Capacity line that may not be enforced
+Issue:  
+Hero line:
+
+“Sites from $495 · Accepting 3 new clients”
+
+If this isn’t actually enforced by logic (e.g., you don’t auto‑hide it when full), it can become untrue and look gimmicky.
+
+How to fix it:
+
+Option A: Make it evergreen:
+
+“Sites from $495 · Limited spots available each month”
+
+Option B: Wire it to a config flag:
+
+js
+const acceptingClients = true;
+const capacityText = acceptingClients
+  ? "Accepting 3 new clients"
+  : "Join the waitlist for next month";
+Then render capacityText in the hero.
+
+4. Service/section links likely need URL checks
+From the content I see:
+
+“View All Services”
+
+“Explore All 8 AI Agents”
+
+“Learn how it works”
+
+“Pay Online”
+
+“Blog”
+
+“Contact”
+
+“Privacy Policy”
+
+“Terms of Service”
+
+What to verify manually:
+
+Each of those is actually clickable and goes to a real, relevant page.
+
+None of them 404 or point to placeholder content.
+
+How to fix broken ones:
+
+For each missing page, either:
+
+Create a simple stub page with correct route, or
+
+Temporarily remove the link until the page exists.
+
+Example (React Router):
+
+jsx
+<Link to="/services">View All Services</Link>
+Make sure /services is defined in your router.
+
+High‑impact improvements (not “broken,” but worth doing)
+These aren’t errors, but they’ll make the site feel tighter and more “self‑marketing”:
+
+Clarify the hero promise even more
+
+Current: “We Build High-Converting Websites & Automations”
+
+Consider adding outcome language:
+“We build high‑converting websites & automations that bring you leads, bookings, and sales on autopilot.”
+
+Make the “Built for Small Businesses” message tie directly to pricing
+
+Add a short line under the pricing teaser:
+“Flexible payment options available for startups and local businesses.”
+
+Turn the stats into trust anchors
+
+“300+ Projects Delivered”, “10+ Years Experience”, etc. are good—make sure they’re visually grouped and easy to scan.
+
+Ensure Privacy Policy and Terms pages are real
+
+If they’re placeholders, generate simple, clear versions and publish them.
