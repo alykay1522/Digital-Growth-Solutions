@@ -1,0 +1,6 @@
+{
+  "buildCommand": "pnpm install && pnpm --filter agency-website run build",
+  "outputDirectory": "agency-website/dist",
+  "framework": "vite",
+  "installCommand": "pnpm install"
+}
