@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Growth Solutions • AI Automation + Ecom Growth</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Space+Grotesk:wght@500;600&amp;display=swap');
+        
+        :root {
+            --primary: #0A0A0A;
+            --accent: #00FF9F;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', system_ui, sans-serif;
+            background: #0A0A0A;
+            color: #FFFFFF;
+            line-height: 1.6;
+        }
+        
+        .nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10,10,10,0.95);
+            backdrop-filter: blur(20px);
+            z-index: 100;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid #222;
+        }
+        
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #00FF9F;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            color: #CCC;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        
+        .nav-links a:hover { color: #00FF9F; }
+        
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 6rem 2rem 4rem;
+            background: linear-gradient(135deg, #0A0A0A 0%, #111 100%);
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(90deg, #FFFFFF, #00FF9F);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero p {
+            font-size: 1.4rem;
+            color: #AAA;
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+        }
+        
+        .cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: #00FF9F;
+            color: #0A0A0A;
+            font-weight: 700;
+            padding: 1rem 2.5rem;
+            border-radius: 9999px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+        }
+        
+        .cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 255, 159, 0.3);
+        }
+        
+        .section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+        }
+        
+        .section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+        
+        .service-card {
+            background: #111;
+            border: 1px solid #222;
+            border-radius: 16px;
+            padding: 2.5rem;
+            transition: all 0.3s;
+        }
+        
+        .service-card:hover {
+            border-color: #00FF9F;
+            transform: translateY(-4px);
+        }
+        
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #00FF9F;
+        }
+        
+        .price {
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 1.5rem 0 0.5rem;
+        }
+        
+        .proof {
+            background: #111;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #00FF9F;
+        }
+        
+        .footer {
+            background: #000;
+            padding: 3rem 2rem;
+            text-align: center;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .github-link {
+            display: inline-block;
+            margin-top: 2rem;
+            color: #00FF9F;
+            text-decoration: none;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <!-- NAV -->
+    <nav class="nav">
+        <div class="nav-content">
+            <div class="logo">DIGITAL GROWTH SOLUTIONS</div>
+            <div class="nav-links">
+                <a href="#services">Services</a>
+                <a href="#proof">Proof</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>AI Systems That<br>Actually Grow Revenue</h1>
+            <p>We build automation and e-commerce infrastructure that removes manual work and increases profit — for Shopify and WooCommerce stores that want to scale without hiring more people.</p>
+            
+            <a href="#contact" class="cta">
+                Book 15-Min Strategy Call →
+            </a>
+            
+            <div style="margin-top: 3rem; font-size: 0.95rem; color: #666;">
+                Trusted by growing ecom brands • Built with n8n • Zapier • Make • SQL • Figma
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services" class="section">
+        <h2>Services That Deliver Results</h2>
+        
+        <div class="services-grid">
+            <!-- Service 1 -->
+            <div class="service-card">
+                <h3>Automation Systems</h3>
+                <p>Custom n8n, Zapier, and Make workflows that connect Shopify, accounting, inventory, email, and CRM — so orders, data, and follow-ups run on autopilot.</p>
+                <div class="price">$1,500 – $4,000</div>
+                <p style="color:#888; font-size:0.95rem;">+ $750–$2,000/mo maintenance</p>
+                <ul style="margin-top:1.5rem; font-size:0.95rem; color:#CCC; line-height:1.8;">
+                    <li>Order → Inventory sync</li>
+                    <li>Abandoned cart recovery</li>
+                    <li>AI chatbots + lead routing</li>
+                    <li>Multi-channel reporting</li>
+                </ul>
+            </div>
+            
+            <!-- Service 2 -->
+            <div class="service-card">
+                <h3>Ecommerce + Data</h3>
+                <p>Shopify/WooCommerce builds, custom dashboards, and data pipelines that turn raw numbers into clear growth decisions.</p>
+                <div class="price">$1,200 – $3,000</div>
+                <ul style="margin-top:1.5rem; font-size:0.95rem; color:#CCC; line-height:1.8;">
+                    <li>Full store setup or migration</li>
+                    <li>Real-time SQL dashboards</li>
+                    <li>Customer lifetime value tracking</li>
+                    <li>Inventory forecasting</li>
+                </ul>
+            </div>
+            
+            <!-- Service 3 -->
+            <div class="service-card">
+                <h3>Branding + UX</h3>
+                <p>Conversion-focused design systems, wireframes, and UI audits that make your store convert higher without redesigning everything.</p>
+                <div class="price">$800 – $2,500</div>
+                <ul style="margin-top:1.5rem; font-size:0.95rem; color:#CCC; line-height:1.8;">
+                    <li>High-converting checkout flows</li>
+                    <li>Brand system + Figma kit</li>
+                    <li>Mobile-first UX audits</li>
+                    <li>A/B test design</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROOF -->
+    <section id="proof" class="proof">
+        <div class="section" style="padding-top:0; padding-bottom:0;">
+            <h2 style="color:#FFF;">Real Results From Real Builds</h2>
+            
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-number">47%</div>
+                    <div style="color:#888;">Average time saved on order processing</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">3.2x</div>
+                    <div style="color:#888;">Average increase in recovered revenue</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">19</div>
+                    <div style="color:#888;">Active clients running on autopilot</div>
+                </div>
+            </div>
+            
+            <a href="https://github.com/alykay1522/Digital-Growth-Solutions" target="_blank" class="github-link">
+                → View all live demos and code on GitHub
+            </a>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section" style="background:#111; border-radius:24px; margin:2rem auto; max-width:900px;">
+        <div style="text-align:center; padding:3rem 2rem;">
+            <h2 style="margin-bottom:1rem;">Ready to remove the manual work?</h2>
+            <p style="max-width:500px; margin:0 auto 2rem; color:#AAA;">Book a 15-minute call. I’ll audit your current stack and show you exactly what can be automated this week.</p>
+            
+            <a href="https://calendly.com/alykay1522/15min" class="cta" style="background:#FFF; color:#0A0A0A;">
+                Book Free Strategy Call
+            </a>
+            
+            <div style="margin-top:2rem; font-size:0.9rem; color:#666;">
+                Or email <a href="mailto:hello@digitalgrowthsolutions.org" style="color:#00FF9F;">hello@digitalgrowthsolutions.org</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>© 2026 Digital Growth Solutions • Built in Smith Center, KS • All automation is custom • No templates sold as "done for you"</p>
+        <p style="margin-top:0.5rem;">GitHub: <a href="https://github.com/alykay1522/Digital-Growth-Solutions" style="color:#00FF9F;">alykay1522/Digital-Growth-Solutions</a></p>
+    </footer>
+
+    <script>
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+        
+        // Simple scroll progress (optional polish)
+        console.log('%c[Digital Growth Solutions] Site ready. Push to GitHub and enable Pages.', 'color:#00FF9F');
+    </script>
+</body>
+</html>
